@@ -1,0 +1,45 @@
+@import "../../assets/scss/color-theme.scss";
+
+
+.mobile-app-section {
+  padding: 50px 0px;
+
+  .mobile-heading {
+    // padding-bottom: 30px;
+    // text-align: center;
+  }
+
+  .mobile-app-content {
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-top: 30px;
+    }
+  }
+
+  .mobile-app-images {
+    text-align: end;
+
+    @media screen and (max-width: 767px) {
+      text-align: center;
+    }
+
+    img {
+      // width: 100%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      border-radius: 30px;
+    }
+
+    .animated {
+      animation: up-down 2s ease-in-out infinite alternate-reverse both;
+    }
+  }
+
+  .app-store-button {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,169 @@
+@import "../../assets/scss/color-theme.scss";
+
+.hero-banner {
+  background-color: $secondary;
+  padding: 50px 0px;
+  scroll-margin-top: 100px;
+
+  @media screen and (max-width: 767px) {
+    padding: 20px 0px;
+  }
+
+  .swiper-wrapper {
+    padding-bottom: 40px;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: $light;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: $primary;
+  }
+
+  .card {
+    background-color: transparent;
+  }
+
+  .hero-banner-content {
+    margin-left: 30px;
+
+    @media screen and (max-width: 991px) {
+      margin-left: 0px;
+    }
+  }
+
+  .hero-banner-images {
+    img {
+      width: 100%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      border-radius: 30px;
+
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: 450px;
+      object-position: top;
+      object-fit: cover;
+    }
+  }
+
+  h1 {
+    color: $primary;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 30px;
+    }
+  }
+
+  p {
+    color: $white;
+    margin-bottom: 20px;
+  }
+}
+
+.consultations-section {
+  background-color: $primary;
+  padding: 40px 0px;
+
+  h2 {
+    color: $white;
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+  }
+
+  p {
+    color: $white;
+  }
+
+  .book-button {
+    text-align: end;
+
+    @media screen and (max-width: 767px) {
+      text-align: center;
+    }
+  }
+}
+
+.consultations-section {
+  h2 {
+    font-size: 48px;
+
+    @media screen and (max-width: 1180px) {
+      font-size: 36px;
+    }
+
+    @media screen and (max-width: 991px) {
+      font-size: 26px;
+    }
+  }
+
+  .card {
+    width: 250px;
+    border-radius: 12px;
+
+    .img-wrap {
+      height: 210px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+
+      @media screen and (max-width: 1180px) {
+        height: 160px;
+      }
+
+      img {
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+    }
+
+    .card-body {
+      @media screen and (max-width: 550px) {
+        padding: 12px;
+      }
+
+      strong {
+        font-size: 24px;
+
+        @media screen and (max-width: 991px) {
+          font-size: 18px;
+        }
+      }
+
+      .btn-primary {
+        font-size: 12px;
+        padding: 8px 14px;
+
+        @media screen and (max-width: 550px) {
+          font-size: 11px;
+        }
+
+        @media screen and (max-width: 390px) {
+          font-size: 8px;
+          padding: 8px 12px;
+        }
+      }
+
+      p {
+        font-size: 14px;
+
+
+        @media screen and (max-width: 550px) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

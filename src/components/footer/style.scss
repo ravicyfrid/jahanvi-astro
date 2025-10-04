@@ -1,0 +1,33 @@
+@import '../../assets/scss/color-theme.scss';
+
+footer {
+  padding: 25px 0px;
+  background-color: $light;
+  border-top: 1px solid #dddd;
+
+  .copyright-content {
+    margin-bottom: 0px;
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    span{
+      @media screen and (max-width: 767px) {
+       display: block;
+       
+      }
+    }
+  }
+
+  ul {
+    justify-content: end;
+    display: flex;
+    margin-bottom: 0px;
+
+    @media screen and (max-width: 767px) {
+      justify-content: center;
+
+    }
+  }
+}
