@@ -199,8 +199,10 @@ export default function Register() {
                           : ""
                           }`}
                       >
+                        <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
+                         <option value="other">Other</option>
                       </select>
                       {formik.errors.gender && formik.touched.gender && (
                         <div className="invalid-feedback">{formik.errors.gender}</div>

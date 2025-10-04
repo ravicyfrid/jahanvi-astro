@@ -77,7 +77,7 @@ const MyBooking = () => {
 																<span className="fw-semibold">ID-{item.order_number}</span>
 																<div className="d-flex gap-2">
 																	<button type="button" onClick={() => chatid(item.chat.id, item.order_number)} className="btn success-button border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chat</button>
-																	<button type="button" className="order-failed border-0">Order Failed</button>
+																	<button type="button" className="order-failed border-0">{item.status}</button>
 																</div>
 															</div>
 															<hr />
@@ -121,32 +121,36 @@ const MyBooking = () => {
 
 									<div className="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex={0}>
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
-											{completedOrders?.length > 0 ? upcomingOrders?.map((i:number) => {
+											{completedOrders?.length > 0 ? completedOrders?.map((item: any, i: number) => {
 												return (
 													<div className="col" key={i}>
 														<div className="booking-card">
 															<div className="d-flex justify-content-between align-items-center">
-																<span className="fw-semibold">ID-78239</span>
-
+																<span className="fw-semibold">ID-{item.order_number}</span>
 																<div className="d-flex gap-2">
-																	<button type="button" className="success-button border-0">Chat</button>
-																	<button type="button" className="order-completeds border-0">Order Failed</button>
+																	<button type="button" onClick={() => chatid(item.chat.id, item.order_number)} className="btn success-button border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chat</button>
 																</div>
 															</div>
 															<hr />
 															<div className="d-flex align-items-center mb-3">
 																<div className="user-avatar">
-																	<i className="bi bi-person"></i>
+																	<Image
+																		src={PlaceHolder}
+																		alt="Avatar"
+																		width={30}
+																		height={30}
+																	/>
+
 																</div>
 																<div className="user-info">
-																	<h6>ravi</h6>
-																	<p>+919926405826</p>
+																	<h6>{item.full_name}</h6>
+																	<p>+{item.phone_number}</p>
 																</div>
 																<div className="ms-auto">
 																	<div className="date-box">
-																		<div className="text-muted">Sat, 27 Sept</div>
-																		<h6 className="day my-1">27</h6>
-																		<p>5:13 pm</p>
+																		<div className="text-muted">{formatDateParts(item.created_at).fullDate}</div>
+																		<h6 className="day my-1">{formatDateParts(item.created_at).dayOnly}</h6>
+																		<p>{formatDateParts(item.created_at).timeOnly}</p>
 																	</div>
 																</div>
 															</div>

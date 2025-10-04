@@ -18,6 +18,7 @@ import SEOHead from '@/components/seo';
 import Logo from '../assets/images/logo.png';
 import { Button } from '@/components/form-inputs';
 import OtpInput from '@/components/form-inputs/otp';
+import Link from 'next/link';
 
 const UserLogin = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -203,7 +204,7 @@ const UserLogin = () => {
 												type="submit"
 												label={otpRequested ? "Login" : "Request OTP"}
 												className={`btn btn-primary py-2 ${loading && 'loading'} `}
-												disabled={loading || ( 
+												disabled={loading || (
 													!mobileNumber &&
 													(!formik.isValid || !formik.dirty)
 												) || (otpRequested && formik.values.otp.length !== 6)}
@@ -228,6 +229,13 @@ const UserLogin = () => {
 											</div>
 										)}
 									</form>
+									{!otpRequested && (
+										<p className="text-center mt-3">
+											<Link href="/register" className="text-danger fw-semibold">
+												Register Here
+											</Link>
+										</p>
+									)}
 								</div>
 							</div>
 						</div>
