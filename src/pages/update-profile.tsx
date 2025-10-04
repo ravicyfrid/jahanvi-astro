@@ -14,7 +14,6 @@ import { Footer, Header } from "@/components";
 import { Button, InputField } from "@/components/form-inputs";
 
 export default function UpdateProfile() {
-	const [otpRequested, setOtpRequested] = useState(false);
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const dispatch = useDispatch<AppDispatch>();

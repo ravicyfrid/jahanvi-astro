@@ -1,8 +1,6 @@
 
 import { Footer, Header } from "@/components";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { ordersService } from '@/services/orders.service';
 import { chatsService } from '@/services/chat.service';
 import formatDateParts from '@/utils/custom-hooks';
@@ -20,10 +18,10 @@ const MyBooking = () => {
 		per_page: 2,
 	})
 
-	const router = useRouter();
-	const { isUserLoggedIn, loggedInUser } = useSelector(
-		(state: any) => state.session
-	);
+	// const router = useRouter();
+	// const { isUserLoggedIn, loggedInUser } = useSelector(
+	// 	(state: any) => state.session
+	// );
 
 	useEffect(() => {
 		setLoading(true)
@@ -36,7 +34,7 @@ const MyBooking = () => {
 
 	const upcomingOrders = orders.items.filter((o: { status: string }) => o.status === "upcoming");
 	const completedOrders = orders.items.filter((o: { status: string }) => o.status === "completed");
-	const cancelledOrders = orders.items.filter((o: { status: string }) => o.status === "cancelled");
+	// const cancelledOrders = orders.items.filter((o: { status: string }) => o.status === "cancelled");
 	console.log('completedOrders', completedOrders);
 	console.log('upcoming', upcomingOrders);
 
@@ -73,7 +71,7 @@ const MyBooking = () => {
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
 											{upcomingOrders?.length > 0 ? upcomingOrders?.map((item: any, i: number) => {
 												return (
-													<div className="col">
+													<div className="col" key={i}>
 														<div className="booking-card">
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
@@ -123,9 +121,9 @@ const MyBooking = () => {
 
 									<div className="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex={0}>
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
-											{completedOrders?.length > 0 ? upcomingOrders?.map((item: any, i: number) => {
+											{completedOrders?.length > 0 ? upcomingOrders?.map((i:number) => {
 												return (
-													<div className="col">
+													<div className="col" key={i}>
 														<div className="booking-card">
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-78239</span>
@@ -363,7 +361,7 @@ const Chat = (props: any) => {
 									const showDate = currentDate !== previousDate;
 									previousDate = currentDate
 									return (
-										<div className="chat-body">
+										<div className="chat-body" key={i}>
 											{showDate && (
 												<div className="text-center text-muted small mb-4">
 													<span className="chat-time">{currentDate}</span>

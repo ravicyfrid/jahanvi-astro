@@ -1,9 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import PhoneInput from "react-phone-input-2";
-import { Footer, Header } from "@/components";
 import { Logo } from "@/assets/images";
 import Image from "next/image";
 import { authService } from "@/services/auth.service";
@@ -14,7 +13,6 @@ import { setMobileNumber } from "@/redux/slices/session.slice";
 
 
 export default function Register() {
-  const [otpRequested, setOtpRequested] = useState(false);
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const [loading, setLoading] = useState(false);
@@ -166,7 +164,6 @@ export default function Register() {
                           formik.setFieldValue("phone_number", phone)
                         }
                         inputStyle={{ width: "100%" }}
-                        disabled={otpRequested}
                       />
                       {formik.errors.phone_number && formik.touched.phone_number && (
                         <div className="text-danger small">

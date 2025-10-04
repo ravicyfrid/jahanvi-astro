@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import PhoneInput from 'react-phone-input-2';
 
-import { useRouter } from 'next/router';
-
 import { useFormik } from 'formik';
 
 import { AppDispatch } from '@/redux/store';
@@ -20,11 +18,9 @@ import SEOHead from '@/components/seo';
 import Logo from '../assets/images/logo.png';
 import { Button } from '@/components/form-inputs';
 import OtpInput from '@/components/form-inputs/otp';
-import { useSelector } from 'react-redux';
 
 const UserLogin = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const [otpRequested, setOtpRequested] = useState(false);
 	const [resendEnabled, setResendEnabled] = useState(false);

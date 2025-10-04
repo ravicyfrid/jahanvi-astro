@@ -1,4 +1,4 @@
-import { genestroImg, Logo } from "@/assets/images";
+import { genestroImg } from "@/assets/images";
 import { Footer, Header } from "@/components";
 import { Button } from "@/components/form-inputs";
 import { enquirieService, gemsService } from "@/services";

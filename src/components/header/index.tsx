@@ -109,7 +109,7 @@ export default function Header() {
                       {/* <span>Profile</span> */}
                     </button>
                     <ul className="dropdown-menu">
-                      <li><a className="dropdown-item" href="/update-profile">Update Profile</a></li>
+                      <li><Link className="dropdown-item" href="/update-profile">Update Profile</Link></li>
                       <li>
                         <button
                           type="button" className="dropdown-item"

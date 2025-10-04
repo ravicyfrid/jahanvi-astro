@@ -1,9 +1,5 @@
-import { UserIcon } from "@/assets/images";
-import Image from "next/image";
 
 const Chat = (props: any) => {
-
-	console.log('chats', props);
 
 	return (
 		<>
