@@ -2,10 +2,10 @@
 import React, { useRef } from "react";
 
 type OtpInputProps = {
-	formik: any;               
-	name?: string;             // form field name, defaults to "otp"
-	length?: number;           // number of boxes, defaults to 6
-	onComplete?: (otp: string) => void; // optional callback when filled
+	formik: any;
+	name?: string;
+	length?: number;
+	onComplete?: (otp: string) => void;
 };
 
 const OtpInput: React.FC<OtpInputProps> = ({
@@ -14,16 +14,18 @@ const OtpInput: React.FC<OtpInputProps> = ({
 	length = 6,
 	onComplete,
 }) => {
-	const inputs = Array.from({ length }, () => useRef<HTMLInputElement>(null));
+	// ✅ Use a single ref to hold an array of refs
+	const inputsRef = useRef<HTMLInputElement[]>([]);
 
 	const getArr = () =>
-		Array.from({ length }, (_, i) => (formik.values[name]?.[i] ?? ""));
+		Array.from({ length }, (_, i) => formik.values[name]?.[i] ?? "");
 
 	const setAt = (index: number, char: string) => {
 		const arr = getArr();
 		arr[index] = char;
 		const otp = arr.join("");
 		formik.setFieldValue(name, otp);
+
 		if (onComplete && otp.length === length && !arr.includes("")) {
 			onComplete(otp);
 		}
@@ -32,12 +34,10 @@ const OtpInput: React.FC<OtpInputProps> = ({
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
 		const raw = e.target.value.replace(/\D/g, "");
 		if (raw) {
-			// take the last typed digit (handles IME / multi-char)
 			const digit = raw[raw.length - 1];
 			setAt(index, digit);
-			if (index < length - 1) inputs[index + 1].current?.focus();
+			if (index < length - 1) inputsRef.current[index + 1]?.focus();
 		} else {
-			// user cleared the box
 			setAt(index, "");
 		}
 	};
@@ -48,12 +48,10 @@ const OtpInput: React.FC<OtpInputProps> = ({
 		if (e.key === "Backspace") {
 			e.preventDefault();
 			if (arr[index]) {
-				// clear current if it has a digit
 				setAt(index, "");
 			} else if (index > 0) {
-				// move left and clear previous
 				setAt(index - 1, "");
-				inputs[index - 1].current?.focus();
+				inputsRef.current[index - 1]?.focus();
 			}
 			return;
 		}
@@ -66,13 +64,13 @@ const OtpInput: React.FC<OtpInputProps> = ({
 
 		if (e.key === "ArrowLeft" && index > 0) {
 			e.preventDefault();
-			inputs[index - 1].current?.focus();
+			inputsRef.current[index - 1]?.focus();
 			return;
 		}
 
 		if (e.key === "ArrowRight" && index < length - 1) {
 			e.preventDefault();
-			inputs[index + 1].current?.focus();
+			inputsRef.current[index + 1]?.focus();
 			return;
 		}
 	};
@@ -90,7 +88,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 		formik.setFieldValue(name, otp);
 
 		const last = Math.min(index + pasted.length - 1, length - 1);
-		inputs[last].current?.focus();
+		inputsRef.current[last]?.focus();
 
 		if (onComplete && otp.length === length && !arr.includes("")) onComplete(otp);
 	};
@@ -100,7 +98,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 			{Array.from({ length }).map((_, i) => (
 				<input
 					key={i}
-					ref={inputs[i]}
+					ref={(el) => { inputsRef.current[i] = el!; }} // ✅ assign each input to the ref array
 					autoFocus={i === 0}
 					type="text"
 					inputMode="numeric"
@@ -122,7 +120,6 @@ const OtpInput: React.FC<OtpInputProps> = ({
 					onKeyDown={(e) => handleKeyDown(e, i)}
 					onPaste={(e) => handlePaste(e, i)}
 					onFocus={(e) => {
-						// highlight & select for quicker overwrite
 						e.currentTarget.select();
 						e.currentTarget.style.border = "2px solid #328fe0";
 						e.currentTarget.style.boxShadow = "0 0 0 .2rem rgba(13,110,253,.15)";
