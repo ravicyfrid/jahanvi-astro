@@ -297,9 +297,7 @@ const MyBooking = () => {
 
 export default MyBooking
 
-
 const Chat = (props: any) => {
-
 	const [chats, setChats] = React.useState<any>({});
 
 	const convertaiton = () => {
