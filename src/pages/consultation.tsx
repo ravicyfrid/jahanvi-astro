@@ -131,12 +131,12 @@ const Consultation = () => {
 						<div className="row justify-content-center align-items-center">
 							<div className="col-md-5 col-lg-5 col-12">
 								<div className="left-panel">
-									<h2>Welcome to Credit Mitra!</h2>
-									<p className="mt-3 text-white"><strong>“Financing Dreams, Simplifying Lives”</strong></p>
+									<h2>Discover What the Cosmos Has Planned for You</h2>
+									<p className="mt-3 text-white"><strong>“Jahanvi Astro Consultation”</strong></p>
 									<p className='text-white'>
-										Our digital lending platform simplifies borrowing with fast approvals,
-										flexible loans, and transparent terms. Whether you’re growing your
-										business, funding education, or managing unexpected expenses.
+										Every question you hold has a cosmic answer waiting to be revealed.
+										Share your birth details and let astrology uncover the truth within.
+										Your spiritual transformation starts with one consultation.
 									</p>
 								</div>
 							</div>

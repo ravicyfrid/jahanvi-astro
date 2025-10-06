@@ -64,7 +64,7 @@ const MyBooking = () => {
 								<div className="tab-content" id="pills-tabContent">
 									<div className="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex={0}>
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
-											{upcomingOrders?.length > 0 ? upcomingOrders?.map((item: any, i: number) => {
+											{upcomingOrders?.length > 0 && upcomingOrders?.map((item: any, i: number) => {
 												return (
 													<div className="col" key={i}>
 														<div className="booking-card">
@@ -105,7 +105,9 @@ const MyBooking = () => {
 													</div>
 												)
 											})
-												:
+											}
+
+											{orders?.pagination?.total_items > 0 && loading &&
 												<div className="justify-content-center d-flex w-100">
 													<p>No record found</p>
 												</div>
@@ -118,7 +120,7 @@ const MyBooking = () => {
 
 									<div className="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex={0}>
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
-											{completedOrders?.length > 0 ? completedOrders?.map((item: any, i: number) => {
+											{completedOrders?.length > 0 && completedOrders?.map((item: any, i: number) => {
 												return (
 													<div className="col" key={i}>
 														<div className="booking-card">
@@ -159,8 +161,8 @@ const MyBooking = () => {
 												)
 											})
 
-												:
-
+											}
+											{orders?.pagination?.total_items > 0 && loading &&
 												<div className="justify-content-center d-flex w-100">
 													<p>No record found</p>
 												</div>
@@ -172,7 +174,7 @@ const MyBooking = () => {
 
 									<div className="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-contact-tab" tabIndex={0}>
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
-											{cancelledOrders?.length > 0 ? cancelledOrders?.map((item: any, i: number) => {
+											{cancelledOrders?.length > 0 && cancelledOrders?.map((item: any, i: number) => {
 												return (
 													<div className="col" key={i}>
 														<div className="booking-card">
@@ -214,14 +216,14 @@ const MyBooking = () => {
 													</div>
 												)
 											})
+											}
 
-												:
 
+											{orders?.pagination?.total_items > 0 && loading &&
 												<div className="justify-content-center d-flex w-100">
 													<p>No record found</p>
 												</div>
 											}
-
 										</div>
 
 									</div>

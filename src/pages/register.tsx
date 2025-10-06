@@ -95,7 +95,7 @@ export default function Register() {
 
     const timeout = setTimeout(() => {
       fetchLocationSuggestions(value);
-    }, 600); 
+    }, 600);
 
     setTypingTimeout(timeout);
   };
@@ -118,12 +118,12 @@ export default function Register() {
             <div className="row">
               <div className="col-md-6 col-lg-6 col-12">
                 <div className="left-panel">
-                  <h2>Welcome to Credit Mitra!</h2>
-                  <p className="mt-3 text-white"><strong>“Financing Dreams, Simplifying Lives”</strong></p>
+                  <h2>Start Your Journey with the Stars</h2>
+                  <p className="mt-3 text-white"><strong>“Join Jahanvi Astro Today!”</strong></p>
                   <p className='text-white'>
-                    Our digital lending platform simplifies borrowing with fast approvals,
-                    flexible loans, and transparent terms. Whether you’re growing your
-                    business, funding education, or managing unexpected expenses.
+                    Create your account and unlock personalized astrological insights.
+                    Get daily horoscopes, relationship guidance, and life predictions.
+                    The stars have messages for you — discover what they reveal!
                   </p>
                 </div>
               </div>

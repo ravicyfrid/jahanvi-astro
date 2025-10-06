@@ -123,12 +123,12 @@ export default function UpdateProfile() {
 						<div className="row">
 							<div className="col-md-6 col-lg-6 col-12">
 								<div className="left-panel">
-									<h2>Welcome to Credit Mitra!</h2>
-									<p className="mt-3 text-white"><strong>“Financing Dreams, Simplifying Lives”</strong></p>
+									<h2>Complete Your Cosmic Identity</h2>
+									<p className="mt-3 text-white"><strong>“Update Your Profile”</strong></p>
 									<p className='text-white'>
-										Our digital lending platform simplifies borrowing with fast approvals,
-										flexible loans, and transparent terms. Whether you’re growing your
-										business, funding education, or managing unexpected expenses.
+										Keep your birth details and personal information accurate to receive better predictions.
+										The more precise your profile, the deeper your astrological insights become.
+										Refresh your details and stay aligned with your stars.
 									</p>
 								</div>
 							</div>

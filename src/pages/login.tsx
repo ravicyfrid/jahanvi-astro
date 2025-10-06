@@ -130,13 +130,12 @@ const UserLogin = () => {
 
 							<div className="col-md-6 col-lg-6 col-12">
 								<div className="left-panel">
-									<h2>Welcome to Credit Mitra!</h2>
-									<p className="mt-3 text-white"><strong>“Financing Dreams, Simplifying Lives”</strong></p>
+									<h2>Your Cosmic Path Awaits</h2>
+									<p className="mt-3 text-white"><strong>“Find Your Path with Jahanvi Astro”</strong></p>
 									<p className='text-white'>
-										Our digital lending platform simplifies borrowing with fast approvals,
-										flexible loans, and transparent terms. Whether you’re growing your
-										business, funding education, or managing unexpected expenses.
-									</p>
+										Dive deep into astrology, numerology, and birth chart analysis.
+										Uncover the patterns shaping your destiny and make informed life choices.
+										Let the stars illuminate your way toward happiness and success.</p>
 								</div>
 							</div>
 							<div className="col-md-6 col-lg-6 col-12 d-flex flex-column justify-content-center align-items-center">
@@ -145,7 +144,7 @@ const UserLogin = () => {
 										<Image src={Logo} alt="Jahanvi Astro Logo" width={120} height={120} />
 										<h5 className="mb-2 text-center">Welcome to Jahanvi Astro</h5>
 										<p className="text-center text-muted mb-4">
-											Enter your mobile number to continue and access your account.
+											Enter mobile number to access your account.
 										</p>
 									</div>
 
