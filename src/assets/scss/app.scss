@@ -528,30 +528,30 @@ table {
 
 .consultation-fees {
 
-    .form-label {
-      font-weight: 500 !important;
+  .form-label {
+    font-weight: 500 !important;
+    font-size: 14px !important;
+  }
+
+
+  .form-check {
+    .form-check-input {
+      width: 22px;
+      height: 22px;
+      margin-right: 7px;
+    }
+
+    .form-check-label {
+      font-weight: 400 !important;
       font-size: 14px !important;
     }
 
-
-    .form-check {
-      .form-check-input {
-        width: 22px;
-        height: 22px;
-        margin-right: 7px;
-      }
-
-      .form-check-label {
-        font-weight: 400 !important;
-        font-size: 14px !important;
-      }
-
-      .form-check-inline {
-        margin-right: 10px;
-      }
+    .form-check-inline {
+      margin-right: 10px;
     }
-
   }
+
+}
 
 .update-profile-section {
   min-height: 84vh;
@@ -782,6 +782,13 @@ table {
     margin-left: auto;
     text-align: right;
   }
+
+}
+
+.msg-left-placeholder {
+  min-height: 60px;
+  width: 160px;
+  border-radius: 10px;
 }
 
 

@@ -16,9 +16,8 @@ const MyBooking = () => {
 	const [chatsId, setChatId] = React.useState<any>({});
 	const [filters, setFilters] = React.useState<any>({
 		page: 1,
-		per_page: 2,
+		per_page: 8,
 	})
-
 
 	useEffect(() => {
 		setLoading(true)
@@ -31,9 +30,7 @@ const MyBooking = () => {
 
 	const upcomingOrders = orders.items.filter((o: { status: string }) => o.status === "upcoming");
 	const completedOrders = orders.items.filter((o: { status: string }) => o.status === "completed");
-	// const cancelledOrders = orders.items.filter((o: { status: string }) => o.status === "cancelled");
-	console.log('completedOrders', completedOrders);
-	console.log('upcoming', upcomingOrders);
+	const cancelledOrders = orders.items.filter((o: { status: string }) => o.status === "cancelled");
 
 	const chatid = (id: string, orderID: string) => {
 		setChatId({ id: id, orderID: orderID })
@@ -115,7 +112,7 @@ const MyBooking = () => {
 													<p>No record found</p>
 												</div>
 											}
-											{!loading && <Skeleton />}
+											{loading && <Skeleton />}
 										</div>
 									</div>
 
@@ -175,120 +172,56 @@ const MyBooking = () => {
 
 									<div className="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-contact-tab" tabIndex={0}>
 										<div className="row row-cols-1 row-cols-md-2 row-cols-lg-2  row-cols-xl-3 g-4">
-											<div className="col">
-												<div className="booking-card">
-													<div className="d-flex justify-content-between align-items-center">
-														<span className="fw-semibold">ID-78239</span>
+											{cancelledOrders?.length > 0 ? cancelledOrders?.map((item: any, i: number) => {
+												return (
+													<div className="col" key={i}>
+														<div className="booking-card">
+															<div className="d-flex justify-content-between align-items-center">
+																<span className="fw-semibold">ID-{item.order_number}</span>
 
-														<div className="d-flex gap-2">
-															<button type="button" className="success-button border-0">Chat</button>
-															<button type="button" className="order-cancelled border-0">Order Failed</button>
-														</div>
-													</div>
-													<hr />
-													<div className="d-flex align-items-center mb-3">
-														<div className="user-avatar">
-															<Image
-																src={PlaceHolder}
-																alt="Avatar"
-																width={30}
-																height={30}
-															/>
-
-														</div>
-														<div className="user-info">
-															<h6>ravi</h6>
-															<p>+919926405826</p>
-														</div>
-														<div className="ms-auto">
-															<div className="date-box">
-																<div className="text-muted">Sat, 27 Sept</div>
-																<h6 className="day my-1">27</h6>
-																<p>5:13 pm</p>
+																<div className="d-flex gap-2">
+																	{/* <button type="button" onClick={() => chatid(item.chat.id, item.order_number)} className="btn success-button border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chat</button> */}
+																	<button type="button" className="order-cancelled border-0">{item.status}</button>
+																</div>
 															</div>
-														</div>
-													</div>
-													<p className="booking-msg">
-														Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
-													</p>
-												</div>
-											</div>
+															<hr />
+															<div className="d-flex align-items-center mb-3">
+																<div className="user-avatar">
+																	<Image
+																		src={PlaceHolder}
+																		alt="Avatar"
+																		width={30}
+																		height={30}
+																	/>
 
-											<div className="col">
-												<div className="booking-card">
-													<div className="d-flex justify-content-between align-items-center">
-														<span className="fw-semibold">ID-78239</span>
-														<div className="d-flex gap-2">
-															<button type="button" className="success-button border-0">Chat</button>
-															<button type="button" className="order-cancelled border-0">Order Failed</button>
-														</div>
-													</div>
-													<hr />
-													<div className="d-flex align-items-center mb-3">
-														<div className="user-avatar">
-															<Image
-																src={PlaceHolder}
-																alt="Avatar"
-																width={30}
-																height={30}
-															/>
-
-														</div>
-														<div className="user-info">
-															<h6>ravi</h6>
-															<p>+919926405826</p>
-														</div>
-														<div className="ms-auto">
-															<div className="date-box">
-																<div className="text-muted">Sat, 27 Sept</div>
-																<h6 className="day my-1">27</h6>
-																<p>5:13 pm</p>
+																</div>
+																<div className="user-info">
+																	<h6>{item.full_name}</h6>
+																	<p>+{item.phone_number}</p>
+																</div>
+																<div className="ms-auto">
+																	<div className="date-box">
+																		<div className="text-muted">{formatDateParts(item.created_at).fullDate}</div>
+																		<h6 className="day my-1">{formatDateParts(item.created_at).dayOnly}</h6>
+																		<p>{formatDateParts(item.created_at).timeOnly}</p>
+																	</div>
+																</div>
 															</div>
+															<p className="booking-msg">
+																Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
+															</p>
 														</div>
 													</div>
-													<p className="booking-msg">
-														Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
-													</p>
-												</div>
-											</div>
+												)
+											})
 
-											<div className="col">
-												<div className="booking-card">
-													<div className="d-flex justify-content-between align-items-center">
-														<span className="fw-semibold">ID-78239</span>
-														<div className="d-flex gap-2">
-															<button type="button" className="success-button border-0">Chat</button>
-															<button type="button" className="order-cancelled border-0">Order Failed</button>
-														</div>
-													</div>
-													<hr />
-													<div className="d-flex align-items-center mb-3">
-														<div className="user-avatar">
-															<Image
-																src={PlaceHolder}
-																alt="Avatar"
-																width={30}
-																height={30}
-															/>
+												:
 
-														</div>
-														<div className="user-info">
-															<h6>ravi</h6>
-															<p>+919926405826</p>
-														</div>
-														<div className="ms-auto">
-															<div className="date-box">
-																<div className="text-muted">Sat, 27 Sept</div>
-																<h6 className="day my-1">27</h6>
-																<p>5:13 pm</p>
-															</div>
-														</div>
-													</div>
-													<p className="booking-msg">
-														Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
-													</p>
+												<div className="justify-content-center d-flex w-100">
+													<p>No record found</p>
 												</div>
-											</div>
+											}
+
 										</div>
 
 									</div>
@@ -323,6 +256,7 @@ export default MyBooking
 
 const Chat = (props: any) => {
 	const [chats, setChats] = React.useState<any>({});
+	const [chatLoading, setchatLoading] = useState(false);
 
 	const convertaiton = () => {
 		chatsService.getChatConvertations(props.chatid.id).then((res) => {
@@ -339,6 +273,7 @@ const Chat = (props: any) => {
 		},
 		enableReinitialize: true,
 		onSubmit: (values) => {
+			setchatLoading(true)
 			console.log(values);
 			chatsService.startChat(props.chatid.id, values).then((results: any) => {
 				console.log('results', results);
@@ -347,6 +282,7 @@ const Chat = (props: any) => {
 					convertaiton()
 				}
 			})
+			setchatLoading(false)
 			formik.resetForm()
 		},
 	});
@@ -377,36 +313,38 @@ const Chat = (props: any) => {
 				<div className="offcanvas-body border-top">
 					<section className="chat">
 						<div className="chat-container">
-							{
-								chats?.items?.length > 0 && [...chats.items].reverse()?.map((item: any, i: number) => {
-									const currentDate = formatDateParts(item.created_at).longDate;
-									const showDate = currentDate !== previousDate;
-									previousDate = currentDate
-									return (
-										<div className="chat-body" key={i}>
-											{showDate && (
-												<div className="text-center text-muted small mb-4">
-													<span className="chat-time">{currentDate}</span>
-												</div>
-											)}
-											{item?.user?.role !== "customer" &&
-												<div className="msg msg-right">
-													<span className="d-block ">{item.message}</span>
-													<small className="text-white">{formatDateParts(item.created_at).timeOnly}</small>
-												</div>
-											}
-											{item?.user?.role === "customer" &&
-												<div>
-													<p className="text-black code-sandbox">{item.name}</p>
-													<div className="msg msg-left">
-														<span className="d-block">
-															{item.message}
-														</span>
-														<small className="text-muted">{formatDateParts(item.created_at).timeOnly}</small>
-													</div>
-												</div>
-											}
-											{/* 
+							<div className="chat-body">
+
+								{
+									chats?.items?.length > 0 && [...chats.items].reverse()?.map((item: any, i: number) => {
+										const currentDate = formatDateParts(item.created_at).longDate;
+										const showDate = currentDate !== previousDate;
+										previousDate = currentDate
+										return (
+												<div key={i}>
+													{showDate && (
+														<div className="text-center text-muted small mb-4">
+															<span className="chat-time">{currentDate}</span>
+														</div>
+													)}
+													{item?.user?.role !== "customer" &&
+														<div className="msg msg-right">
+															<span className="d-block ">{item.message}</span>
+															<small className="text-white">{formatDateParts(item.created_at).timeOnly}</small>
+														</div>
+													}
+													{item?.user?.role === "customer" &&
+														<div>
+															<p className="text-black code-sandbox">{item.name}</p>
+															<div className="msg msg-left">
+																<span className="d-block">
+																	{item.message}
+																</span>
+																<small className="text-muted">{formatDateParts(item.created_at).timeOnly}</small>
+															</div>
+														</div>
+													}
+													{/* 
 										<div className="msg msg-left">Hello how are you?<br /><small className="text-muted">12:46 PM</small></div>
 
 										<div className="msg msg-right">I am fine mam<br /><small className="text-white">12:46 PM</small></div>
@@ -414,9 +352,11 @@ const Chat = (props: any) => {
 										<div className="msg msg-left">What is your name<br /><small className="text-muted">12:46 PM</small></div>
 
 										<div className="msg msg-right">Ram<br /><small className="text-white">12:47 PM</small></div> */}
-										</div>
-									)
-								})}
+												</div>
+										)
+									})}
+							</div>
+							{chatLoading && <ChatSkeleton />}
 						</div>
 					</section>
 				</div>
@@ -425,7 +365,8 @@ const Chat = (props: any) => {
 					<form action="" className=" w-100" onSubmit={formik.handleSubmit}>
 						<div className="chat-footer">
 							<input type="text" placeholder="Type a message..." name="message" onChange={formik.handleChange} value={formik.values.message} />
-							<button type="submit" className="bg-primary">➤</button>
+							<button type="submit" className={`btn btn-primary ${chatLoading ? 'loading' : ''} `}>➤</button>
+
 						</div>
 					</form>
 				</div>
@@ -470,5 +411,24 @@ const Skeleton = () => {
 				</p>
 			</div>
 		</div>
+	)
+}
+
+
+const ChatSkeleton = () => {
+	return (
+		<>
+			<div className="text-center placeholder-glow mb-4">
+				<span className="placeholder col-4 py-3 rounded-pill"></span>
+			</div>
+
+			<div className="placeholder-glow mb-2">
+				<small className="placeholder msg-left-placeholder"></small>
+			</div>
+
+			<div className="placeholder-glow mb-2 justify-content-end d-flex">
+				<small className="placeholder msg-left-placeholder"></small>
+			</div>
+		</>
 	)
 }
