@@ -1,10 +1,8 @@
-import { Logo } from "@/assets/images";
 import { Footer, Header } from "@/components";
 import { Button, InputField } from "@/components/form-inputs";
 import SEOHead from "@/components/seo";
 import { ordersService } from "@/services/orders.service";
 import { useFormik } from "formik";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
