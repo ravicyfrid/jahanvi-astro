@@ -485,6 +485,12 @@ table {
   .left-panel {
     min-height: 96vh;
 
+    @media screen and (max-width: 1440px) {
+      min-height: 100vh;
+
+
+    }
+
     @media screen and (max-width: 1180px) {
       min-height: 880px;
 
@@ -518,8 +524,10 @@ table {
       box-shadow: none;
     }
   }
+}
 
-  .consultation-fees {
+.consultation-fees {
+
     .form-label {
       font-weight: 500 !important;
       font-size: 14px !important;
@@ -544,7 +552,6 @@ table {
     }
 
   }
-}
 
 .update-profile-section {
   min-height: 84vh;

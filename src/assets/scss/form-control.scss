@@ -6,6 +6,9 @@
   .is-invalid {
     background-image: none !important;
   }
+  .invalid-feedback {
+ font-size: 13px;
+ }
 
   label {
     color: rgba(51, 48, 60, 0.87);

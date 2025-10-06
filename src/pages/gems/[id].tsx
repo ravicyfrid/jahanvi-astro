@@ -1,6 +1,6 @@
 import { genestroImg } from "@/assets/images";
 import { Footer, Header } from "@/components";
-import { Button } from "@/components/form-inputs";
+import { Button, InputField } from "@/components/form-inputs";
 import { enquirieService, gemsService } from "@/services";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -83,30 +83,33 @@ const GemestonsDetails = () => {
                                 <div className="card">
                                     <form className="row" onSubmit={formik.handleSubmit}>
                                         <h6 className="mb-3">Connect with our team</h6>
-                                        <div className="mb-3 form-group col-lg-6 col-md-6 col-12">
-                                            <label className="form-label">Name</label>
-                                            <input
+                                        <div className="col-lg-6 col-md-6 col-12">
+
+                                            <InputField
+                                                label="Full Name"
+                                                required={true}
                                                 type="text"
                                                 name="name"
                                                 placeholder="Enter name"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.name}
-                                                className={`form-control ${formik.errors.name && formik.touched.name ? "is-invalid" : ""
+                                                className={`${formik.errors.name && formik.touched.name ? "is-invalid" : ""
                                                     }`}
                                             />
                                             {formik.errors.name && formik.touched.name && (
                                                 <div className="invalid-feedback">{formik.errors.name}</div>
                                             )}
                                         </div>
-                                        <div className="mb-3 form-group col-lg-6 col-md-6 col-12">
-                                            <label className="form-label">Email</label>
-                                            <input
+                                        <div className="col-lg-6 col-md-6 col-12">
+                                            <InputField
+                                                label="Email"
+                                                required={true}
                                                 type="email"
                                                 name="email"
                                                 placeholder="Enter Email"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.email}
-                                                className={`form-control ${formik.errors.email && formik.touched.email ? "is-invalid" : ""
+                                                className={`${formik.errors.email && formik.touched.email ? "is-invalid" : ""
                                                     }`}
                                             />
                                             {formik.errors.email && formik.touched.email && (
@@ -114,7 +117,7 @@ const GemestonsDetails = () => {
                                             )}
                                         </div>
                                         <div className="mb-3 form-group col-lg-6 col-md-6 col-12">
-                                            <label className="form-label">Mobile Number</label>
+                                            <label className="form-label">Mobile Number<span className="text-danger">*</span></label>
                                             <PhoneInput
                                                 country={"in"}
                                                 value={formik.values.phone_number}

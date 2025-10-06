@@ -8,6 +8,7 @@ import Pagination from "@/components/pagination";
 import { useFormik } from "formik";
 import Image from "next/image";
 import { PlaceHolder } from "@/assets/images";
+import SEOHead from "@/components/seo";
 
 const MyBooking = () => {
 	const [orders, setOrders] = React.useState<any>({ items: [], pagination: {} });
@@ -18,10 +19,6 @@ const MyBooking = () => {
 		per_page: 2,
 	})
 
-	// const router = useRouter();
-	// const { isUserLoggedIn, loggedInUser } = useSelector(
-	// 	(state: any) => state.session
-	// );
 
 	useEffect(() => {
 		setLoading(true)
@@ -45,6 +42,7 @@ const MyBooking = () => {
 
 	return (
 		<>
+			<SEOHead title={'My Booking'} />
 			<Header />
 
 			<section className="my-booking-section">
@@ -113,9 +111,11 @@ const MyBooking = () => {
 
 												:
 
-												<p>No record found</p>
+												<div className="justify-content-center d-flex w-100">
+													<p>No record found</p>
+												</div>
 											}
-											{loading && <Skeleton />}
+											{!loading && <Skeleton />}
 										</div>
 									</div>
 
@@ -164,7 +164,9 @@ const MyBooking = () => {
 
 												:
 
-												<p>No record found</p>
+												<div className="justify-content-center d-flex w-100">
+													<p>No record found</p>
+												</div>
 											}
 											{loading && <Skeleton />}
 
@@ -186,7 +188,13 @@ const MyBooking = () => {
 													<hr />
 													<div className="d-flex align-items-center mb-3">
 														<div className="user-avatar">
-															<i className="bi bi-person"></i>
+															<Image
+																src={PlaceHolder}
+																alt="Avatar"
+																width={30}
+																height={30}
+															/>
+
 														</div>
 														<div className="user-info">
 															<h6>ravi</h6>
@@ -218,7 +226,13 @@ const MyBooking = () => {
 													<hr />
 													<div className="d-flex align-items-center mb-3">
 														<div className="user-avatar">
-															<i className="bi bi-person"></i>
+															<Image
+																src={PlaceHolder}
+																alt="Avatar"
+																width={30}
+																height={30}
+															/>
+
 														</div>
 														<div className="user-info">
 															<h6>ravi</h6>
@@ -250,7 +264,13 @@ const MyBooking = () => {
 													<hr />
 													<div className="d-flex align-items-center mb-3">
 														<div className="user-avatar">
-															<i className="bi bi-person"></i>
+															<Image
+																src={PlaceHolder}
+																alt="Avatar"
+																width={30}
+																height={30}
+															/>
+
 														</div>
 														<div className="user-info">
 															<h6>ravi</h6>
@@ -418,36 +438,37 @@ const Chat = (props: any) => {
 
 const Skeleton = () => {
 	return (
-
-		<div className="booking-card booking-card-placeholder">
-			<div className="d-flex justify-content-between align-items-center mb-2">
-				<p className="placeholder-glow">
-					<span className="placeholder id-number"></span>
-				</p>
-				<div className="d-flex gap-2 placeholder-glow">
-					<span className="placeholder placehoder-primary-button me-2"></span>
-					<span className="placeholder placehoder-danger-button"></span>
-				</div>
-			</div>
-			<hr />
-			<div className="d-flex align-items-center justify-content-between placeholder-glow">
-				<div className="d-flex align-items-center placeholder-glow">
-
-					<span className="placeholder rounded-circle placehoder-avtar me-2"></span>
-					<div>
-						<p className="placeholder-glow">
-							<span className="placeholder placehoder-avtar-h"></span>
-
-							<span className="placeholder placehoder-avtar-p"></span>
-						</p>
+		<div className="col">
+			<div className="booking-card booking-card-placeholder">
+				<div className="d-flex justify-content-between align-items-center mb-2">
+					<p className="placeholder-glow">
+						<span className="placeholder id-number"></span>
+					</p>
+					<div className="d-flex gap-2 placeholder-glow">
+						<span className="placeholder placehoder-primary-button me-2"></span>
+						<span className="placeholder placehoder-danger-button"></span>
 					</div>
 				</div>
-				<span className="placeholder placehoder-date-box d-block mb-2"></span>
+				<hr />
+				<div className="d-flex align-items-center justify-content-between placeholder-glow">
+					<div className="d-flex align-items-center placeholder-glow">
+
+						<span className="placeholder rounded-circle placehoder-avtar me-2"></span>
+						<div>
+							<p className="placeholder-glow">
+								<span className="placeholder placehoder-avtar-h"></span>
+
+								<span className="placeholder placehoder-avtar-p"></span>
+							</p>
+						</div>
+					</div>
+					<span className="placeholder placehoder-date-box d-block mb-2"></span>
+				</div>
+				<p className="placeholder-glow placehoder-booking-msg">
+					<span className="placeholder col-12 mb-1"></span>
+					<span className="placeholder col-12"></span>
+				</p>
 			</div>
-			<p className="placeholder-glow placehoder-booking-msg">
-				<span className="placeholder col-12 mb-1"></span>
-				<span className="placeholder col-12"></span>
-			</p>
 		</div>
 	)
 }

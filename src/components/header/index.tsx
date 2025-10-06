@@ -78,7 +78,7 @@ export default function Header() {
 
                 <li className="nav-item">
                   <Link
-                    href="/#about-us"
+                    href="https://mediumaquamarine-oryx-625809.hostingersite.com"
                     className={`nav-link ${active === "about" ? "active" : ""}`}
                     onClick={() => handleSetActive("about")} >
                     About
@@ -87,7 +87,7 @@ export default function Header() {
 
                 <li className="nav-item">
                   <Link
-                    href="/#gemstones" className={`nav-link ${active === "gemstones" ? "active" : ""}`}
+                    href="https://mediumaquamarine-oryx-625809.hostingersite.com" className={`nav-link ${active === "gemstones" ? "active" : ""}`}
                     onClick={() => handleSetActive("gemstones")}>
                     Gemstones
                   </Link>
@@ -96,7 +96,7 @@ export default function Header() {
                 <li className="nav-item">
                   <Link
                     className={`nav-link ${active === "contact" ? "active" : ""}`}
-                    href="/#contactus"
+                    href="https://mediumaquamarine-oryx-625809.hostingersite.com"
                     onClick={() => handleSetActive("contact")}
                   >
                     Contact Us

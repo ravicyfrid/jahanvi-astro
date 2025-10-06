@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { Button, InputField } from "@/components/form-inputs";
 import { useDispatch } from "react-redux";
 import { setMobileNumber } from "@/redux/slices/session.slice";
+import SEOHead from "@/components/seo";
 
 
 export default function Register() {
@@ -46,7 +47,7 @@ export default function Register() {
         const results = await authService.Register(values);
         if (results.error === false) {
           toast.success(results.message);
-          
+
           dispatch(setMobileNumber(values.phone_number));
         } else {
           toast.error(results.message);
@@ -94,12 +95,11 @@ export default function Register() {
 
     const timeout = setTimeout(() => {
       fetchLocationSuggestions(value);
-    }, 600); // wait 600ms after typing stops
+    }, 600); 
 
     setTypingTimeout(timeout);
   };
 
-  // Handle suggestion select
   const handleSelectSuggestion = (s: any) => {
     formik.setFieldValue("birth_place", s.display_name);
     formik.setFieldValue("lat", s.lat);
@@ -111,6 +111,7 @@ export default function Register() {
 
   return (
     <>
+      <SEOHead title={'Register'} />
       <section className="login-auth registration-form align-center d-flex justify-content-center py-2">
         <div className="container">
           <div className="card">
@@ -140,7 +141,7 @@ export default function Register() {
                   <form onSubmit={formik.handleSubmit} className="row">
                     <div className="col-lg-6 col-md-6 col-12">
                       <InputField
-												label="Full Name"
+                        label="Full Name"
                         required={true}
                         type="text"
                         name="name"
@@ -173,8 +174,8 @@ export default function Register() {
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-12">
-                    <InputField
-												label="Email"
+                      <InputField
+                        label="Email"
                         required={true}
                         type="email"
                         name="email"
@@ -202,7 +203,7 @@ export default function Register() {
                         <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                         <option value="other">Other</option>
+                        <option value="other">Other</option>
                       </select>
                       {formik.errors.gender && formik.touched.gender && (
                         <div className="invalid-feedback">{formik.errors.gender}</div>
@@ -210,7 +211,7 @@ export default function Register() {
                     </div>
                     <div className="col-lg-6 col-md-6 col-12">
                       <InputField
-												label="Time of Birth (HH:MM)"
+                        label="Time of Birth (HH:MM)"
                         required={true}
                         type="time"
                         name="tob"
@@ -226,7 +227,23 @@ export default function Register() {
 
                     <div className="col-lg-6 col-md-6 col-12">
                       <InputField
-												label="Birth Place"
+                        label="Date of Birth"
+                        required={true}
+                        type="date"
+                        name="dob"
+                        onChange={formik.handleChange}
+                        value={formik.values.dob}
+                        className={`${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
+                          }`}
+                      />
+                      {formik.errors.dob && formik.touched.dob && (
+                        <div className="invalid-feedback">{formik.errors.dob}</div>
+                      )}
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 col-12">
+                      <InputField
+                        label="Birth Place"
                         required={true}
                         type="text"
                         name="birth_place"
@@ -263,23 +280,7 @@ export default function Register() {
                         </ul>
                       )}
                     </div>
-
-                    <div className="col-lg-12 col-md-12 col-12">
-                      <InputField
-												label="Date of Birth"
-                        required={true}
-                        type="date"
-                        name="dob"
-                        onChange={formik.handleChange}
-                        value={formik.values.dob}
-                        className={`${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
-                          }`}
-                      />
-                      {formik.errors.dob && formik.touched.dob && (
-                        <div className="invalid-feedback">{formik.errors.dob}</div>
-                      )}
-                    </div>
-                    <div className="mb-3 col-12">
+                    <div className="mb-3 col-12 text-center mx-auto">
                       <Button
                         type="submit"
                         label="Submit"

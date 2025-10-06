@@ -12,6 +12,8 @@ import { setLoggedInUser } from "@/redux/slices/session.slice";
 import { authService } from "@/services/auth.service";
 import { Footer, Header } from "@/components";
 import { Button, InputField } from "@/components/form-inputs";
+import { toast } from "react-toastify";
+import SEOHead from "@/components/seo";
 
 export default function UpdateProfile() {
 	const [suggestions, setSuggestions] = useState<any[]>([]);
@@ -43,23 +45,26 @@ export default function UpdateProfile() {
 			tzone: loggedInUser.tzone || ""
 		},
 		validationSchema: Yup.object({
-			name: Yup.string().required("Required"),
-			gender: Yup.string().required("Required"),
-			birth_place: Yup.string().required("Required"),
-			dob: Yup.string().required("Required"),
-			tob: Yup.string().required("Required"),
+			name: Yup.string().label('Name').required(),
+			gender: Yup.string().label('Gender').required(),
+			birth_place: Yup.string().label('Birth Place').required(),
+			dob: Yup.string().label('Date Of Birth').required(),
+			tob: Yup.string().label("Time Of Birth").required(),
 		}),
 		enableReinitialize: true,
 		onSubmit: async (values) => {
-			console.log('values', values);
-
 			setLoading(true)
 			try {
 				const res = await authService.updateProfile(values)
 				setLoading(false)
 				console.log('res', res)
-			} catch (err) {
+				if (res.error === false) {
+					dispatch(setLoggedInUser());
+					toast.success(res.message)
+				}
+			} catch (err: any) {
 				console.error('err', err)
+				toast.error(err.message)
 			}
 		},
 	});
@@ -88,7 +93,6 @@ export default function UpdateProfile() {
 		}
 	};
 
-	// Handle typing with debounce
 	const handlePlaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		formik.setFieldValue("birth_place", value);
@@ -97,21 +101,21 @@ export default function UpdateProfile() {
 
 		const timeout = setTimeout(() => {
 			fetchLocationSuggestions(value);
-		}, 600); // wait 600ms after typing stops
+		}, 600)
 
 		setTypingTimeout(timeout);
 	};
 
-	// Handle suggestion select
 	const handleSelectSuggestion = (s: any) => {
 		formik.setFieldValue("birth_place", s.display_name);
 		formik.setFieldValue("lat", s.lat);
 		formik.setFieldValue("lon", s.lon);
-		setSuggestions([]); // clear dropdown after selection
+		setSuggestions([]);
 	};
 
 	return (
 		<>
+			<SEOHead title={'Update Profile'} />
 			<Header />
 			<section className="login-auth update-profile align-center d-flex justify-content-center py-5">
 				<div className="container">
@@ -148,10 +152,8 @@ export default function UpdateProfile() {
 												value={formik.values.name}
 												className={` ${formik.errors.name && formik.touched.name ? "is-invalid" : ""
 													}`}
+												error={formik.errors.name && formik.touched.name && (formik.errors.name)}
 											/>
-											{formik.errors.name && formik.touched.name && (
-												<div className="invalid-feedback">{formik.errors.name}</div>
-											)}
 										</div>
 
 										<div className="form-group mb-3 col-lg-6 col-md-6 col-12">
@@ -171,8 +173,6 @@ export default function UpdateProfile() {
 												</div>
 											)}
 										</div>
-
-
 
 										<div className="form-group mb-3 col-lg-6 col-md-6 col-12">
 											<label className="form-label">Gender<span className="text-danger">*</span></label>
@@ -204,10 +204,8 @@ export default function UpdateProfile() {
 												value={formik.values.tob}
 												className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
 													}`}
+												error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
 											/>
-											{formik.errors.tob && formik.touched.tob && (
-												<div className="invalid-feedback">{formik.errors.tob}</div>
-											)}
 										</div>
 
 										<div className="col-lg-6 col-md-6 col-12">
@@ -220,13 +218,11 @@ export default function UpdateProfile() {
 												value={formik.values.dob}
 												className={` ${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
 													}`}
+												error={formik.errors.dob && formik.touched.dob && (formik.errors.dob)}
 											/>
-											{formik.errors.dob && formik.touched.dob && (
-												<div className="invalid-feedback">{formik.errors.dob}</div>
-											)}
 										</div>
 
-										<div className="col-lg-12 col-md-12 col-12">
+										<div className="col-lg-6 col-md-6 col-12">
 											<InputField
 												label="Birth Place"
 												required={true}
@@ -239,14 +235,9 @@ export default function UpdateProfile() {
 													: ""
 													}`}
 												autoComplete="off"
+												error={formik.errors.birth_place && formik.touched.birth_place && (formik.errors.birth_place)}
 											/>
-											{formik.errors.birth_place && formik.touched.birth_place && (
-												<div className="invalid-feedback">
-													{formik.errors.birth_place}
-												</div>
-											)}
 
-											{/* Suggestions dropdown */}
 											{suggestions.length > 0 && (
 												<ul
 													className="list-group position-absolute w-100"
@@ -265,25 +256,22 @@ export default function UpdateProfile() {
 												</ul>
 											)}
 										</div>
-										<div className="mb-3 col-12">
+										<div className="mb-3 col-12 text-center mx-auto">
 											<Button
 												type="submit"
 												label="Submit"
 												className={`btn btn-primary py-2 ${loading && 'loading'} `}
 												disabled={loading}
-											/>										</div>
+											/>
+										</div>
 									</form>
-
-
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</section>
 			<Footer />
-
 		</>
 	);
 }

@@ -38,17 +38,6 @@ const UserLogin = () => {
 		},
 		enableReinitialize: true,
 
-		// validationSchema: Yup.object().shape({
-		// 	username: Yup.string()
-		// 		.label("Phone Number")
-		// 		.required("Phone number is required"),
-		// 	otp: otpRequested
-		// 		? Yup.string()
-		// 			.length(6, "OTP must be 6 digits")
-		// 			.required("OTP is required")
-		// 		: Yup.string(),
-		// }),
-
 		onSubmit: async (values: any) => {
 			setLoading(true);
 
@@ -80,11 +69,7 @@ const UserLogin = () => {
 					if (verifyResult?.error === false && verifyResult?.access_token) {
 						toast.success(verifyResult?.message || 'User logged in successfully', { autoClose: 3000 });
 						dispatch(setAuthToken(verifyResult?.access_token));
-						// if (router.query.page) {
-						// 	dispatch(setAuthToken({ ...verifyResult.data?.loginWithOTP, redirect_to: router.query?.redirect_to || `${router.query.page}` }))
-						// } else {
-						// 	dispatch(setAuthToken({ ...verifyResult.data?.loginWithOTP, redirect_to: router.query?.redirect_to || '/' }))
-						// }
+
 					} else {
 						toast.error(
 							verifyResult?.message
@@ -119,7 +104,6 @@ const UserLogin = () => {
 		try {
 			setLoading(true);
 			const results: any = await authService.ResendOtp({ user_id: formik.values.user_id });
-			console.log('results of resend otp', results);
 
 			if (results?.error === false) {
 				toast.success(results?.message || "OTP resent successfully");
@@ -231,7 +215,7 @@ const UserLogin = () => {
 									</form>
 									{!otpRequested && (
 										<p className="text-center mt-3">
-											<Link href="/register" className="text-danger fw-semibold">
+											<Link href="/register" className="text-danger">
 												Register Here
 											</Link>
 										</p>
@@ -241,10 +225,8 @@ const UserLogin = () => {
 						</div>
 					</div>
 				</div>
-
 			</section >
 		</>
-
 	);
 };
 
