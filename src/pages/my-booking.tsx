@@ -16,7 +16,7 @@ const MyBooking = () => {
 	const [chatsId, setChatId] = React.useState<any>({});
 	const [filters, setFilters] = React.useState<any>({
 		page: 1,
-		per_page: 8,
+		per_page: 9,
 	})
 
 	useEffect(() => {
@@ -72,7 +72,7 @@ const MyBooking = () => {
 																<span className="fw-semibold">ID-{item.order_number}</span>
 																<div className="d-flex gap-2">
 																	<button type="button" onClick={() => chatid(item.chat.id, item.order_number)} className="btn success-button border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chat</button>
-																	<button type="button" className="order-failed border-0">{item.status}</button>
+																	{/* <button type="button" className="order-failed border-0">{item.status}</button> */}
 																</div>
 															</div>
 															<hr />
@@ -105,14 +105,14 @@ const MyBooking = () => {
 													</div>
 												)
 											})
-
 												:
-
 												<div className="justify-content-center d-flex w-100">
 													<p>No record found</p>
 												</div>
 											}
-											{loading && <Skeleton />}
+											{loading && Array.from({ length: 3 }).map((_, i) => (
+												<Skeleton key={i} />
+											))}
 										</div>
 									</div>
 
@@ -124,9 +124,9 @@ const MyBooking = () => {
 														<div className="booking-card">
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
-																<div className="d-flex gap-2">
+																{/* <div className="d-flex gap-2">
 																	<button type="button" onClick={() => chatid(item.chat.id, item.order_number)} className="btn success-button border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chat</button>
-																</div>
+																</div> */}
 															</div>
 															<hr />
 															<div className="d-flex align-items-center mb-3">
@@ -181,7 +181,7 @@ const MyBooking = () => {
 
 																<div className="d-flex gap-2">
 																	{/* <button type="button" onClick={() => chatid(item.chat.id, item.order_number)} className="btn success-button border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chat</button> */}
-																	<button type="button" className="order-cancelled border-0">{item.status}</button>
+																	{/* <button type="button" className="order-cancelled border-0">{item.status}</button> */}
 																</div>
 															</div>
 															<hr />
@@ -246,7 +246,6 @@ const MyBooking = () => {
 
 			<Footer />
 			<Chat chatid={chatsId} />
-
 		</>
 
 	);
@@ -264,6 +263,7 @@ const Chat = (props: any) => {
 		})
 	}
 	useEffect(() => {
+		if (!props?.chatid?.id) return;
 		convertaiton()
 	}, [props.chatid])
 
@@ -276,8 +276,6 @@ const Chat = (props: any) => {
 			setchatLoading(true)
 			console.log(values);
 			chatsService.startChat(props.chatid.id, values).then((results: any) => {
-				console.log('results', results);
-
 				if (results.error === false) {
 					convertaiton()
 				}
@@ -321,30 +319,30 @@ const Chat = (props: any) => {
 										const showDate = currentDate !== previousDate;
 										previousDate = currentDate
 										return (
-												<div key={i}>
-													{showDate && (
-														<div className="text-center text-muted small mb-4">
-															<span className="chat-time">{currentDate}</span>
+											<div key={i}>
+												{showDate && (
+													<div className="text-center text-muted small mb-4">
+														<span className="chat-time">{currentDate}</span>
+													</div>
+												)}
+												{item?.user?.role !== "customer" &&
+													<div className="msg msg-right">
+														<span className="d-block ">{item.message}</span>
+														<small className="text-white">{formatDateParts(item.created_at).timeOnly}</small>
+													</div>
+												}
+												{item?.user?.role === "customer" &&
+													<div>
+														<p className="text-black code-sandbox">{item.name}</p>
+														<div className="msg msg-left">
+															<span className="d-block">
+																{item.message}
+															</span>
+															<small className="text-muted">{formatDateParts(item.created_at).timeOnly}</small>
 														</div>
-													)}
-													{item?.user?.role !== "customer" &&
-														<div className="msg msg-right">
-															<span className="d-block ">{item.message}</span>
-															<small className="text-white">{formatDateParts(item.created_at).timeOnly}</small>
-														</div>
-													}
-													{item?.user?.role === "customer" &&
-														<div>
-															<p className="text-black code-sandbox">{item.name}</p>
-															<div className="msg msg-left">
-																<span className="d-block">
-																	{item.message}
-																</span>
-																<small className="text-muted">{formatDateParts(item.created_at).timeOnly}</small>
-															</div>
-														</div>
-													}
-													{/* 
+													</div>
+												}
+												{/* 
 										<div className="msg msg-left">Hello how are you?<br /><small className="text-muted">12:46 PM</small></div>
 
 										<div className="msg msg-right">I am fine mam<br /><small className="text-white">12:46 PM</small></div>
@@ -352,7 +350,7 @@ const Chat = (props: any) => {
 										<div className="msg msg-left">What is your name<br /><small className="text-muted">12:46 PM</small></div>
 
 										<div className="msg msg-right">Ram<br /><small className="text-white">12:47 PM</small></div> */}
-												</div>
+											</div>
 										)
 									})}
 							</div>
