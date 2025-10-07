@@ -166,6 +166,7 @@ export default function UpdateProfile() {
 												}
 												inputStyle={{ width: "100%" }}
 												disabled
+												countryCodeEditable={false}
 											/>
 											{formik.errors.phone_number && formik.touched.phone_number && (
 												<div className="text-danger small">

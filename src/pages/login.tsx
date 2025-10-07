@@ -157,7 +157,7 @@ const UserLogin = () => {
 												onChange={(phone) => formik.setFieldValue("phoneNumber", phone)}
 												inputStyle={{ width: "100%" }}
 												disabled={otpRequested}
-
+												countryCodeEditable={false}
 											/>
 										</div>
 										{formik.touched.phoneNumber && formik.errors.phoneNumber ? (

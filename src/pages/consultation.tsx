@@ -172,6 +172,7 @@ const Consultation = () => {
 													formik.setFieldValue("phone_number", phone)
 												}
 												inputStyle={{ width: "100%" }}
+												countryCodeEditable={false}
 											/>
 											{formik.errors.phone_number && formik.touched.phone_number && (
 												<div className="text-danger small">
