@@ -1,16 +1,6 @@
-import { gemsService } from "@/services"
-import { useEffect } from "react"
-
-const Gems = () => {
-
-    useEffect(() => {
-        gemsService.getGems().then((result: any) => {
-            console.log('result',result);
-
-        })
-    }, [])
-    return (<>
-this is gems page
-    </>)
+const GemsCategories=()=>{
+  return(
+    <>This is Gems category listing page</>
+  )
 }
-export default Gems
+export default GemsCategories

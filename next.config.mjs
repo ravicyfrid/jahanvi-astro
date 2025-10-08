@@ -6,16 +6,8 @@ const nextConfig = {
   },
   typescript: {
 		ignoreBuildErrors: true
-	},
-  async redirects() {
-    return [
-      {
-        source: '/',       // when user visits root
-        destination: '/login',  // redirect here
-        permanent: false,  // use true if it's a permanent redirect (301)
-      },
-    ];
-  },
+	}
+
 };
 
 export default nextConfig;
