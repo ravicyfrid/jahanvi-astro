@@ -37,7 +37,7 @@ const Consultation = () => {
 								<div className="form-check form-check-inline">
 									<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
 									<label className="form-check-label" htmlFor="inlineRadio3">
-										 Tapasvi D/O Guru Maa
+										Tapasvi D/O Guru Maa
 										₹2100
 									</label>
 								</div>
@@ -108,7 +108,7 @@ const Consultation = () => {
 								/>
 							</div>
 
-							<div className="col-lg-12 col-md-12 col-12">
+							<div className="col-12">
 								<div className="brith-place-flied position-relative">
 									<InputField
 										// label="Birth Place"
@@ -121,6 +121,11 @@ const Consultation = () => {
 									<button type="button" className="border-0 p-0 search-button"><Image src={SearchIcon} alt="search icon" width={16} height={16} /> </button>
 								</div>
 							</div>
+							<div className="form-group mb-3 col-12">
+									{/* <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
+									<textarea className="form-control" placeholder="Message" id="exampleFormControlTextarea1" rows={3}></textarea>
+							</div>
+
 							<div>
 								<Button
 									label='Submit'

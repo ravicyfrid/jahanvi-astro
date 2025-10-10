@@ -107,6 +107,49 @@ p {
   min-height: 75vh;
 }
 
+.user-profile-mobile {
+  .user-infos {
+    a {
+      font-weight: 600;
+      font-size: 18px;
+      color: #000;
+    }
+  }
+
+  .user-profile-list {
+    ul {
+      li {
+        margin-bottom: 15px;
+
+        .menu-icon {
+          background-color: #f3f3f3;
+          border-radius: 10px;
+          height: 30px;
+          width: 30px;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+        }
+
+        a {
+          font-weight: 600;
+          font-size: 18px;
+          color: #000;
+
+        }
+      }
+    }
+  }
+}
+.logout-modal{
+  border-radius: 16px;
+  button{
+   font-size: 14px;
+    padding: 7px 19px;
+    border-radius: 25px;
+  }
+}
+
 .geme-cards {
   .card {
     padding: 10px 10px 10px 10px;
@@ -120,12 +163,11 @@ p {
 .footer-menu-list {
   position: fixed;
   bottom: 0;
-  border-top: 1px solid;
   left: 0;
   right: 0;
   margin: auto;
   text-align: center;
-  /* width: 100%; */
+  width: 100%;
   justify-content: center;
   display: flex;
   max-width: 450px;
@@ -432,7 +474,7 @@ p {
   }
 
   .gemes-details-card-box {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 }
 

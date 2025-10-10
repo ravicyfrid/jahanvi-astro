@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { GurumaPhoto } from "@/components/hero-banner/images";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -29,9 +29,12 @@ export default function Home() {
                   loop={true}
                   speed={1500}
                   pagination={{ clickable: true }}
-                  autoplay={{ delay: 2500, }}
+                  autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
                   keyboard={{ enabled: true }}
-                  modules={[Navigation, Pagination]}
+                  modules={[Navigation, Pagination, Autoplay]}
                   className="mySwiper"
                 >
                   <SwiperSlide>
@@ -102,9 +105,12 @@ export default function Home() {
                 loop={true}
                 speed={1500}
                 pagination={{ clickable: true }}
-                autoplay={{ delay: 2500, }}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
                 keyboard={{ enabled: true }}
-                modules={[Navigation, Pagination]}
+                modules={[Navigation, Pagination, Autoplay]}
                 className="mySwiper"
               >
                 <SwiperSlide>
@@ -115,7 +121,7 @@ export default function Home() {
                 </SwiperSlide>
 
                 <SwiperSlide>
-                 <h6>100k+ Resolutions till date</h6>
+                  <h6>100k+ Resolutions till date</h6>
                   <p>
                     Jahanvi soni neema
                   </p>
