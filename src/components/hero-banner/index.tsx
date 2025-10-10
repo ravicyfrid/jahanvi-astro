@@ -80,6 +80,7 @@ export default function HeroBanner({ props }: _Object) {
                 )}
               </Swiper>
             </div>
+            
             <div className="col-lg-7 col-md-7 col-sm-12 col-12 my-auto">
               <div className="hero-banner-content">
                 <h1>
