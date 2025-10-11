@@ -1,9 +1,6 @@
-/* eslint-disable max-len */
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const InputField = ({ name, type = 'text', onChange, value, label, placeholder = 'Enter here', required = false, className = '', icon = '', error, ...props }: any) => {
 	const [eyeOn, setEyeOn] = useState(false)
 	const [fieldType, setFieldType] = useState(type)
@@ -26,7 +23,6 @@ const InputField = ({ name, type = 'text', onChange, value, label, placeholder =
 				autoComplete="off"
 				name={name}
 				placeholder={placeholder}
-				// value={value}
 				value={value ?? ''}
 				onChange={onChange}
 				required={required}
