@@ -1,7 +1,7 @@
 
 
 import { Notification, SearchIcon } from "@/assets/images";
-import { Button, InputField } from "@/components/form-inputs";
+import { Button, InputField } from "@/components";
 import SEOHead from "@/components/seo";
 import Image from "next/image";
 import PhoneInput from "react-phone-input-2";

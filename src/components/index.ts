@@ -5,6 +5,14 @@ import HeroBanner from "./hero-banner";
 import Slider from "./slider";
 import Footer from "./footer";
 import ContactUs from "./contact-us";
+import InputField from './form-inputs/input-field'
+import Button from './form-inputs/button'
+import TextArea from './form-inputs/text-area'
+import OtpInput from './form-inputs/otp'
+import InputGroup from './form-inputs/input-group'
+import Pagination from "./pagination";
+import Chat from './chat'
+import SEOHead from './seo/index'
 
 export {
     CTA,
@@ -13,5 +21,13 @@ export {
     HeroBanner,
     Slider,
     Footer,
-    ContactUs
+    ContactUs,
+    InputField,
+	InputGroup,
+	Button,
+	TextArea,
+	OtpInput,
+    Pagination,
+    Chat,
+    SEOHead
 }

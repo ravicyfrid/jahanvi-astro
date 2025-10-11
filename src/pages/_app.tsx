@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+
+import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import store from '@/redux/store';
+
 import type { AppProps } from 'next/app';
 import '../assets/scss/app.scss';
 import '../assets/scss/main.scss';
-import { ToastContainer } from 'react-toastify';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	useEffect(() => {
@@ -19,8 +23,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
 	return (
 		<>
+			<Provider store={store}>
 				<Component {...pageProps} />
 				<ToastContainer />
+			</Provider>
 		</>
 	);
 };
