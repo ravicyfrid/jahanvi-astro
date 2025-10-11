@@ -47,6 +47,20 @@ p {
   color: #000;
 }
 
+.brith-place-flied {
+  .form-control {
+    padding-left: 30px !important;
+  }
+
+  .search-button {
+    background-color: transparent;
+    position: absolute;
+    top: 13px;
+    left: 9px;
+
+  }
+}
+
 .form-group {
   .form-control {
     color: #2196f3 !important;
@@ -100,7 +114,7 @@ p {
 }
 
 .login-auth-mobile {
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 .otp-auth-mobile {
@@ -113,6 +127,25 @@ p {
       font-weight: 600;
       font-size: 18px;
       color: #000;
+    }
+  }
+
+  .gemstones-enquiries-card {
+    .menu-icon {
+      background-color: #f3f3f3;
+      border-radius: 10px;
+      height: 30px;
+      width: 30px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    a {
+      font-weight: 600;
+      font-size: 18px;
+      color: #000;
+
     }
   }
 
@@ -141,10 +174,12 @@ p {
     }
   }
 }
-.logout-modal{
+
+.logout-modal {
   border-radius: 16px;
-  button{
-   font-size: 14px;
+
+  button {
+    font-size: 14px;
     padding: 7px 19px;
     border-radius: 25px;
   }
@@ -300,19 +335,7 @@ p {
 .consultation-page-mobile {
   padding-bottom: 70px;
 
-  .brith-place-flied {
-    .form-control {
-      padding-left: 30px;
-    }
 
-    .search-button {
-      background-color: transparent;
-      position: absolute;
-      top: 13px;
-      left: 9px;
-
-    }
-  }
 
 
 }
@@ -476,6 +499,24 @@ p {
   .gemes-details-card-box {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
+
+  .geme-category-skeleton {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    .gemes-img-skeletons {
+      width: 100px;
+      min-height: 100px;
+    }
+
+    .sub-title-skeleton {
+      min-height: 15px;
+    }
+  }
+
+}
+
+.gems-horizontal-img {
+  height: 175px;
 }
 
 

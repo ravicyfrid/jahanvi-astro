@@ -17,6 +17,15 @@ import CatsEye from '../images/cats-eye.webp'
 import PearlMoti from '../images/pearl-moti.jpg'
 import SearchIcon from '../images/search-icon.svg'
 import CategoryIcon from '../images/category-icon.svg'
+import ContactusIcon from '../images/contactus.svg'
+import PrivcyPolicy from '../images/privcy-policy.svg'
+import Logout from '../images/logout.svg'
+import GemstonsIcon from '../images/gemstonsicon.svg'
+
+
+
+
+
 
 
 export {
@@ -38,5 +47,9 @@ export {
 	CatsEye,
 	PearlMoti,
 	SearchIcon,
-	CategoryIcon
+	CategoryIcon,
+	ContactusIcon,
+	PrivcyPolicy,
+	GemstonsIcon,
+	Logout
 }

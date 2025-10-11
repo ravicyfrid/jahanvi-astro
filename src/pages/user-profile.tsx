@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from '@/components/form-inputs';
 
 import PhoneInput from "react-phone-input-2";
-import { Notification, PensilIcon, PlaceHolder, UserProfile } from "@/assets/images";
+import { ContactusIcon, GemstonsIcon, Logout, Notification, PensilIcon, PlaceHolder, PrivcyPolicy, UserProfile } from "@/assets/images";
 
 export default function UpdateProfile() {
 
@@ -14,6 +14,7 @@ export default function UpdateProfile() {
 		<>
 			<SEOHead title={'Update Profile'} />
 			<section className="user-profile-mobile">
+
 				<div className="card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
 
 					<h5 className="card-title text-black d-flex align-items-center gap-2">
@@ -48,14 +49,27 @@ export default function UpdateProfile() {
 							</div>
 						</div>
 
-						<div className="card rounded-2 shadow-lg bg-white px-3 py-4 mb-2">
-							<div className="d-flex align-items-center">
-								<div className="user-profile pe-3">
+						<div className="card rounded-2 shadow-lg bg-white px-3 py-4 mb-2 gemstones-enquiries-card">
+
+							<a href="/gemstones-enquiries" className="d-flex align-items-center gap-3">
+								<div className="menu-icon">
 									<Image
-										src={UserProfile}
-										alt="Avatar"
-										width={30}
-										height={30}
+										src={GemstonsIcon}
+										alt="Contact Icon"
+										width={20}
+										height={20}
+									/>
+								</div>
+								<span>Gemstones Enquiries</span>
+							</a>
+						</div>
+						{/* <div className="d-flex align-items-center">
+								<div className="menu-icon">
+									<Image
+										src={GemstonsIcon}
+										alt="Gemstons Icon"
+										width={20}
+										height={20}
 									/>
 								</div>
 								<div className="user-infos">
@@ -65,7 +79,7 @@ export default function UpdateProfile() {
 								</div>
 
 							</div>
-						</div>
+						</div> */}
 
 						<div className="card text-center card rounded-2 shadow-lg bg-white px-3 py-4 mb-2 user-profile-list">
 							<ul className="list-unstyled menu-list mb-0">
@@ -73,7 +87,12 @@ export default function UpdateProfile() {
 								<li>
 									<a href="/contact" className="d-flex align-items-center gap-3">
 										<div className="menu-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 440.965 440.965"><g><path d="M341.508 36.207A220.151 220.151 0 0 0 220.587.154C98.892.271.235 98.832 0 220.527a215.892 215.892 0 0 0 36.48 120.32L.853 426.18c-2.189 5.469.47 11.677 5.939 13.867a10.672 10.672 0 0 0 7.928 0l85.333-35.627c101.679 66.676 238.158 38.3 304.834-63.379s38.3-238.158-63.379-304.834zm-120.707 383.36h-.213v.213h-.001a200.961 200.961 0 0 1-113.28-36.053 10.673 10.673 0 0 0-5.973-1.92 10.47 10.47 0 0 0-4.053 0l-66.774 28.587 27.947-66.56a10.666 10.666 0 0 0-1.067-10.24 194.766 194.766 0 0 1-36.053-113.067c-.118-110.045 88.995-199.349 199.04-199.467 110.044-.118 199.349 88.995 199.467 199.04.118 110.045-88.995 199.349-199.04 199.467z" fill="#328fe0" opacity="1" data-original="#000000"></path><path d="M288.514 162.764c-4.633-33.756-33.865-58.657-67.927-57.864-36.795-.118-66.752 29.552-66.987 66.347 0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667c.471-25.209 21.289-45.263 46.499-44.792 25.21.471 45.263 21.289 44.792 46.499-.465 24.874-20.759 44.796-45.637 44.8-5.891 0-10.667 4.776-10.667 10.667v47.787c0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667v-37.973c36.652-5.029 62.288-38.819 57.259-75.471z" fill="#328fe0" opacity="1" data-original="#000000"></path><circle cx="219.697" cy="325.147" r="11.675" fill="#328fe0" opacity="1" data-original="#000000"></circle></g></svg>
+											<Image
+												src={ContactusIcon}
+												alt="Contact Icon"
+												width={20}
+												height={20}
+											/>
 										</div>
 										<span>Contact</span>
 									</a>
@@ -82,7 +101,12 @@ export default function UpdateProfile() {
 									<a href="/privacy-policy" className="d-flex align-items-center  gap-3">
 										<div className="menu-icon">
 											<div className="menu-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 440.965 440.965"><g><path d="M341.508 36.207A220.151 220.151 0 0 0 220.587.154C98.892.271.235 98.832 0 220.527a215.892 215.892 0 0 0 36.48 120.32L.853 426.18c-2.189 5.469.47 11.677 5.939 13.867a10.672 10.672 0 0 0 7.928 0l85.333-35.627c101.679 66.676 238.158 38.3 304.834-63.379s38.3-238.158-63.379-304.834zm-120.707 383.36h-.213v.213h-.001a200.961 200.961 0 0 1-113.28-36.053 10.673 10.673 0 0 0-5.973-1.92 10.47 10.47 0 0 0-4.053 0l-66.774 28.587 27.947-66.56a10.666 10.666 0 0 0-1.067-10.24 194.766 194.766 0 0 1-36.053-113.067c-.118-110.045 88.995-199.349 199.04-199.467 110.044-.118 199.349 88.995 199.467 199.04.118 110.045-88.995 199.349-199.04 199.467z" fill="#328fe0" opacity="1" data-original="#000000"></path><path d="M288.514 162.764c-4.633-33.756-33.865-58.657-67.927-57.864-36.795-.118-66.752 29.552-66.987 66.347 0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667c.471-25.209 21.289-45.263 46.499-44.792 25.21.471 45.263 21.289 44.792 46.499-.465 24.874-20.759 44.796-45.637 44.8-5.891 0-10.667 4.776-10.667 10.667v47.787c0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667v-37.973c36.652-5.029 62.288-38.819 57.259-75.471z" fill="#328fe0" opacity="1" data-original="#000000"></path><circle cx="219.697" cy="325.147" r="11.675" fill="#328fe0" opacity="1" data-original="#000000"></circle></g></svg>
+												<Image
+													src={PrivcyPolicy}
+													alt="Privcy Policy"
+													width={20}
+													height={20}
+												/>
 											</div>
 										</div>
 										<span>Privacy Policy</span>
@@ -99,7 +123,12 @@ export default function UpdateProfile() {
 								<li>
 									<a href="/logout" className="d-flex align-items-center  gap-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
 										<div className="menu-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 440.965 440.965"><g><path d="M341.508 36.207A220.151 220.151 0 0 0 220.587.154C98.892.271.235 98.832 0 220.527a215.892 215.892 0 0 0 36.48 120.32L.853 426.18c-2.189 5.469.47 11.677 5.939 13.867a10.672 10.672 0 0 0 7.928 0l85.333-35.627c101.679 66.676 238.158 38.3 304.834-63.379s38.3-238.158-63.379-304.834zm-120.707 383.36h-.213v.213h-.001a200.961 200.961 0 0 1-113.28-36.053 10.673 10.673 0 0 0-5.973-1.92 10.47 10.47 0 0 0-4.053 0l-66.774 28.587 27.947-66.56a10.666 10.666 0 0 0-1.067-10.24 194.766 194.766 0 0 1-36.053-113.067c-.118-110.045 88.995-199.349 199.04-199.467 110.044-.118 199.349 88.995 199.467 199.04.118 110.045-88.995 199.349-199.04 199.467z" fill="#328fe0" opacity="1" data-original="#000000"></path><path d="M288.514 162.764c-4.633-33.756-33.865-58.657-67.927-57.864-36.795-.118-66.752 29.552-66.987 66.347 0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667c.471-25.209 21.289-45.263 46.499-44.792 25.21.471 45.263 21.289 44.792 46.499-.465 24.874-20.759 44.796-45.637 44.8-5.891 0-10.667 4.776-10.667 10.667v47.787c0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667v-37.973c36.652-5.029 62.288-38.819 57.259-75.471z" fill="#328fe0" opacity="1" data-original="#000000"></path><circle cx="219.697" cy="325.147" r="11.675" fill="#328fe0" opacity="1" data-original="#000000"></circle></g></svg>
+											<Image
+												src={Logout}
+												alt="Logout"
+												width={20}
+												height={20}
+											/>
 										</div>
 										<span>Logout</span>
 									</a>
@@ -150,27 +179,27 @@ export default function UpdateProfile() {
 			</nav>
 
 
-{/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			{/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button> */}
 
-<div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog modal-dialog-centered modal-sm">
-    <div className="modal-content logout-modal">
-    
-      <div className="modal-body text-center p-4">
-        <h4 className="mb-3">
-					Log Out
-				</h4>
-				<p>Are You Sure you want to log out?</p>
-      <div className="d-flex justify-content-between ">
-        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
-        <button type="button" className="btn btn-primary">Log Out</button>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
+			<div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog modal-dialog-centered modal-sm">
+					<div className="modal-content logout-modal">
+
+						<div className="modal-body text-center p-4">
+							<h4 className="mb-3">
+								Log Out
+							</h4>
+							<p>Are You Sure you want to log out?</p>
+							<div className="d-flex justify-content-between ">
+								<button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
+								<button type="button" className="btn btn-primary">Log Out</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</>
 	);
