@@ -1,11 +1,10 @@
 
-import { InputField } from "@/components/form-inputs";
 import SEOHead from "@/components/seo";
 import Image from "next/image";
-import { Button } from '@/components/form-inputs';
 
 import PhoneInput from "react-phone-input-2";
 import { PensilIcon, UserProfile } from "@/assets/images";
+import { Button, InputField } from "@/components";
 
 export default function UpdateProfile() {
 

@@ -498,6 +498,16 @@ p {
 
   .gemes-details-card-box {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    h5{
+      font-size: 15px;
+    }
+    h6{
+      font-size: 14px;
+    }
+    p{
+      font-size: 13px;
+    }
+    
   }
 
   .geme-category-skeleton {
@@ -513,6 +523,19 @@ p {
     }
   }
 
+}
+
+.geme-category-skeleton {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  .gemes-img-skeletons {
+    width: 100px;
+    min-height: 100px;
+  }
+
+  .sub-title-skeleton {
+    min-height: 15px;
+  }
 }
 
 .gems-horizontal-img {

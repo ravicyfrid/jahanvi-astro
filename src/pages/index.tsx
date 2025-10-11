@@ -50,49 +50,87 @@ const UserLogin = () => {
 	return (
 		<>
 			<SEOHead title={'Login'} />
-			<section className="login-auth-mobile login-form-page align-center d-flex justify-content-center py-2 bg-white">
-				<div className="container">
-					<div className="card">
-						<div className="row">
+			<section className="">
+				<div className="d-flex justify-content-between card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar">
+					<h6 className="mb-0">Login/Signup</h6>
+				</div>
+				<div className='login-auth-mobile login-form-page align-center d-flex justify-content-center py-2 bg-white'>
+					<div className="container">
+						<div className="card">
+							<div className="row">
 
-							<div className="col-12 d-flex flex-column justify-content-center align-items-center">
-								<div className='login-form-cotnent'>
-									<div className="text-center mb-3">
-										<Image src={Logo} alt="Jahanvi Astro Logo mb-4" width={120} height={120} />
-										<h5 className="mb-2 text-center text-primary">Welcome to Jahanvi Astro</h5>
-										<p className="text-center text-muted mb-4">
-											Your trusted guide for personalized astrology insights and gemstone consultations. Our expert astrologers and gemstone consultants are here to provide you with tailored advice to help navigate life's challenges and understand your future.
-										</p>
-									</div>
-
-									<form className="login-form" onSubmit={formik.handleSubmit}>
-										<div className='form-group'>
-											<PhoneInput
-												country={"in"}
-												value={formik.values.username}
-												onChange={(value) => formik.setFieldValue('username', value)}
-												inputStyle={{ width: "100%" }}
-												countryCodeEditable={false}
-											/>
-											<div className='d-flex  justify-content-between mt-1'>
-												{formik.touched.username && formik.errors.username ? (
-													<p className="text-danger" style={{ fontSize: "12px" }}>{formik.errors.username}</p>
-												) : <p className="text-danger" style={{ fontSize: "12px" }}></p>}
-												<p className='md-0' style={{ textAlign: 'right', fontSize: '12px' }}>
-													0 / 10
-												</p>
-											</div>
+								<div className="col-12 d-flex flex-column justify-content-center align-items-center">
+									<div className='login-form-cotnent'>
+										<div className="text-center mb-3">
+											<Image src={Logo} alt="Jahanvi Astro Logo mb-4" width={120} height={120} />
+											<h5 className="mb-2 text-center text-primary">Welcome to Jahanvi Astro</h5>
+											<p className="text-center text-muted mb-4">
+												Your trusted guide for personalized astrology insights and gemstone consultations. Our expert astrologers and gemstone consultants are here to provide you with tailored advice to help navigate life's challenges and understand your future.
+											</p>
 										</div>
 
-										<Button
-											label='Login'
-											loading={loading}
+										{/* <form className="login-form" onSubmit={formik.handleSubmit}>
+											<div className='form-group'>
+												<PhoneInput
+													country={"in"}
+													value={formik.values.username}
+													onChange={(value) => formik.setFieldValue('username', value)}
+													inputStyle={{ width: "100%" }}
+													countryCodeEditable={false}
+												/>
+												<div className='d-flex  justify-content-between mt-1'>
+													{formik.touched.username && formik.errors.username ? (
+														<p className="text-danger" style={{ fontSize: "12px" }}>{formik.errors.username}</p>
+													) : <p className="text-danger" style={{ fontSize: "12px" }}></p>}
+													<p className='md-0' style={{ textAlign: 'right', fontSize: '12px' }}>
+														0 / 10
+													</p>
+												</div>
+											</div>
+
+
+											
+
+											<Button
+												label='Login'
+												loading={loading}
 												disabled={loading || (
 													(!formik.isValid || !formik.dirty)
 												)}
-											className='primary w-100 rounded-pill mt-3 '
-										/>
-									</form>
+												className='primary w-100 rounded-pill mt-3 '
+											/>
+										</form> */}
+
+										<form className="login-form">
+											<div className='form-group'>
+												{/* <label className="form-label">Mobile Number</label> */}
+												<PhoneInput
+													country={"in"}
+													// value={formik.values.phoneNumber}
+													// onChange={(value) => formik.setFieldValue('phoneNumber', value)}
+													inputStyle={{ width: "100%" }}
+													countryCodeEditable={false}
+												/>
+												<div className='d-flex justify-content-between mt-1'>
+													{/* {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+<p className="text-danger" style={{ fontSize: "12px" }}>{formik.errors.phoneNumber}lllllllllllllll</p>
+) : null} */}
+													<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+														0 / 10
+													</p>
+
+													<p className='mb-0' style={{ textAlign: 'right', fontSize: '12px' }}>
+														0 / 10
+													</p>
+												</div>
+											</div>
+
+											<Button
+												label='Login/Signup'
+												className='primary w-100 rounded-pill mt-3'
+											/>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>

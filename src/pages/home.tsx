@@ -159,19 +159,21 @@ const Home = () => {
         <div className="container mt-4 mb-5">
           <div className="row geme-cards">
             <div className="col-12">
-              <div className="card mb-3">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={Astro} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
-                  </div>
-                  <div className="col-8 d-flex aligh-items-center">
-                    <div className="card-body py-1">
-                      <h5 className="card-title">Gems</h5>
-                      <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
+              <Link href={'/gemstone-category'}>
+                <div className="card mb-3">
+                  <div className="row g-0">
+                    <div className="col-4">
+                      <Image src={Astro} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
+                    </div>
+                    <div className="col-8 d-flex aligh-items-center">
+                      <div className="card-body py-1">
+                        <h5 className="card-title">Gems</h5>
+                        <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             <div className="col-12">
@@ -232,7 +234,7 @@ const Home = () => {
         </div> */}
         </div>
 
-        <Footer/>
+        <Footer />
       </section >
     </>
   )
