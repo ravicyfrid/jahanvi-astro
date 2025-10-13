@@ -33,7 +33,7 @@ export default class CommonService {
 			else if (data.error === true) {
 				toast.error(data?.message );
 				if (data.message === 'Unauthorized access!') {
-					window.location.replace('/login');
+					window.location.replace('/');
 				}
 			}
 
@@ -43,7 +43,7 @@ export default class CommonService {
 			// this.showErrorToast(error?.message);
 
 			if (error.message === 'Unauthorized access!') {
-				window.location.replace('/login');
+				window.location.replace('/');
 			}
 			return error;
 		}

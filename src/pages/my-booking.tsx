@@ -11,25 +11,25 @@ const MyBooking = () => {
 	const [orders, setOrders] = React.useState<any>({ items: [], pagination: {} });
 	const [loading, setLoading] = useState(false)
 	// const [chatsId, setChatId] = React.useState<any>({});
-	const router=useRouter()
-	const [filters, setFilters] = React.useState<any>({
-		page: 1,
-		per_page: 9,
-	})
+	const router = useRouter()
+	// const [filters, setFilters] = React.useState<any>({
+	// 	page: 1,
+	// 	per_page: 9,
+	// })
 
 	useEffect(() => {
 		setLoading(true)
-		ordersService.GetOrders(filters).then((res) => {
+		ordersService.GetOrders({
+			page: 1,
+			per_page: 9,
+		}).then((res) => {
 			setLoading(false)
 
 			setOrders({ items: res.items, pagination: res.pagination })
 		})
 
-		setFilters({
-		page: 1,
-		per_page: 9,
-	})
-	}, [filters])
+
+	}, [])
 
 	const upcomingOrders = orders.items.filter((o: { status: string }) => o.status === "upcoming");
 	const completedOrders = orders.items.filter((o: { status: string }) => o.status === "completed");
@@ -39,7 +39,7 @@ const MyBooking = () => {
 	// 	setChatId({ id: id, orderID: orderID })
 	// }
 
-	
+
 	return (
 		<>
 			<SEOHead title={'My Booking'} />
@@ -79,7 +79,7 @@ const MyBooking = () => {
 																<div className="d-flex gap-2">
 																	<button
 																		type="button"
-																		onClick={() =>router.push(`/chat/${item.chat.id}/${item.order_number}`)}
+																		onClick={() => router.push(`/chat/${item.chat.id}/${item.order_number}`)}
 																		className="btn success-button border-0"
 																	>Chat</button>
 																</div>
@@ -121,9 +121,14 @@ const MyBooking = () => {
 													<p>No record found</p>
 												</div>
 											}
-											{/* {loading && Array.from({ length: 3 }).map((_, i) => (
-												<Skeleton key={i} />
-											))} */}
+											<div className="col-12">
+												{loading &&
+													// Array.from({ length: 3 }).map(() => (
+													<MybookingSkeleton />
+													// ))
+												}
+											</div>
+
 										</div>
 									</div>
 
@@ -254,7 +259,41 @@ export default MyBooking
 
 
 
+const MybookingSkeleton = () => {
+	return (
+		<>
+			<div className="booking-card booking-card-placeholder">
+				<div className="d-flex justify-content-between align-items-center mb-2">
+					<p className="placeholder-glow">
+						<span className="placeholder id-number"></span>
+					</p>
+					<div className="d-flex gap-2 placeholder-glow">
+						<span className="placeholder placehoder-danger-button"></span>
+					</div>
+				</div>
+				<hr />
+				<div className="d-flex align-items-center justify-content-between placeholder-glow">
+					<div className="d-flex align-items-center placeholder-glow">
 
+						<span className="placeholder rounded-circle placehoder-avtar me-2"></span>
+						<div>
+							<p className="placeholder-glow">
+								<span className="placeholder placehoder-avtar-h"></span>
+
+								<span className="placeholder placehoder-avtar-p"></span>
+							</p>
+						</div>
+					</div>
+					<span className="placeholder placehoder-date-box d-block mb-2"></span>
+				</div>
+				<p className="placeholder-glow placehoder-booking-msg">
+					<span className="placeholder col-12 mb-1"></span>
+					<span className="placeholder col-12"></span>
+				</p>
+			</div >
+		</>
+	)
+}
 
 
 

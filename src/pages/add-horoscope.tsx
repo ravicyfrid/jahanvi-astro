@@ -127,6 +127,10 @@ const AddHoroscope = () => {
 									placeholder="Full Name"
 									onChange={formik.handleChange}
 									value={formik.values.full_name}
+									onBlur={formik.handleBlur}
+									error={formik.errors.full_name && formik.touched.full_name && (formik.errors.full_name)}
+									className={` ${formik.errors.full_name && formik.touched.full_name ? "is-invalid" : ""
+										}`}
 								/>
 							</div>
 							<div className="col-12">
@@ -137,6 +141,10 @@ const AddHoroscope = () => {
 									name="email"
 									onChange={formik.handleChange}
 									value={formik.values.email}
+									onBlur={formik.handleBlur}
+									error={formik.errors.email && formik.touched.email && (formik.errors.email)}
+									className={` ${formik.errors.email && formik.touched.email ? "is-invalid" : ""
+										}`}
 
 								/>
 							</div>
@@ -147,6 +155,7 @@ const AddHoroscope = () => {
 									className="form-select"
 									onChange={formik.handleChange}
 									value={formik.values.gender}
+									required
 								>
 									<option value="">Gender</option>
 									<option value="male">Male</option>
@@ -168,6 +177,10 @@ const AddHoroscope = () => {
 									onChange={formik.handleChange}
 									value={formik.values.tob}
 									placeholder="Time of Birth"
+									onBlur={formik.handleBlur}
+									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
+									className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
+										}`}
 								/>
 							</div>
 
@@ -180,6 +193,10 @@ const AddHoroscope = () => {
 									onChange={formik.handleChange}
 									value={formik.values.dob}
 									placeholder="Date of Birth"
+									onBlur={formik.handleBlur}
+									error={formik.errors.dob && formik.touched.dob && (formik.errors.dob)}
+									className={` ${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
+										}`}
 								/>
 							</div>
 
@@ -194,6 +211,7 @@ const AddHoroscope = () => {
 										value={formik.values.birth_place}
 										placeholder="Birth Place"
 										autoComplete="off"
+										
 									/>
 									{suggestions.length > 0 && (
 										<ul

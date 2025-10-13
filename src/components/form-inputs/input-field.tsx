@@ -2,9 +2,11 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 const InputField = ({ name, type = 'text', onChange, value, label, placeholder = 'Enter here', required = false, className = '', icon = '', error, ...props }: any) => {
+	console.log('error',error);
+	
 	const [eyeOn, setEyeOn] = useState(false)
 	const [fieldType, setFieldType] = useState(type)
-
+  const finalPlaceholder = required ?  `${placeholder} * `: placeholder;
 	const toggleEyeOn = () => {
 		if (eyeOn === false) {
 			setEyeOn(true)
@@ -22,7 +24,7 @@ const InputField = ({ name, type = 'text', onChange, value, label, placeholder =
 				type={fieldType ? fieldType : 'text'}
 				autoComplete="off"
 				name={name}
-				placeholder={placeholder}
+				placeholder={finalPlaceholder}
 				value={value ?? ''}
 				onChange={onChange}
 				required={required}
@@ -40,7 +42,7 @@ const InputField = ({ name, type = 'text', onChange, value, label, placeholder =
 				>
 				</button>
 			}
-			{error && <span className="invalid-feedback text-danger d-block mt-1">{error}</span>}
+			{error && <span className="invalid-feedback text-danger d-block mt-1 text-start">{error}</span>}
 		</div >
 	)
 }

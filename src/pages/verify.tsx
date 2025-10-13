@@ -58,7 +58,7 @@ const OtpVerify = () => {
 
 			if (results?.error === false) {
 				// Reset timer and disable resend button
-				setTimer(600);
+				setTimer(60);
 				setResendEnabled(false);
 				formik.setFieldValue("user_id", results?.user_id); // update reqid
 			}

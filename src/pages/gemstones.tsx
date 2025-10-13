@@ -1,5 +1,5 @@
 import Image from "next/image"
-import {  CategoryIcon, OpalImg, PearlMoti } from "@/assets/images"
+import {  CategoryIcon, PlaceHolder } from "@/assets/images"
 import { useEffect, useState } from "react"
 import { gemsService } from "@/services"
 import { Footer, SEOHead } from "@/components"
@@ -12,7 +12,6 @@ const Gemstones = () => {
 
   useEffect(() => {
     gemsService.getGems().then((results: any) => {
-      console.log('resultssssssss', results);
       setResults({ items: results.items, pagination: results.pagination })
     })
   }, [])
@@ -45,7 +44,7 @@ const Gemstones = () => {
                 <div className="col-6" key={i}>
                   <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
                     <Link href={`/gemstones/${item.id}`}>
-                      <Image src={OpalImg} className="icon me-1 img-fluid rounded-2 w-100" height={100} width={100} alt={item.title} />
+                      <Image src={item?.images[0]?.path || PlaceHolder} className="icon me-1 img-fluid rounded-2 w-100" height={100} width={100} alt={item.title} />
                       <div className="card-body py-1 px-1 text-center">
                         <h5 className="card-title text-primary mb-1">{item.title}</h5>
                         <p className="mb-1">Price:{item.price}</p>
@@ -60,7 +59,7 @@ const Gemstones = () => {
                   <Link href={`/gemstones/${item.id}`}>
                     <div className="row g-0">
                       <div className="col-4">
-                        <Image src={PearlMoti} className="icon card-img-top rounded-2" height={100} width={100} alt={item.title} />
+                        <Image src={item?.images[0]?.path || PlaceHolder} className="icon card-img-top rounded-2" height={100} width={100} alt={item.title} />
                       </div>
                       <div className="col-8 ps-2 d-flex align-items-center">
                         <div className="card-body py-1 px-1">

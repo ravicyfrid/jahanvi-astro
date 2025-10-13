@@ -22,7 +22,7 @@ export default function UpdateProfile() {
 	const dispatch = useDispatch<AppDispatch>();
 	const [loading, setLoading] = React.useState(false);
 	console.log(loading);
-	
+
 
 	const { isUserLoggedIn, loggedInUser } = useSelector(
 		(state: any) => state.session
@@ -65,6 +65,7 @@ export default function UpdateProfile() {
 	});
 
 
+	console.log('formik.errors.name', formik.errors.gender);
 
 	return (
 		<>
@@ -90,14 +91,16 @@ export default function UpdateProfile() {
 								<form className="login-form" onSubmit={formik.handleSubmit}>
 									<div className="col-12">
 										<InputField
-											// label="Full Name"
 											required={true}
 											type="text"
 											name="name"
 											placeholder="Full Name"
 											onChange={formik.handleChange}
 											value={formik.values.name}
+											onBlur={formik.handleBlur}
 											error={formik.errors.name && formik.touched.name && (formik.errors.name)}
+											className={` ${formik.errors.name && formik.touched.name ? "is-invalid" : ""
+												}`}
 										/>
 									</div>
 									<div className='form-group mb-3'>
@@ -120,12 +123,12 @@ export default function UpdateProfile() {
 									</div>
 
 									<div className="form-group mb-3 col-12">
-										{/* <label className="form-label">Gender<span className="text-danger">*</span></label> */}
 										<select
 											name="gender"
 											className="form-select "
 											onChange={formik.handleChange}
 											value={formik.values.gender}
+											onBlur={formik.handleBlur}
 										>
 											<option value="">Gender</option>
 											<option value="male">Male</option>

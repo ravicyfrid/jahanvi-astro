@@ -7,24 +7,23 @@ import { useRouter } from "next/router";
 
 export default function Horoscope() {
 	const router =useRouter()
-	const [filters, setFilters] = React.useState<any>({
-		page: 1,
-		per_page: 9,
-	})
+	// const [filters, setFilters] = React.useState<any>({
+	// 	page: 1,
+	// 	per_page: 9,
+	// })
 	const [kundli, setKundli] = React.useState<any>({ items: [], pagination: {} });
 
 	useEffect(() => {
-		kundliService.getKundlies(filters).then((results: any) => {
+		kundliService.getKundlies({
+		page: 1,
+		per_page: 9,
+	}).then((results: any) => {
 			setKundli({ items: results.items, pagination: results.pagination })
 		})
 
 
-		setFilters({
-		page: 1,
-		per_page: 9,
-	})
-	
-	}, [filters])
+
+	}, [])
 
 	
 	return (

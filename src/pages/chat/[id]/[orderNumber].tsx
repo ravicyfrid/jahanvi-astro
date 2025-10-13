@@ -46,9 +46,9 @@ const Chat = () => {
 				<div className="offcanvas offcanvas-end" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"> */}
 			<div className="card-header d-flex p-3 justify-content-between bg-light sticky-sidebar">
 				<div className="d-flex align-items-center">
-					<button type="button" className="btn-close mt-2 p-0 me-3" data-bs-dismiss="offcanvas" aria-label="Close">
+					{/* <button type="button" className="btn-close mt-2 p-0 me-3" data-bs-dismiss="offcanvas" aria-label="Close">
 
-					</button>
+					</button> */}
 					<div>
 						<p className="mb-0"><strong className="text-primary">Booking-ID <span className="text-success">●</span></strong>
 							<small className="d-block">{orderNumber}</small></p>

@@ -18,7 +18,7 @@ const Consultation = () => {
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
 
-console.log('loading',loading);
+	console.log('loading', loading);
 
 	useEffect(() => {
 		ordersService.getConsultationFees().then((res: any) => {
@@ -88,6 +88,7 @@ console.log('loading',loading);
 		},
 		enableReinitialize: true,
 		validationSchema: Yup.object({
+			fees_id: Yup.string().label("Consultation Fees").required(),
 			full_name: Yup.string().label("Full Name").required(),
 			phone_number: Yup.string().label("Phone Number").required(),
 			email: Yup.string().label("Email").email("Invalid email").required(),
@@ -147,10 +148,12 @@ console.log('loading',loading);
 													name="fees_id"
 													id={item.id}
 													value="myself"
+													required
 													onChange={() => {
 														formik.setFieldValue("fees_id", item.id);
 														formik.setFieldValue("type", item.title === "Guru Maa" ? '1' : '0')
 													}}
+
 												/>
 												<label className="form-check-label" htmlFor={item.id}>
 													{item.title} ₹{item.fees}</label>
@@ -183,6 +186,7 @@ console.log('loading',loading);
 									name="full_name"
 									onChange={formik.handleChange}
 									value={formik.values.full_name}
+									onBlur={formik.handleBlur}
 									placeholder="Full Name"
 									error={formik.errors.full_name && formik.touched.full_name && (formik.errors.full_name)}
 									className={`${formik.errors.full_name && formik.touched.full_name ? "is-invalid" : ""}`}
@@ -196,8 +200,10 @@ console.log('loading',loading);
 									name="email"
 									onChange={formik.handleChange}
 									value={formik.values.email}
+									onBlur={formik.handleBlur}
 									placeholder="Email"
 									error={formik.errors.email && formik.touched.email && (formik.errors.email)}
+									className={`${formik.errors.email && formik.touched.email ? "is-invalid" : ""}`}
 								/>
 							</div>
 
@@ -226,6 +232,8 @@ console.log('loading',loading);
 									name="gender"
 									onChange={formik.handleChange}
 									value={formik.values.gender}
+									onBlur={formik.handleBlur}
+									required
 									className="form-select">
 									<option value="">Gender</option>
 									<option value="male">Male</option>
@@ -246,8 +254,11 @@ console.log('loading',loading);
 									name="tob"
 									placeholder="Time of Birth"
 									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
 									value={formik.values.tob}
 									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
+									className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
+										}`}
 								/>
 							</div>
 
@@ -259,8 +270,11 @@ console.log('loading',loading);
 									name="dob"
 									placeholder="Date of Birth"
 									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
 									value={formik.values.dob}
 									error={formik.errors.dob && formik.touched.dob && (formik.errors.dob)}
+									className={` ${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
+										}`}
 								/>
 								{suggestions.length > 0 && (
 									<ul
@@ -314,13 +328,14 @@ console.log('loading',loading);
 								<Button
 									label='Submit'
 									className='primary w-100 rounded-pill mt-3'
+									loading={loading}
 								/>
 							</div>
 						</form>
 					</div>
 				</div>
 			</section>
-		<Footer/>
+			<Footer />
 
 		</>
 
