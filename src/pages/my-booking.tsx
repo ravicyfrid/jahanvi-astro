@@ -36,7 +36,7 @@ const MyBooking = () => {
 			<SEOHead title={'My Booking'} />
 
 			<section className="my-booking-section-mobile">
-				<div className="d-flex justify-content-between mb-3 card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar">
+				<div className="d-flex justify-content-between mb-3 card-header bg-white border-bottom p-3 sticky-sidebar">
 					<h6 className="mb-0">My Booking</h6>
 					<button type="button" className="border-0 bg-white"> <Image src={Notification} className="icon me-1 img-fluid" height={20} width={20} alt="notification icon" /></button>
 				</div>

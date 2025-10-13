@@ -48,7 +48,7 @@ const UserLogin = () => {
 		<>
 			<SEOHead title={'Login'} />
 			<section className="">
-				<div className="d-flex justify-content-between card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar">
+				<div className="d-flex justify-content-between card-header bg-white border-bottom p-3 sticky-sidebar">
 					<h6 className="mb-0">Login/Signup</h6>
 				</div>
 				<div className='login-auth-mobile login-form-page align-center d-flex justify-content-center py-2 bg-white'>

@@ -1,4 +1,4 @@
-import {  PlaceHolder } from "@/assets/images"
+import { genestroImg, PlaceHolder } from "@/assets/images"
 import { Button, InputField } from "@/components"
 import { enquirieService, gemsService } from "@/services"
 import { useFormik } from "formik"
@@ -6,7 +6,13 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import PhoneInput from "react-phone-input-2"
 import * as Yup from "yup"
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { _Object } from "@/utils/interfaces";
+import { Navigation, Pagination } from "swiper/modules";
+import Image from "next/image"
 const Gems = () => {
 
   const [gem, setGem] = useState<any>({})
@@ -51,13 +57,68 @@ const Gems = () => {
   return (
     <>
       <section className="gems-details-mobile">
-        <div className="card-header shadow-sm bg-white border-bottom shadow-sm bg-white border-bottom p-3 sticky-sidebar">
+        <div className="card-header bg-white border-bottom p-3 sticky-sidebar">
           <h5 className="card-title text-black d-flex align-items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="20" x="0" y="0" viewBox="0 0 24 24" >
               <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg>
             Gemstones Details</h5>
         </div>
-        <img src={gem?.images?.lenght> 0 ? gem?.images[0]?.path : PlaceHolder} alt="User Profile" width={250} height={250} className="img-fluid w-100" />
+        {/* <img src={gem?.images?.lenght > 0 ? gem?.images[0]?.path : PlaceHolder} alt="User Profile" width={250} height={250} className="img-fluid w-100" /> */}
+
+
+        <div className="gemeston-single-silder">
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <Swiper
+                  slidesPerView={1}
+                  spaceBetween={20}
+                  loop={true}
+                  speed={1500}
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 2500, disableOnInteraction: false }}
+                  keyboard={{ enabled: true }}
+                  modules={[Navigation, Pagination]}
+                  className="mySwiper"
+                >
+                  <div className="card">
+                  </div>
+                  <SwiperSlide>
+                    <div className="card">
+                      <a href="#" className="">
+                        <Image
+                          src={genestroImg}
+                          alt="Hero Banner"
+                          className="img-fluid"
+                          width={500}
+                          height={450}
+                          priority
+                        />
+                      </a>
+                    </div>
+                  </SwiperSlide>
+                   <SwiperSlide>
+                    <div className="card">
+                      <a href="#" className="">
+                        <Image
+                          src={genestroImg}
+                          alt="Hero Banner"
+                          className="img-fluid"
+                          width={500}
+                          height={450}
+                          priority
+                        />
+                      </a>
+                    </div>
+                  </SwiperSlide>
+
+                </Swiper>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className="container pt-4">
           <div className="row">
             <div className="col-12">

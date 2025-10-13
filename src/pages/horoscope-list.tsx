@@ -11,7 +11,7 @@ export default function UpdateProfile() {
 			<SEOHead title={'Update Profile'} />
 			<section className="user-profile-mobile">
 
-				<div className="card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
+				<div className="card-header bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
 
 					<h5 className="card-title text-black d-flex align-items-center gap-2">
 						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="20" x="0" y="0" viewBox="0 0 24 24" >

@@ -23,7 +23,7 @@ const GemsCategories = () => {
     <>
       <SEOHead title={'Gemstone Category'} />
       <section className="gems-details-mobile">
-        <div className="card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
+        <div className="card-header bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
 
           <h5 className="card-title text-black d-flex align-items-center gap-2">
             Gemstone Category
@@ -40,7 +40,7 @@ const GemsCategories = () => {
           }
         </div>
 
-        <div className="container pt-4">
+        <div className="container pt-4 gems-category-card-box-list">
           <div className="row gap-4">
             <div className="col-12">
               <div className="row">
@@ -52,7 +52,7 @@ const GemsCategories = () => {
                         <Link href={'/gemstones'}>
                           <img
                             src={item?.images?.path}
-                            className="icon card-img-top rounded-2"
+                            className="icon card-img-top w-100 rounded-2"
                             height={100}
                             width={100}
                             alt={item.title}

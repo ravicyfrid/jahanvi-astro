@@ -21,7 +21,7 @@ const Gemstones = () => {
     <>
       <SEOHead title={'Gemstones'} />
       <section className="gems-details-mobile">
-        <div className="card-header shadow-sm bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
+        <div className="card-header bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
 
           <h5 className="card-title text-black d-flex align-items-center gap-2">
             Gemstone

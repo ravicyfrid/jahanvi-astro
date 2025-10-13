@@ -177,6 +177,7 @@ const Home = () => {
             </div>
 
             <div className="col-12">
+                <Link href={'/gemstone-category'}>
               <div className="card mb-3">
                 <div className="row g-0">
                   <div className="col-4">
@@ -190,9 +191,12 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+              </Link>
             </div>
 
             <div className="col-12">
+                <Link href={'/gemstone-category'}>
+
               <div className="card mb-3">
                 <div className="row g-0">
                   <div className="col-4">
@@ -206,6 +210,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+              </Link>
             </div>
           </div>
           {/* <div className="card mb-3 p-2 d-flex flex-row align-items-center">
