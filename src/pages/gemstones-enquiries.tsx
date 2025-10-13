@@ -1,7 +1,5 @@
-import { genestroImg, UserProfile } from "@/assets/images"
-import { gemsService } from "@/services"
+import { genestroImg } from "@/assets/images"
 import Image from "next/image"
-import { useEffect } from "react"
 
 const GemsonesEnquirires = () => {
 	// useEffect(() => {

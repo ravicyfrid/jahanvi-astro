@@ -1,4 +1,4 @@
-import { Astro, Astro2, Astro3, PlaceHolder, vriksha } from "@/assets/images";
+import { Astro, Astro2, Astro3, vriksha } from "@/assets/images";
 import SEOHead from "@/components/seo";
 import Image from "next/image";
 import Link from "next/link";

@@ -62,7 +62,7 @@ const UserLogin = () => {
 											<Image src={Logo} alt="Jahanvi Astro Logo mb-4" width={120} height={120} />
 											<h5 className="mb-2 text-center text-primary">Welcome to Jahanvi Astro</h5>
 											<p className="text-center text-muted mb-4">
-												Your trusted guide for personalized astrology insights and gemstone consultations. Our expert astrologers and gemstone consultants are here to provide you with tailored advice to help navigate life's challenges and understand your future.
+												Your trusted guide for personalized astrology insights and gemstone consultations. Our expert astrologers and gemstone consultants are here to provide you with tailored advice to help navigate lifes challenges and understand your future.
 											</p>
 										</div>
 

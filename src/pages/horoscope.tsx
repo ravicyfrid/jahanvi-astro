@@ -17,8 +17,16 @@ export default function Horoscope() {
 		kundliService.getKundlies(filters).then((results: any) => {
 			setKundli({ items: results.items, pagination: results.pagination })
 		})
+
+
+		setFilters({
+		page: 1,
+		per_page: 9,
+	})
+	
 	}, [filters])
 
+	
 	return (
 		<>
 			<SEOHead title={'Horoscope'} />

@@ -4,14 +4,10 @@ import { SearchIcon } from "@/assets/images";
 import { Button, InputField } from "@/components";
 import SEOHead from "@/components/seo";
 import Image from "next/image";
-import PhoneInput from "react-phone-input-2";
 import * as Yup from "yup";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { authService } from "@/services/auth.service";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setMobileNumber } from "@/redux/slices/session.slice";
 import { kundliService } from "@/services";
 import Link from "next/link";
 
@@ -21,7 +17,6 @@ const AddHoroscope = () => {
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
-	const dispatch = useDispatch()
 
 	const formik = useFormik({
 		initialValues: {

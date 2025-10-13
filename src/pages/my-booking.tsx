@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 const MyBooking = () => {
 	const [orders, setOrders] = React.useState<any>({ items: [], pagination: {} });
 	const [loading, setLoading] = useState(false)
-	const [chatsId, setChatId] = React.useState<any>({});
+	// const [chatsId, setChatId] = React.useState<any>({});
 	const router=useRouter()
 	const [filters, setFilters] = React.useState<any>({
 		page: 1,
@@ -24,15 +24,20 @@ const MyBooking = () => {
 
 			setOrders({ items: res.items, pagination: res.pagination })
 		})
+
+		setFilters({
+		page: 1,
+		per_page: 9,
+	})
 	}, [filters])
 
 	const upcomingOrders = orders.items.filter((o: { status: string }) => o.status === "upcoming");
 	const completedOrders = orders.items.filter((o: { status: string }) => o.status === "completed");
 	const cancelledOrders = orders.items.filter((o: { status: string }) => o.status === "cancelled");
 
-	const chatid = (id: string, orderID: string) => {
-		setChatId({ id: id, orderID: orderID })
-	}
+	// const chatid = (id: string, orderID: string) => {
+	// 	setChatId({ id: id, orderID: orderID })
+	// }
 
 	
 	return (
@@ -67,8 +72,8 @@ const MyBooking = () => {
 
 											{upcomingOrders?.length > 0 && upcomingOrders?.map((item: any, i: number) => {
 												return (
-													<div className="col">
-														<div className="booking-card" key={i}>
+													<div className="col" key={i}>
+														<div className="booking-card" >
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
 																<div className="d-flex gap-2">
@@ -126,14 +131,14 @@ const MyBooking = () => {
 										<div className="row gap-2">
 											{completedOrders?.length > 0 && completedOrders?.map((item: any, i: number) => {
 												return (
-													<div className="col">
-														<div className="booking-card" key={i}>
+													<div className="col" key={i}>
+														<div className="booking-card" >
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
 																<div className="d-flex gap-2">
 																	<button
 																		type="button"
-																		onClick={() => chatid(item.chat.id, item.order_number)}
+																		// onClick={() => chatid(item.chat.id, item.order_number)}
 																		className="btn success-button border-0"
 																		data-bs-toggle="offcanvas"
 																		data-bs-target="#offcanvasRight"
@@ -178,8 +183,8 @@ const MyBooking = () => {
 										<div className="row gap-2">
 											{cancelledOrders?.length > 0 && cancelledOrders?.map((item: any, i: number) => {
 												return (
-													<div className="col">
-														<div className="booking-card" key={i}>
+													<div className="col" key={i}>
+														<div className="booking-card" >
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
 															</div>

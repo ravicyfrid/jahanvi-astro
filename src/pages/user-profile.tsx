@@ -2,7 +2,7 @@
 import SEOHead from "@/components/seo";
 import Image from "next/image";
 
-import { ContactusIcon, GemstonsIcon, Logout, Notification, PensilIcon, PlaceHolder, PrivcyPolicy, UserProfile } from "@/assets/images";
+import { ContactusIcon, GemstonsIcon, Logout, Notification, PrivcyPolicy, UserProfile } from "@/assets/images";
 import { Footer } from "@/components";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -21,9 +21,6 @@ export default function UpdateProfile() {
 			dispatch(setLoggedInUser());
 		}
 	}, [isUserLoggedIn, dispatch]);
-
-
-	console.log('loggedInUser', loggedInUser, isUserLoggedIn);
 
 	return (
 		<>
@@ -72,7 +69,7 @@ export default function UpdateProfile() {
 
 						<div className="card rounded-2 shadow-lg bg-white px-3 py-4 mb-2 gemstones-enquiries-card">
 
-							<a href="/gemstones-enquiries" className="d-flex align-items-center gap-3">
+							<Link href="/gemstones-enquiries" className="d-flex align-items-center gap-3">
 								<div className="menu-icon">
 									<Image
 										src={GemstonsIcon}
@@ -81,10 +78,8 @@ export default function UpdateProfile() {
 										height={20}
 									/>
 								</div>
-								<Link href='/gemstones-enquiries'>
 									<span>Gemstones Enquiries</span>
-								</Link>
-							</a>
+							</Link>
 						</div>
 						{/* <div className="d-flex align-items-center">
 								<div className="menu-icon">

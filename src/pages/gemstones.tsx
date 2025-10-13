@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { BlueTopaz, CategoryIcon, CatsEye, CoralImg, genestroImg, OpalImg, PearlMoti } from "@/assets/images"
+import {  CategoryIcon, OpalImg, PearlMoti } from "@/assets/images"
 import { useEffect, useState } from "react"
 import { gemsService } from "@/services"
 import { Footer, SEOHead } from "@/components"

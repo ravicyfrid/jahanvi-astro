@@ -6,7 +6,7 @@ import PhoneInput from "react-phone-input-2";
 import { PensilIcon, UserProfile } from "@/assets/images";
 import { Button, InputField } from "@/components";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
@@ -17,10 +17,12 @@ import { authService } from "@/services";
 
 export default function UpdateProfile() {
 
-	const [suggestions, setSuggestions] = useState<any[]>([]);
-	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+	// const [suggestions, setSuggestions] = useState<any[]>([]);
+	// const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const dispatch = useDispatch<AppDispatch>();
 	const [loading, setLoading] = React.useState(false);
+	console.log(loading);
+	
 
 	const { isUserLoggedIn, loggedInUser } = useSelector(
 		(state: any) => state.session

@@ -1,4 +1,4 @@
-import { genestroImg, PlaceHolder } from "@/assets/images"
+import { genestroImg } from "@/assets/images"
 import { Button, InputField } from "@/components"
 import { enquirieService, gemsService } from "@/services"
 import { useFormik } from "formik"
@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { _Object } from "@/utils/interfaces";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image"
 const Gems = () => {

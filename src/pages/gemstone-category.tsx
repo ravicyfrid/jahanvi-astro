@@ -1,11 +1,11 @@
 import Image from "next/image"
 
-import { BlueTopaz, CategoryIcon, CatsEye, CoralImg, genestroImg, OpalImg, PearlMoti } from "@/assets/images"
 import { useEffect, useState } from "react"
 import { gemsService } from "@/services"
 import { Footer, SEOHead } from "@/components"
 import { Breadcrumb } from "@/assets/svg"
 import Link from "next/link"
+import { CategoryIcon } from "@/assets/images"
 
 
 
