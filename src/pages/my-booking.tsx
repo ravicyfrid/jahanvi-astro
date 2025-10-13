@@ -4,12 +4,14 @@ import SEOHead from "@/components/seo";
 import { ordersService } from "@/services";
 import formatDateParts from "@/utils/custom-hooks";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const MyBooking = () => {
 	const [orders, setOrders] = React.useState<any>({ items: [], pagination: {} });
 	const [loading, setLoading] = useState(false)
 	const [chatsId, setChatId] = React.useState<any>({});
+	const router=useRouter()
 	const [filters, setFilters] = React.useState<any>({
 		page: 1,
 		per_page: 9,
@@ -31,6 +33,8 @@ const MyBooking = () => {
 	const chatid = (id: string, orderID: string) => {
 		setChatId({ id: id, orderID: orderID })
 	}
+
+	
 	return (
 		<>
 			<SEOHead title={'My Booking'} />
@@ -70,11 +74,9 @@ const MyBooking = () => {
 																<div className="d-flex gap-2">
 																	<button
 																		type="button"
-																		onClick={() => chatid(item.chat.id, item.order_number)}
+																		onClick={() =>router.push(`/chat/${item.chat.id}/${item.order_number}`)}
 																		className="btn success-button border-0"
-																		data-bs-toggle="offcanvas"
-																		data-bs-target="#offcanvasRight"
-																		aria-controls="offcanvasRight">Chat</button>
+																	>Chat</button>
 																</div>
 															</div>
 															<hr />
