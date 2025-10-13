@@ -13,7 +13,9 @@ class GemsService extends CommonService {
 	async getGemsDetails(id: any) {
 		return await this.get(`/gems/${id}`)
 	}
-
+		async getGemsInquiries() {
+		return await this.get('/gems/enquiries')
+	}
 
 }
 

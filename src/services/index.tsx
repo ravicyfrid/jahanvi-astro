@@ -5,6 +5,9 @@ import { bioService } from './bio.serivce';
 import { chatsService } from './chat.service';
 import CommonService from './common.service';
 import { ordersService } from './orders.service';
+import { mediaService } from './media.service';
+import { kundliService } from './kundli.service';
+import { homePageSerivec } from './homepage.service';
 export {
 	enquirieService,
 	gemsService,
@@ -12,6 +15,9 @@ export {
 	bioService,
 	chatsService,
 	CommonService,
-	ordersService
+	ordersService,
+	mediaService,
+	kundliService,
+	homePageSerivec
 
 }

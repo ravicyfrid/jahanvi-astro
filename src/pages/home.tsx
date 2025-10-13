@@ -12,7 +12,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Footer } from "@/components";
+import { useEffect, useState } from "react";
+import { homePageSerivec } from "@/services";
+
 const Home = () => {
+  const [results, setResults] = useState<any>({})
+  useEffect(() => {
+    homePageSerivec.getHomePage().then((results: any) => {
+      setResults(results)
+    })
+  }, [])
+
   return (
     <>
       <SEOHead title="Jahanvi Astro" />
@@ -113,21 +123,16 @@ const Home = () => {
                 modules={[Navigation, Pagination, Autoplay]}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <h6>100k+ Resolutions till date</h6>
-                  <p>
-                    Jahanvi soni neema
-                  </p>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <h6>100k+ Resolutions till date</h6>
-                  <p>
-                    Jahanvi soni neema
-                  </p>
-                </SwiperSlide>
-
-
+                {results?.quotes?.map((item: any, i: number) => {
+                  return (
+                    <SwiperSlide key={i}>
+                      <h6>{item?.description}</h6>
+                      <p>
+                        {item?.name}
+                      </p>
+                    </SwiperSlide>
+                  )
+                })}
               </Swiper>
             </div>
 
@@ -177,39 +182,39 @@ const Home = () => {
             </div>
 
             <div className="col-12">
-                <Link href={'/gemstone-category'}>
-              <div className="card mb-3">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={Astro2} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
-                  </div>
-                  <div className="col-8 d-flex aligh-items-center">
-                    <div className="card-body py-1">
-                      <h5 className="card-title">Appointment</h5>
-                      <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
+              <Link href={'/consultation'}>
+                <div className="card mb-3">
+                  <div className="row g-0">
+                    <div className="col-4">
+                      <Image src={Astro2} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
+                    </div>
+                    <div className="col-8 d-flex aligh-items-center">
+                      <div className="card-body py-1">
+                        <h5 className="card-title">Appointment</h5>
+                        <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
               </Link>
             </div>
 
             <div className="col-12">
-                <Link href={'/gemstone-category'}>
+              <Link href={'/horoscope'}>
 
-              <div className="card mb-3">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={Astro3} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
-                  </div>
-                  <div className="col-8 d-flex aligh-items-center">
-                    <div className="card-body py-1">
-                      <h5 className="card-title">Kundli</h5>
-                      <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
+                <div className="card mb-3">
+                  <div className="row g-0">
+                    <div className="col-4">
+                      <Image src={Astro3} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
+                    </div>
+                    <div className="col-8 d-flex aligh-items-center">
+                      <div className="card-body py-1">
+                        <h5 className="card-title">Kundli</h5>
+                        <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
               </Link>
             </div>
           </div>

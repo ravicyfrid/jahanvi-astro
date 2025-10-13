@@ -26,7 +26,7 @@ const sessionSlice = createSlice({
       store.clearAll()
       state.isUserLoggedIn = false
       state.loggedInUser = {}
-      window.location.replace('/login')
+      window.location.replace('/')
     },
 
     setMobileNumber: (state, action) => {
