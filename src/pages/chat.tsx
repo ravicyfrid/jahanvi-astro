@@ -3,8 +3,8 @@ const Chat = (props: any) => {
 
 	return (
 		<>
-			{props?.chats?.items?.length > 0 && (
-				<div className="offcanvas offcanvas-end" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+			{/* {props?.chats?.items?.length > 0 && (
+				<div className="offcanvas offcanvas-end" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"> */}
 					<div className="offcanvas-header justify-content-between bg-light">
 						<div className="d-flex align-items-center">
 							<button type="button" className="btn-close m-0 p-0 me-3" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -79,21 +79,11 @@ const Chat = (props: any) => {
 											<small className="text-muted">12:44 PM</small>
 										</div>
 									</div>
-
 									<div className="msg msg-left">Hello how are you?<br /><small className="text-muted">12:46 PM</small></div>
-
 									<div className="msg msg-right">I am fine mam<br /><small className="text-white">12:46 PM</small></div>
-
 									<div className="msg msg-left">What is your name<br /><small className="text-muted">12:46 PM</small></div>
-
 									<div className="msg msg-right">Ram<br /><small className="text-white">12:47 PM</small></div>
-
-
-
 								</div>
-
-
-
 							</div>
 						</section>
 					</div>
@@ -106,8 +96,8 @@ const Chat = (props: any) => {
 							</div>
 						</form>
 					</div>
-				</div>
-			)}
+				{/* </div>
+			)} */}
 		</>
 
 	);

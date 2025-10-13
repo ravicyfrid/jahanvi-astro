@@ -11,7 +11,6 @@ import TextArea from './form-inputs/text-area'
 import OtpInput from './form-inputs/otp'
 import InputGroup from './form-inputs/input-group'
 import Pagination from "./pagination";
-import Chat from './chat'
 import SEOHead from './seo/index'
 
 export {
@@ -28,6 +27,5 @@ export {
 	TextArea,
 	OtpInput,
     Pagination,
-    Chat,
     SEOHead
 }

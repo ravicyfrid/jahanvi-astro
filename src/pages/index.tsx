@@ -15,7 +15,6 @@ import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
 import { setMobileNumber } from '@/redux/slices/session.slice';
 
-
 const UserLogin = () => {
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch()
@@ -25,8 +24,7 @@ const UserLogin = () => {
 			username_type: "", // 'phone_number'
 		},
 		validationSchema: Yup.object({
-			username: Yup.string().label('Phone number').required(),
-
+			username: Yup.string().label('Phone number').required()
 		}),
 		enableReinitialize: true,
 
@@ -45,7 +43,6 @@ const UserLogin = () => {
 
 		}
 	})
-
 
 	return (
 		<>
@@ -69,7 +66,7 @@ const UserLogin = () => {
 											</p>
 										</div>
 
-										{/* <form className="login-form" onSubmit={formik.handleSubmit}>
+										<form className="login-form" onSubmit={formik.handleSubmit}>
 											<div className='form-group'>
 												<PhoneInput
 													country={"in"}
@@ -78,47 +75,13 @@ const UserLogin = () => {
 													inputStyle={{ width: "100%" }}
 													countryCodeEditable={false}
 												/>
-												<div className='d-flex  justify-content-between mt-1'>
-													{formik.touched.username && formik.errors.username ? (
-														<p className="text-danger" style={{ fontSize: "12px" }}>{formik.errors.username}</p>
-													) : <p className="text-danger" style={{ fontSize: "12px" }}></p>}
-													<p className='md-0' style={{ textAlign: 'right', fontSize: '12px' }}>
-														0 / 10
-													</p>
-												</div>
-											</div>
-
-
-											
-
-											<Button
-												label='Login'
-												loading={loading}
-												disabled={loading || (
-													(!formik.isValid || !formik.dirty)
-												)}
-												className='primary w-100 rounded-pill mt-3 '
-											/>
-										</form> */}
-
-										<form className="login-form">
-											<div className='form-group'>
-												{/* <label className="form-label">Mobile Number</label> */}
-												<PhoneInput
-													country={"in"}
-													// value={formik.values.phoneNumber}
-													// onChange={(value) => formik.setFieldValue('phoneNumber', value)}
-													inputStyle={{ width: "100%" }}
-													countryCodeEditable={false}
-												/>
 												<div className='d-flex justify-content-between mt-1'>
-													{/* {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-<p className="text-danger" style={{ fontSize: "12px" }}>{formik.errors.phoneNumber}lllllllllllllll</p>
-) : null} */}
-													<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
-														0 / 10
-													</p>
-
+													{formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+														<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+															{formik.errors.phoneNumber}
+														</p>
+													) : <p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+														</p>}
 													<p className='mb-0' style={{ textAlign: 'right', fontSize: '12px' }}>
 														0 / 10
 													</p>
@@ -128,6 +91,11 @@ const UserLogin = () => {
 											<Button
 												label='Login/Signup'
 												className='primary w-100 rounded-pill mt-3'
+												type='submit'
+												loading={loading}
+												disabled={loading || (
+													(!formik.isValid || !formik.dirty)
+												)}
 											/>
 										</form>
 									</div>
