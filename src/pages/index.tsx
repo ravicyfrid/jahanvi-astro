@@ -1,50 +1,112 @@
-import { Header, Footer, Slider, PlayStore, CTA, HeroBanner, ContactUs } from "@/components";
-import SEOHead from "@/components/seo";
-import { gemsService } from "@/services";
-import { bioService } from "@/services/bio.serivce";
-import { _Object } from "@/utils/interfaces";
-import { GetStaticProps } from "next";
+import React, { useState } from 'react'
 
-export default function Home(props: _Object) {
-  return (
-    <>
-      <SEOHead title="Jahanvi Astro" />
-      <Header />
-      <HeroBanner props={props.bioData} />
-      <Slider props={props.gemstons}/>
-      <CTA />
-      <PlayStore />
-      <ContactUs />
-      <Footer />
-    </>
-  );
-}
+import { useFormik } from 'formik';
 
-export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const bioData: _Object = await bioService.getBio();
-    const gemstons: _Object = await gemsService.getGems();
+import PhoneInput from 'react-phone-input-2';
 
-    // Sanitize data for JSON serialization
-    const sanitizedBioData = JSON.parse(JSON.stringify(bioData));
-    const sanitizedGemstons = JSON.parse(JSON.stringify(gemstons));
+import { Button, SEOHead } from '@/components';
 
-    return {
-      props: {
-        bioData: sanitizedBioData,
-        gemstons: sanitizedGemstons,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
+import Image from 'next/image';
+import { Logo } from '@/assets/images';
+import { authService } from '@/services';
+import store from 'store';
+import Router from 'next/router';
+import * as Yup from "yup";
+import { useDispatch } from 'react-redux';
+import { setMobileNumber } from '@/redux/slices/session.slice';
 
-    // Handle errors gracefully
-    return {
-      props: {
-        bioData: null,
-        gemstons: null,
-        error: "An error occurred",
-      },
-    };
-  }
+const UserLogin = () => {
+	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch()
+	const formik: any = useFormik({
+		initialValues: {
+			username: "",
+			username_type: "", // 'phone_number'
+		},
+		validationSchema: Yup.object({
+			username: Yup.string().label('Phone number').required()
+		}),
+		enableReinitialize: true,
+
+		onSubmit: async (values: any) => {
+			dispatch(setMobileNumber(values.username))
+			setLoading(true);
+			const results: any = await authService.RequestOtpForLogin({ username: values.username, username_type: 'phone_number' });
+			console.log('results', results);
+
+			if (results?.error === false) {
+				console.log('');
+				store.set('user_id', results?.user_id)
+				Router.push('/verify')
+			}
+			setLoading(false);
+
+		}
+	})
+
+	return (
+		<>
+			<SEOHead title={'Login'} />
+			<section className="">
+				<div className="d-flex justify-content-between card-header bg-white border-bottom p-3 sticky-sidebar">
+					<h6 className="mb-0">Login/Signup</h6>
+				</div>
+				<div className='login-auth-mobile login-form-page align-center d-flex justify-content-center py-2 bg-white'>
+					<div className="container">
+						<div className="card">
+							<div className="row">
+
+								<div className="col-12 d-flex flex-column justify-content-center align-items-center">
+									<div className='login-form-cotnent'>
+										<div className="text-center mb-3">
+											<Image src={Logo} alt="Jahanvi Astro Logo mb-4" width={120} height={120} />
+											<h5 className="mb-2 text-center text-primary">Welcome to Jahanvi Astro</h5>
+											<p className="text-center text-muted mb-4">
+												Your trusted guide for personalized astrology insights and gemstone consultations. Our expert astrologers and gemstone consultants are here to provide you with tailored advice to help navigate lifes challenges and understand your future.
+											</p>
+										</div>
+
+										<form className="login-form" onSubmit={formik.handleSubmit}>
+											<div className='form-group'>
+												<PhoneInput
+													country={"in"}
+													value={formik.values.username}
+													onChange={(value) => formik.setFieldValue('username', value)}
+													inputStyle={{ width: "100%" }}
+													countryCodeEditable={false}
+												/>
+												<div className='d-flex justify-content-between mt-1'>
+													{formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+														<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+															{formik.errors.phoneNumber}
+														</p>
+													) : <p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+														</p>}
+													<p className='mb-0' style={{ textAlign: 'right', fontSize: '12px' }}>
+														0 / 10
+													</p>
+												</div>
+											</div>
+
+											<Button
+												label='Login/Signup'
+												className='primary w-100 rounded-pill mt-3'
+												type='submit'
+												loading={loading}
+												disabled={loading || (
+													(!formik.isValid || !formik.dirty)
+												)}
+											/>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</>
+	);
 };
+
+export default UserLogin

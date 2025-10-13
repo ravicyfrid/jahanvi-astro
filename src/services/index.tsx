@@ -1,6 +1,23 @@
 import { enquirieService } from './enquiry.service';
 import { gemsService } from './gems.service';
+import { authService } from './auth.service';
+import { bioService } from './bio.serivce';
+import { chatsService } from './chat.service';
+import CommonService from './common.service';
+import { ordersService } from './orders.service';
+import { mediaService } from './media.service';
+import { kundliService } from './kundli.service';
+import { homePageSerivec } from './homepage.service';
 export {
 	enquirieService,
-	gemsService
+	gemsService,
+	authService,
+	bioService,
+	chatsService,
+	CommonService,
+	ordersService,
+	mediaService,
+	kundliService,
+	homePageSerivec
+
 }

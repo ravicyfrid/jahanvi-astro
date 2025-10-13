@@ -1,20 +1,24 @@
-import { Footer, Header } from "@/components";
-import { Button, InputField } from "@/components/form-inputs";
+
+
+import { SearchIcon } from "@/assets/images";
+import { Button, Footer, InputField } from "@/components";
 import SEOHead from "@/components/seo";
-import { ordersService } from "@/services/orders.service";
+import { ordersService } from "@/services";
 import { useFormik } from "formik";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
-
 import * as Yup from "yup";
 
 const Consultation = () => {
+
 	const [fees, setFees] = React.useState<any>({})
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
 
+	console.log('loading', loading);
 
 	useEffect(() => {
 		ordersService.getConsultationFees().then((res: any) => {
@@ -79,11 +83,12 @@ const Consultation = () => {
 			"tzone": "5.5",
 			fees_id: "",
 			type: "",
-			belongs_to: "",
+			belongs_to: "myself",
 			order_note: ""
 		},
 		enableReinitialize: true,
 		validationSchema: Yup.object({
+			fees_id: Yup.string().label("Consultation Fees").required(),
 			full_name: Yup.string().label("Full Name").required(),
 			phone_number: Yup.string().label("Phone Number").required(),
 			email: Yup.string().label("Email").email("Invalid email").required(),
@@ -98,7 +103,6 @@ const Consultation = () => {
 				const response = await ordersService.CreateOrder(values);
 
 				if (!response.error && response.data?.id) {
-					toast.success(response.message);
 
 					const cashfree = await ordersService.Cashfree(response.data.id);
 
@@ -120,261 +124,219 @@ const Consultation = () => {
 		}
 
 	});
-
 	return (
 		<>
 			<SEOHead title={'Consultation'} />
-			<Header />
-			<section className="login-auth consultation-section  align-center d-flex justify-content-center py-3">
+			<section className="consultation-page-mobile pt-4 bg-white">
 				<div className="container">
-					<div className="card">
-						<div className="row justify-content-center align-items-center">
-							<div className="col-md-5 col-lg-5 col-12">
-								<div className="left-panel">
-									<h2>Discover What the Cosmos Has Planned for You</h2>
-									<p className="mt-3 text-white"><strong>“Jahanvi Astro Consultation”</strong></p>
-									<p className='text-white'>
-										Every question you hold has a cosmic answer waiting to be revealed.
-										Share your birth details and let astrology uncover the truth within.
-										Your spiritual transformation starts with one consultation.
-									</p>
-								</div>
-							</div>
+					<div className="row">
+						<div className="col-12 text-center pb-3">
+							<h6>Consultation</h6>
 
-							<div className="col-md-7 col-lg-7 col-12">
-								<div className="consultation-form-content">
-									<div className="text-center mb-3">
-										{/* <Image src={Logo} alt="Jahanvi Astro Logo" width={120} height={120} /> */}
-										<h5 className="mb-1">Book a Consultation</h5>
-										<p>Fill in the details below and our team will get back to you shortly.</p>
-									</div>
-									<form className="row consultation-form" onSubmit={formik.handleSubmit}>
-										<div className="col-lg-6 col-md-6 col-12">
-											<InputField
-												label="Full Name"
-												required={true}
-												type="text"
-												name="full_name"
-												onChange={formik.handleChange}
-												value={formik.values.full_name}
-												className={`${formik.errors.full_name && formik.touched.full_name ? "is-invalid" : ""
-													}`}
-												error={formik.errors.full_name && formik.touched.full_name && (formik.errors.full_name)}
-											/>
-										</div>
-
-										<div className="form-group mb-3 col-lg-6 col-md-6 col-12">
-											<label className="form-label">Mobile Number<span className="text-danger">*</span></label>
-											<PhoneInput
-												country={"in"}
-												value={formik.values.phone_number}
-												onChange={(phone) =>
-													formik.setFieldValue("phone_number", phone)
-												}
-												inputStyle={{ width: "100%" }}
-												countryCodeEditable={false}
-											/>
-											{formik.errors.phone_number && formik.touched.phone_number && (
-												<div className="text-danger small">
-													{formik.errors.phone_number}
-												</div>
-											)}
-										</div>
-
-										<div className="mb-3 col-lg-6 col-md-6 col-12">
-											<InputField
-												label="Email"
-												required={true}
-												type="email"
-												name="email"
-												onChange={formik.handleChange}
-												value={formik.values.email}
-												placeholder="Email"
-												className={`${formik.errors.email && formik.touched.email ? "is-invalid" : ""
-													}`}
-												error={formik.errors.email && formik.touched.email && (formik.errors.email)}
-											/>
-										</div>
-
-										<div className="form-group mb-3 col-lg-6 col-md-6 col-12">
-											<label className="form-label">Gender<span className="text-danger">*</span></label>
-											<select
-												name="gender"
-												onChange={formik.handleChange}
-												value={formik.values.gender}
-												className={`form-select ${formik.errors.gender && formik.touched.gender
-													? "is-invalid"
-													: ""
-													}`}
-											>
-												<option value="">Select Gender</option>
-												<option value="male">Male</option>
-												<option value="female">Female</option>
-												<option value="other">Other</option>
-											</select>
-											{formik.errors.gender && formik.touched.gender && (
-												<div className="invalid-feedback">{formik.errors.gender}</div>
-											)}
-										</div>
-
-										<div className="col-lg-6 col-md-6 col-12">
-											<InputField
-												label="Time of Birth HH:MM)"
-												required={true}
-												type="time"
-												name="tob"
-												onChange={formik.handleChange}
-												value={formik.values.tob}
-												className={`${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
-													}`}
-												error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
-											/>
-										</div>
-
-										<div className="col-lg-6 col-md-6 col-12">
-											<InputField
-												label="Date of Birth"
-												required={true}
-												type="date"
-												name="dob"
-												onChange={formik.handleChange}
-												value={formik.values.dob}
-												className={` ${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
-													}`}
-												error={formik.errors.dob && formik.touched.dob && (formik.errors.dob)}
-											/>
-										</div>
-
-										<div className="col-lg-12 col-md-12 col-12">
-											<InputField
-												label="Birth Place"
-												required={true}
-												type="text"
-												name="birth_place"
-												placeholder="Birth Place"
-												onChange={handlePlaceChange}
-												value={formik.values.birth_place}
-												className={`${formik.errors.birth_place && formik.touched.birth_place
-													? "is-invalid"
-													: ""
-													}`}
-												autoComplete="off"
-												error={formik.errors.birth_place && formik.touched.birth_place && (formik.errors.birth_place)}
-											/>
-
-											{/* Suggestions dropdown */}
-											{suggestions.length > 0 && (
-												<ul
-													className="list-group position-absolute w-100"
-													style={{ zIndex: 1000, maxHeight: "200px", overflowY: "auto" }}
-												>
-													{suggestions.map((s: any, i: number) => (
-														<li
-															key={i}
-															className="list-group-item list-group-item-action"
-															onClick={() => handleSelectSuggestion(s)}
-															style={{ cursor: "pointer" }}
-														>
-															{s.display_name}
-														</li>
-													))}
-												</ul>
-											)}
-										</div>
-										<div className="form-group mb-3 col-lg-12 col-md-12 col-12">
-											<label htmlFor="text" className="form-label">Order Notes</label>
-											<textarea
-												className="form-control"
-												placeholder="Order Notes"
-												name="order_note"
-												onChange={formik.handleChange}
-												value={formik.values.order_note}
-											/>
-										</div>
-
-
-
-										<div className="consultation-fees form-group mb-2 col-lg-12 col-md-12 col-12">
-
-
-											<div className="mb-2">
-												<label htmlFor="text" className="form-label d-block mb-0">Consulation & Fees</label>
-												{fees?.items?.map((item: any) => {
-													console.log('item', item);
-
-													if (item.status === 'active') {
-														return (
-															<div className="form-check form-check-inline" key={item.id}>
-																<input
-																	className="form-check-input"
-																	type="radio"
-																	name="fees_id"
-																	onChange={() => {
-																		formik.setFieldValue("fees_id", item.id);
-																		formik.setFieldValue("type", item.title === "Guru Maa" ? '1' : '0')
-																	}}
-																	value="myself"
-																/>
-																<label className="form-check-label" htmlFor="inlineRadio1">
-																	{item.title} ₹{item.fees}
-																</label>
-															</div>
-														);
-													}
-
-													return null; // Always return something for map()
-												})}
-
-											</div>
-
-
-											<div>
-												<label htmlFor="text" className="form-label d-block mb-0">Belongs To</label>
-												<div className="form-check form-check-inline">
-													<input
-														className="form-check-input"
-														type="radio"
-														name="belongs_to"
-														onChange={formik.handleChange}
-														value="myself"
-
-													/>
-
-													<label className="form-check-label" htmlFor="inlineRadio1">My Self </label>
-												</div>
-
-												<div className="form-check form-check-inline">
-													<input
-														className="form-check-input"
-														type="radio"
-														name="belongs_to"
-														onChange={formik.handleChange}
-														value="other"
-
-													/>
-													{/* <label htmlFor="text" className="form-label">Belongs To</label> */}
-													<label className="form-check-label" htmlFor="inlineRadio1">Other </label>
-												</div>
-											</div>
-
-										</div>
-
-										<div className="col-12 text-center mx-auto">
-											<Button
-												type="submit"
-												label="Submit"
-												className={`btn btn-primary py-2 ${loading && 'loading'} `}
-												disabled={loading || !formik.isValid || !formik.dirty}
-											/>
-										</div>
-									</form>
-								</div>
-							</div>
 						</div>
+						<form onSubmit={formik.handleSubmit}>
+							<p className="mb-1">Consultation & fees</p>
+
+							<div className="col-12 mb-3">
+								{fees?.items?.map((item: any) => {
+									if (item.status === 'active') {
+										return (
+											<div className="form-check form-check-inline" key={item.id}>
+												<input
+													className="form-check-input"
+													type="radio"
+													name="fees_id"
+													id={item.id}
+													value="myself"
+													required
+													onChange={() => {
+														formik.setFieldValue("fees_id", item.id);
+														formik.setFieldValue("type", item.title === "Guru Maa" ? '1' : '0')
+													}}
+
+												/>
+												<label className="form-check-label" htmlFor={item.id}>
+													{item.title} ₹{item.fees}</label>
+											</div>
+										);
+									}
+
+									return null; // Always return something for map()
+								})}
+
+								{/* <div className="form-check form-check-inline">
+									<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+									<label className="form-check-label" htmlFor="inlineRadio2">Student
+										₹700</label>
+								</div>
+								<div className="form-check form-check-inline">
+									<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
+									<label className="form-check-label" htmlFor="inlineRadio3">
+										Tapasvi D/O Guru Maa
+										₹2100
+									</label>
+								</div> */}
+							</div>
+
+							<div className="col-12">
+								<InputField
+									// label="Full Name"
+									required={true}
+									type="text"
+									name="full_name"
+									onChange={formik.handleChange}
+									value={formik.values.full_name}
+									onBlur={formik.handleBlur}
+									placeholder="Full Name"
+									error={formik.errors.full_name && formik.touched.full_name && (formik.errors.full_name)}
+									className={`${formik.errors.full_name && formik.touched.full_name ? "is-invalid" : ""}`}
+								/>
+							</div>
+							<div className="col-12">
+								<InputField
+									// label="Full Name"
+									required={true}
+									type="email"
+									name="email"
+									onChange={formik.handleChange}
+									value={formik.values.email}
+									onBlur={formik.handleBlur}
+									placeholder="Email"
+									error={formik.errors.email && formik.touched.email && (formik.errors.email)}
+									className={`${formik.errors.email && formik.touched.email ? "is-invalid" : ""}`}
+								/>
+							</div>
+
+							<div className='form-group mb-3'>
+								{/* <label className="form-label">Mobile Number</label> */}
+								<PhoneInput
+									country={"in"}
+									value={formik.values.phone_number}
+									onChange={(phone) =>
+										formik.setFieldValue("phone_number", phone)
+									}
+									countryCodeEditable={false}
+									inputStyle={{ width: "100%" }}
+								/>
+								{formik.touched.phone_number && formik.errors.phone_number ? (
+									<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+										{formik.errors.phone_number}
+									</p>
+								) : <p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+								</p>}
+							</div>
+
+							<div className="form-group mb-3 col-12">
+								{/* <label className="form-label">Gender<span className="text-danger">*</span></label> */}
+								<select
+									name="gender"
+									onChange={formik.handleChange}
+									value={formik.values.gender}
+									onBlur={formik.handleBlur}
+									required
+									className="form-select">
+									<option value="">Gender</option>
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+									<option value="other">Other</option>
+								</select>
+								{formik.errors.gender && formik.touched.gender && (
+									<div className="invalid-feedback">{formik.errors.gender}</div>
+								)}
+							</div>
+
+
+							<div className="col-12">
+								<InputField
+									// label="Time of Birth HH:MM)"
+									required={true}
+									type="time"
+									name="tob"
+									placeholder="Time of Birth"
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.tob}
+									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
+									className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
+										}`}
+								/>
+							</div>
+
+							<div className="col-12">
+								<InputField
+									// label="Date of Birth"
+									required={true}
+									type="date"
+									name="dob"
+									placeholder="Date of Birth"
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.dob}
+									error={formik.errors.dob && formik.touched.dob && (formik.errors.dob)}
+									className={` ${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
+										}`}
+								/>
+								{suggestions.length > 0 && (
+									<ul
+										className="list-group position-absolute w-100"
+										style={{ zIndex: 1000, maxHeight: "200px", overflowY: "auto" }}
+									>
+										{suggestions.map((s: any, i: number) => (
+											<li
+												key={i}
+												className="list-group-item list-group-item-action"
+												onClick={() => handleSelectSuggestion(s)}
+												style={{ cursor: "pointer" }}
+											>
+												{s.display_name}
+											</li>
+										))}
+									</ul>
+								)}
+							</div>
+
+							<div className="col-12">
+								<div className="brith-place-flied position-relative">
+									<InputField
+										// label="Birth Place"
+										required={true}
+										type="text"
+										name="birth_place"
+										placeholder="Birth Place"
+										autoComplete="off"
+										onChange={handlePlaceChange}
+										value={formik.values.birth_place}
+										error={formik.errors.birth_place && formik.touched.birth_place && (formik.errors.birth_place)}
+									/>
+									<button type="submit" className="border-0 p-0 search-button"><Image src={SearchIcon} alt="search icon" width={16} height={16} /> </button>
+								</div>
+							</div>
+							<div className="form-group mb-3 col-12">
+								{/* <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
+								<textarea
+									className="form-control"
+									placeholder="Message"
+									name="order_note"
+									onChange={formik.handleChange}
+									value={formik.values.order_note}
+									rows={3}
+								>
+								</textarea>
+							</div>
+
+							<div>
+								<Button
+									label='Submit'
+									className='primary w-100 rounded-pill mt-3'
+									loading={loading}
+								/>
+							</div>
+						</form>
 					</div>
 				</div>
 			</section>
 			<Footer />
+
 		</>
 
 	);

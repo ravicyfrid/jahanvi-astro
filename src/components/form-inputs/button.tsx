@@ -21,7 +21,7 @@ const Button = ({ type = 'submit', disabled, className = 'primary', name = '', i
 			<button
 				name={name}
 				type={type}
-				className={`btn btn-${className} ${loading ? 'btn-loading' : ''} `}
+				className={`btn btn-${className} ${loading ? 'loading' : ''} `}
 				disabled={disabled ? disabled : loading}
 				onClick={onClick}
 				{...props}>

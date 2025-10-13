@@ -19,19 +19,18 @@ const sessionSlice = createSlice({
     setAuthToken: (state, action) => {
       store.set(`${process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY}` || '', action.payload)
       state.isUserLoggedIn = true
-      window.location.replace('https://mediumaquamarine-oryx-625809.hostingersite.com')
+      window.location.replace('/home')
     },
 
     destroyAuthSession: (state) => {
       store.clearAll()
       state.isUserLoggedIn = false
       state.loggedInUser = {}
-      window.location.replace('/login')
+      window.location.replace('/')
     },
 
     setMobileNumber: (state, action) => {
       store.set('mobileNumber', action.payload)
-      window.location.replace('/login')
     },
   },
   extraReducers: (builder) => {

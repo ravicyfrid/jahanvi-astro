@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Button, InputField, TextArea } from '../form-inputs';
 import enquireImage from './images/enquiry-img.jpg';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { bioService } from '@/services/bio.serivce';
+import InputField from '../form-inputs/input-field';
+import TextArea from '../form-inputs/text-area';
+import Button from '../form-inputs/button';
 
 export default function ContactUs() {
   const [loading, setLoading] = useState(false);

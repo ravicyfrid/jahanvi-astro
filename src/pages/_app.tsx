@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import type { AppProps } from 'next/app';
-import '../assets/scss/app.scss';
-import '../assets/scss/main.scss';
+
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import store from '@/redux/store';
+
+import type { AppProps } from 'next/app';
+import '../assets/scss/app.scss';
+import '../assets/scss/main.scss';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	useEffect(() => {

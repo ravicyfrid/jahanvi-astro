@@ -1,18 +1,19 @@
+import { toast } from 'react-toastify';
 import store from 'store'
 export default class CommonService {
 	baseURL: string;
 	accessToken: string | null
-	
+
 	constructor() {
 		this.baseURL = process.env.NEXT_PUBLIC_BASE_URL || '';
-		this.accessToken=store.get(process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY || '') || null
+		this.accessToken = store.get(process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY || '') || null
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	async request(endpoint: string, method: string, params?: any) {
 		const headers = {
 			'Content-Type': 'application/json',
-			'Authorization': this.accessToken ? this.accessToken :''
+			'Authorization': this.accessToken ? this.accessToken : ''
 		};
 
 		const config: RequestInit = { method, headers };
@@ -27,19 +28,22 @@ export default class CommonService {
 			const response = await fetch(fullURL, config);
 			const data = await response.json();
 			if (data.error === false) {
-			} else if (data.error === true) {
+				toast.success(data.message)
+			}
+			else if (data.error === true) {
+				toast.error(data?.message );
 				if (data.message === 'Unauthorized access!') {
-					window.location.replace('/login');
+					window.location.replace('/');
 				}
 			}
 
 			return data;
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			// this.showErrorToast(error?.message);
 
 			if (error.message === 'Unauthorized access!') {
-				window.location.replace('/login');
+				window.location.replace('/');
 			}
 			return error;
 		}
