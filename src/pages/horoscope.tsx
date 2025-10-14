@@ -5,8 +5,8 @@ import React, { useEffect } from "react";
 import { kundliService } from "@/services";
 import { useRouter } from "next/router";
 
-export default function Horoscope() {
-	const router =useRouter()
+const Horoscope = () => {
+	const router = useRouter()
 	// const [filters, setFilters] = React.useState<any>({
 	// 	page: 1,
 	// 	per_page: 9,
@@ -15,17 +15,13 @@ export default function Horoscope() {
 
 	useEffect(() => {
 		kundliService.getKundlies({
-		page: 1,
-		per_page: 9,
-	}).then((results: any) => {
+			page: 1,
+			per_page: 9,
+		}).then((results: any) => {
 			setKundli({ items: results.items, pagination: results.pagination })
 		})
-
-
-
 	}, [])
 
-	
 	return (
 		<>
 			<SEOHead title={'Horoscope'} />
@@ -40,11 +36,11 @@ export default function Horoscope() {
 						</Link>
 						Horoscope
 					</h5>
-					<button type="button" className="border-1 border-primary rounded-5 bg-white  text-primary px-3 py-1" onClick={()=>router.push('/add-horoscope')}> Add +</button>
+					<button type="button" className="border-1 border-primary rounded-5 bg-white  text-primary px-3 py-1" onClick={() => router.push('/add-horoscope')}> Add +</button>
 				</div>
 				<div className="container pt-4">
 					<div className="col-12">
-						{kundli.items.map((item: any, i: number) => {
+						{kundli.items?.length > 0 ? kundli.items.map((item: any, i: number) => {
 							return (
 								<>
 									<div className="card rounded-2  shadow-lg bg-white px-3 py-4 mb-2" key={i}>
@@ -55,15 +51,18 @@ export default function Horoscope() {
 												<p className="mb-0"><small className="d-block fw-semibold">Gender: {item?.gender}</small> <small className="d-block fw-semibold"> DOB: {item?.dob}</small></p>
 											</div>
 											<div className="ms-auto">
-												<button type="button" className="border-1 border-primary rounded-5 bg-white  text-primary px-3 py-1" onClick={()=>router.push(`/horoscope/${item?.id}`)}>View</button>
+												<button type="button" className="border-1 border-primary rounded-5 bg-white  text-primary px-3 py-1" onClick={() => router.push(`/horoscope/${item?.id}`)}>View</button>
 											</div>
 										</div>
 									</div>
 								</>
 							)
-						})}
+						})
+							:
+							<SkeletonHoroscope />
+						}
 
-{/* 
+						{/* 
 						<div className="card rounded-2  shadow-lg bg-white px-3 py-4 mb-2">
 							<div className="d-flex align-items-center">
 								<div className="user-info">
@@ -87,4 +86,31 @@ export default function Horoscope() {
 
 		</>
 	);
+}
+export default Horoscope
+
+const SkeletonHoroscope = () => {
+	return (
+
+		<>
+			<div className="card rounded-2 shadow-sm bg-white px-3 py-3 mb-3 user-card-skeleton" aria-busy="true">
+				<div className="d-flex align-items-center">
+					<div className="user-info flex-grow-1">
+						<div className="skeleton skeleton-title mb-2"></div>
+
+						<div className="d-flex gap-2 mb-1">
+							<div className="skeleton skeleton-meta" style={{ width: '38%' }}></div>
+							<div className="skeleton skeleton-meta" style={{ width: '25%' }}></div>
+						</div>
+
+						<div className="skeleton skeleton-meta" style={{ width: '22%' }}></div>
+					</div>
+
+					<div className="ms-auto">
+						<div className="skeleton skeleton-btn"></div>
+					</div>
+				</div>
+			</div>
+		</>
+	)
 }
