@@ -21,6 +21,7 @@ import ContactusIcon from '../images/contactus.svg'
 import PrivcyPolicy from '../images/privcy-policy.svg'
 import Logout from '../images/logout.svg'
 import GemstonsIcon from '../images/gemstonsicon.svg'
+import KundliImage from '../images/kundli.gif'
 
 
 
@@ -51,5 +52,6 @@ export {
 	ContactusIcon,
 	PrivcyPolicy,
 	GemstonsIcon,
-	Logout
+	Logout,
+	KundliImage
 }

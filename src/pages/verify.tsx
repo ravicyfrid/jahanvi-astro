@@ -113,7 +113,7 @@ const OtpVerify = () => {
 															Resend OTP
 														</button>
 													) : (
-														<p className="border-bottom" style={{ fontSize: "14px" }}>
+														<p className="" style={{ fontSize: "14px" }}>
 															Request another OTP over SMS in {timer}S
 														</p>
 													)}

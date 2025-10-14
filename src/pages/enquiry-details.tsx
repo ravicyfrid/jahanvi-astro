@@ -1,7 +1,7 @@
 import { genestroImg } from "@/assets/images"
 import Image from "next/image"
 
-const HoroscopeDetails = () => {
+const EnquiryDetails = () => {
 	// useEffect(() => {
 	// gemsService.getGemsInquiries().then((result: any) => {
 	// console.log('result', result);
@@ -216,4 +216,4 @@ const HoroscopeDetails = () => {
 		</>
 	)
 }
-export default HoroscopeDetails
+export default EnquiryDetails

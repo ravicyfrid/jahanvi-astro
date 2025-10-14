@@ -1,8 +1,26 @@
-import { genestroImg } from "@/assets/images"
 import { SEOHead } from "@/components"
-import Image from "next/image"
+import { kundliService } from "@/services"
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
 
 const HoroscopeDetails = () => {
+  const router = useRouter();
+  const [results, setResults] = useState<any>({});
+  const [kundli, setKundli] = useState<any>(null);
+
+  useEffect(() => {
+    if (!router.query.id) return; // wait until router.query.id is available
+
+    kundliService.getKundlies({
+      page: 1,
+      per_page: 999999,
+    }).then((res: any) => {
+      setResults(res);
+      const filtered = res.items?.filter((item: any) => item.id === router.query.id);
+      setKundli(filtered ? filtered[0] : null);
+    });
+  }, [router.query.id]);
+
   return (
     <>
       <SEOHead title={'Horoscope Details'} />
@@ -15,52 +33,76 @@ const HoroscopeDetails = () => {
                 <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg></a>
             Horoscope Details</h5>
         </div>
-        <div className="container">
-          <div className="row">
+
+        {kundli ?
+          <div className="container">
+            <div className="row">
 
 
-            <div className="col-12">
+              <div className="col-12">
 
-              <div className="details-card mt-3">
-                <h6 className="mb-2">Raj Darwar</h6>
-                <p className="mb-0"><strong>Gender:</strong> Male</p>
-                <p className="mb-0"><strong>DOB:</strong> 2011-10-14</p>
-                <p className="mb-0"><strong>TOB:</strong> 13:20:00</p>
-                <p className="mb-0"><strong>Place:</strong> Jaipur, Rajasthan, India</p>
+                <div className="details-card mt-3">
+                  <h6 className="mb-2">{kundli?.full_name}</h6>
+                  <p className="mb-0"><strong>Gender:</strong> {kundli?.gender}</p>
+                  <p className="mb-0"><strong>DOB:</strong>{kundli?.dob}</p>
+                  <p className="mb-0"><strong>TOB:</strong> {kundli?.tob}</p>
+                  <p className="mb-0"><strong>Place:</strong> {kundli?.birth_place}</p>
 
-                <div className="horoscope-box my-2">
-                  <Image
-                    src={genestroImg}
-                    alt="Horoscope Chart"
-                    width={100}
-                    height={100}
-                    className="img-fluid w-100 rounded-2 shadow-lg bg-white mb-2 d-flex justify-content-center  p-2"
-                  />
-                </div>
+                  <div className="horoscope-box my-2">
+                    <div
+                      className="d-flex justify-content-center p-2 bg-white rounded-2 shadow-lg"
+                      dangerouslySetInnerHTML={{ __html: kundli?.horoscope_chart_image?.svg }}
+                    />
 
-                <div className="mahadasa-section mt-4">
-                  <h5>Mahadasha</h5>
-
-                  <div className="mahadasa-card">
-                    <h6 className="text-center">Mahadasha 1</h6>
-                    <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong> सूर्य</p>
-                    <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> 6-6-2020 21:23</p>
-                    <p className="d-flex justify-content-between mb-1"><strong>End:</strong> 7-6-2026 9:23</p>
                   </div>
 
-                  <div className="mahadasa-card">
-                    <h6 className="text-center">Mahadasha 2</h6>
-                    <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>
-                      <span>शुक्र</span>
-                    </p>
-                    <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> 7-6-2025 3:23</p>
-                    <p className="d-flex justify-content-between mb-1"><strong>End:</strong> 7-6-2038 9:23</p>
+                  <div className="mahadasa-section mt-4">
+                    <h5>Mahadasha</h5>
+
+                    <div className="mahadasa-card">
+                      <h6 className="text-center">Mahadasha 1</h6>
+                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.major?.planet}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.major?.start}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.major?.end}</p>
+                    </div>
+
+                    <div className="mahadasa-card">
+                      <h6 className="text-center">Mahadasha 2</h6>
+                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.minor?.planet}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.minor?.start}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.minor?.end}</p>
+                    </div>
+
+
+                    <div className="mahadasa-card">
+                      <h6 className="text-center">Mahadasha 3</h6>
+                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_minor?.planet}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_minor?.start}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_minor?.end}</p>
+                    </div>
+
+                    <div className="mahadasa-card">
+                      <h6 className="text-center">Mahadasha 4</h6>
+                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_sub_minor?.planet}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_sub_minor?.start}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_sub_minor?.end}</p>
+                    </div>
+
+                    <div className="mahadasa-card">
+                      <h6 className="text-center">Mahadasha 5</h6>
+                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_sub_sub_minor?.planet}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_sub_sub_minor?.start}</p>
+                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_sub_sub_minor?.end}</p>
+                    </div>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          :
+          <p>Loading...</p>
+        }
       </section>
 
 
