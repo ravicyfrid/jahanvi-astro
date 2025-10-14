@@ -1,8 +1,8 @@
-import { genestroImg } from "@/assets/images"
 import { gemsService } from "@/services"
 import { useFormik } from "formik"
 import moment from "moment"
 import Image from "next/image"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
@@ -10,12 +10,10 @@ const EnquiryDetails = () => {
   const router = useRouter();
   const [gems, setGems] = useState<any>({});
 
-  // fetch details when id becomes available
   useEffect(() => {
     const id = router.query.id;
     if (!id) return;
     gemsService.getGemsInquiriesDetails(id).then((result: any) => {
-      console.log("result>>>>>>>>>>", result);
       setGems(result);
     }).catch(err => {
       console.error("failed to load details", err);
@@ -35,25 +33,38 @@ const EnquiryDetails = () => {
       setSubmitting(true);
 
       try {
-        // send the message
-        const postResult = await gemsService.gemsInquiriesMessages(id, values);
-        console.log("post result", postResult);
 
-        // re-fetch details so UI shows the new state from server
         const refreshed = await gemsService.getGemsInquiriesDetails(id);
-        console.log("refreshed details", refreshed);
         setGems(refreshed);
 
-        // reset the form to initial values
         resetForm();
       } catch (err) {
         console.error("submit error", err);
-        // optionally show notification to user here
       } finally {
         setSubmitting(false);
       }
     },
   });
+
+  function getShortRelativeTime(date: any) {
+    const now = moment();
+    const then = moment(date);
+    const diffSeconds = now.diff(then, 'seconds');
+    const diffMinutes = now.diff(then, 'minutes');
+    const diffHours = now.diff(then, 'hours');
+    const diffDays = now.diff(then, 'days');
+    const diffWeeks = now.diff(then, 'weeks');
+    const diffMonths = now.diff(then, 'months');
+    const diffYears = now.diff(then, 'years');
+
+    if (diffSeconds < 60) return 'now';
+    if (diffMinutes < 60) return `${diffMinutes}m`;
+    if (diffHours < 24) return `${diffHours}h`;
+    if (diffDays < 7) return `${diffDays}d`;
+    if (diffWeeks < 4) return `${diffWeeks}w`;
+    if (diffMonths < 12) return `${diffMonths}mo`;
+    return `${diffYears}y`;
+  }
 
   return (
     <>
@@ -61,9 +72,9 @@ const EnquiryDetails = () => {
 
         <div className="card-header bg-white border-bottom p-3 sticky-sidebar">
           <h5 className="card-title text-black d-flex align-items-center gap-2">
-            <a href="#">
+            <Link href="/gemstones-enquiries">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="20" x="0" y="0" viewBox="0 0 24 24" >
-                <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg></a>
+                <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg></Link>
             Gemstones Details</h5>
         </div>
         <div className="container pt-4">
@@ -120,9 +131,31 @@ const EnquiryDetails = () => {
             <div className="col-12">
               <div className="card px-2">
                 <div className="card-body pb-5">
-
                   <h5>Comments</h5>
-                  <p className="text-center">No comments found</p>
+                  <div className="chat-list">
+                    {gems?.comments?.length > 0 ? [...gems?.comments]?.reverse()?.map((item: any, i: number) => {
+                      return (
+                        <div className="chat-item" key={i}>
+                          <div className="avatar-circle">Y</div>
+                          <div className="chat-meta">
+                            <div className="chat-top">
+                              <div>
+                                <div className="chat-name">You</div>
+                                <div className="chat-role">{item?.user?.role}</div>
+                              </div>
+                              <div className="chat-time">{getShortRelativeTime(item?.created_at)}</div>
+                            </div>
+
+                            <div className="chat-bubble">{item?.comment}</div>
+                          </div>
+                        </div>
+                      )
+                    })
+                      :
+                      <p className="text-center">No comments found</p>
+                    }
+
+                  </div>
                 </div>
                 <div className="card-footer bg-white border-0 px-0">
                   <div className="mb-3 form-group position-relative">

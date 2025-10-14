@@ -81,13 +81,13 @@ const Chat = () => {
 																<span className="chat-time">{currentDate}</span>
 															</div>
 														)}
-														{item?.user?.role !== "customer" &&
+														{item?.user?.role == "customer" &&
 															<div className="msg msg-right">
 																<span className="d-block ">{item.message} </span>
 																<small className="text-white">{formatDateParts(item.created_at).timeOnly}</small>
 															</div>
 														}
-														{item?.user?.role === "customer" &&
+														{item?.user?.role !== "customer" &&
 															<div>
 																<p className="text-black code-sandbox mb-1">{item.name}</p>
 																<div className="msg msg-left">
