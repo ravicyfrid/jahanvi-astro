@@ -18,7 +18,6 @@ const Consultation = () => {
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
 
-	console.log('loading', loading);
 
 	useEffect(() => {
 		ordersService.getConsultationFees().then((res: any) => {
@@ -80,7 +79,7 @@ const Consultation = () => {
 			tob: "",
 			lat: "",
 			lon: "",
-			"tzone": "5.5",
+			// "tzone": "5.5",
 			fees_id: "",
 			type: "",
 			belongs_to: "myself",
@@ -91,31 +90,31 @@ const Consultation = () => {
 			fees_id: Yup.string().label("Consultation Fees").required(),
 			full_name: Yup.string().label("Full Name").required(),
 			phone_number: Yup.string().label("Phone Number").required(),
-			email: Yup.string().label("Email").email("Invalid email").required(),
 			gender: Yup.string().label("Gender").required(),
 			birth_place: Yup.string().label("Birth Place").required(),
 			dob: Yup.string().label("Date Of Birth").required(),
 			tob: Yup.string().label("Time Of Birth").required(),
 		}),
-		onSubmit: async (values) => {
+		onSubmit: async (values, { resetForm }) => {
 			setLoading(true)
 			try {
 				const response = await ordersService.CreateOrder(values);
 
 				if (!response.error && response.data?.id) {
+					resetForm()
+					formik.setFieldValue("phone_number", "+91")
+					// const cashfree = await ordersService.Cashfree(response.data.id);
 
-					const cashfree = await ordersService.Cashfree(response.data.id);
+					// if (!cashfree.error && cashfree.payment_link) {
 
-					if (!cashfree.error && cashfree.payment_link) {
-
-						if (cashfree.cf_order_id) {
-							await ordersService.MarkPaid({
-								order_id: response.data.id,
-								cf_order_id: cashfree.cf_order_id,
-							});
-						}
-						window.location.href = cashfree.payment_link;
-					}
+					// 	if (cashfree.cf_order_id) {
+					// 		await ordersService.MarkPaid({
+					// 			order_id: response.data.id,
+					// 			cf_order_id: cashfree.cf_order_id,
+					// 		});
+					// 	}
+					// 	window.location.href = cashfree.payment_link;
+					// }
 					setLoading(false)
 				}
 			} catch (error) {
@@ -143,12 +142,12 @@ const Consultation = () => {
 										return (
 											<div className="form-check form-check-inline" key={item.id}>
 												<input
-													className="form-check-input"
 													type="radio"
 													name="fees_id"
 													id={item.id}
-													value="myself"
 													required
+													value="myself"
+													onBlur={formik.handleBlur}
 													onChange={() => {
 														formik.setFieldValue("fees_id", item.id);
 														formik.setFieldValue("type", item.title === "Guru Maa" ? '1' : '0')
@@ -157,12 +156,14 @@ const Consultation = () => {
 												/>
 												<label className="form-check-label" htmlFor={item.id}>
 													{item.title} ₹{item.fees}</label>
+
 											</div>
 										);
 									}
 
 									return null; // Always return something for map()
 								})}
+								{formik.errors.fees_id && formik.touched.fees_id && <span className="invalid-feedback text-danger d-block mt-1 text-start">{formik.errors.fees_id}</span>}
 
 								{/* <div className="form-check form-check-inline">
 									<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
@@ -189,13 +190,12 @@ const Consultation = () => {
 									onBlur={formik.handleBlur}
 									placeholder="Full Name"
 									error={formik.errors.full_name && formik.touched.full_name && (formik.errors.full_name)}
-									className={`${formik.errors.full_name && formik.touched.full_name ? "is-invalid" : ""}`}
+									className=''
 								/>
 							</div>
 							<div className="col-12">
 								<InputField
 									// label="Full Name"
-									required={true}
 									type="email"
 									name="email"
 									onChange={formik.handleChange}
@@ -203,7 +203,6 @@ const Consultation = () => {
 									onBlur={formik.handleBlur}
 									placeholder="Email"
 									error={formik.errors.email && formik.touched.email && (formik.errors.email)}
-									className={`${formik.errors.email && formik.touched.email ? "is-invalid" : ""}`}
 								/>
 							</div>
 
@@ -212,6 +211,7 @@ const Consultation = () => {
 								<PhoneInput
 									country={"in"}
 									value={formik.values.phone_number}
+									onBlur={formik.handleBlur}
 									onChange={(phone) =>
 										formik.setFieldValue("phone_number", phone)
 									}
@@ -234,7 +234,8 @@ const Consultation = () => {
 									value={formik.values.gender}
 									onBlur={formik.handleBlur}
 									required
-									className="form-select">
+									className={`form-select ${formik.touched.gender && formik.errors.gender ? "is-invalid" : ""
+										}`}>
 									<option value="">Gender</option>
 									<option value="male">Male</option>
 									<option value="female">Female</option>
@@ -243,23 +244,6 @@ const Consultation = () => {
 								{formik.errors.gender && formik.touched.gender && (
 									<div className="invalid-feedback">{formik.errors.gender}</div>
 								)}
-							</div>
-
-
-							<div className="col-12">
-								<InputField
-									// label="Time of Birth HH:MM)"
-									required={true}
-									type="time"
-									name="tob"
-									placeholder="Time of Birth"
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									value={formik.values.tob}
-									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
-									className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
-										}`}
-								/>
 							</div>
 
 							<div className="col-12">
@@ -273,13 +257,12 @@ const Consultation = () => {
 									onBlur={formik.handleBlur}
 									value={formik.values.dob}
 									error={formik.errors.dob && formik.touched.dob && (formik.errors.dob)}
-									className={` ${formik.errors.dob && formik.touched.dob ? "is-invalid" : ""
-										}`}
+
 								/>
 								{suggestions.length > 0 && (
 									<ul
-										className="list-group position-absolute w-100"
-										style={{ zIndex: 1000, maxHeight: "200px", overflowY: "auto" }}
+										className="list-group position-absolute "
+										style={{ zIndex: 1000, maxHeight: "200px", overflowY: "auto", maxWidth: "426px" }}
 									>
 										{suggestions.map((s: any, i: number) => (
 											<li
@@ -296,6 +279,21 @@ const Consultation = () => {
 							</div>
 
 							<div className="col-12">
+								<InputField
+									// label="Time of Birth HH:MM)"
+									required={true}
+									type="time"
+									name="tob"
+									placeholder="Time of Birth"
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.tob}
+									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
+
+								/>
+							</div>
+
+							<div className="col-12">
 								<div className="brith-place-flied position-relative">
 									<InputField
 										// label="Birth Place"
@@ -303,6 +301,7 @@ const Consultation = () => {
 										type="text"
 										name="birth_place"
 										placeholder="Birth Place"
+										onBlur={formik.handleBlur}
 										autoComplete="off"
 										onChange={handlePlaceChange}
 										value={formik.values.birth_place}
