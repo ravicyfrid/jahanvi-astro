@@ -39,14 +39,17 @@ const Gems = () => {
 
     }),
     enableReinitialize: true,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         setLoading(true);
         const results = await enquirieService.gemsEnquiries(values);
+
         if (results.error === false) {
-          formik.resetForm();
+          resetForm();
+          formik.setFieldValue("phone_number", "+91");
         }
       } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -117,7 +120,6 @@ const Gems = () => {
               <div className="gemestone-content mb-4">
                 <div className="item-container mb-2">
                   <h5 className="">{gem?.title} </h5>
-                  {/* <h6>text</h6> */}
                   <p>{gem?.description}</p>
                 </div>
 
@@ -145,21 +147,22 @@ const Gems = () => {
                         placeholder="Name"
                         onChange={formik.handleChange}
                         value={formik.values.name}
-                        	onBlur={formik.handleBlur}
-                        className={`${formik.errors.name && formik.touched.name ? "is-invalid" : ""
-                          }`}
-                        error={formik.errors.name && formik.touched.name ? formik.errors.name : ""}
+                        onBlur={formik.handleBlur}
+                        error={formik.errors.name  && formik.touched.name ? formik.errors.name : ''} 
                       />
+
                     </div>
                     <div className='form-group mb-3'>
                       <PhoneInput
                         country={"in"}
                         value={formik.values.phone_number}
+                        onBlur={formik.handleBlur}
                         onChange={(phone) =>
                           formik.setFieldValue("phone_number", phone)
                         }
                         inputStyle={{ width: "100%" }}
                         countryCodeEditable={false}
+                        inputClass={`form-control ${formik.errors.phone_number && formik.touched.phone_number ? 'is-invalid' : ''}`}
                       />
                       {formik.errors.phone_number && formik.touched.phone_number && (
                         <div className="text-danger small">
@@ -175,9 +178,7 @@ const Gems = () => {
                         placeholder="Email"
                         onChange={formik.handleChange}
                         value={formik.values.email}
-                        	onBlur={formik.handleBlur}
-                        className={`${formik.errors.email && formik.touched.email ? "is-invalid" : ""
-                          }`}
+                        onBlur={formik.handleBlur}
                         error={formik.errors.email && formik.touched.email ? formik.errors.email : ""}
                       />
 
@@ -190,9 +191,10 @@ const Gems = () => {
                     <Button
                       label='Submit'
                       className='primary w-100 rounded-pill mt-3'
-                      disabled={loading || (
-                        (!formik.isValid || !formik.dirty)
-                      )}
+                      loading={loading}
+                    // disabled={loading || (
+                    //   (!formik.isValid || !formik.dirty)
+                    // )}
                     />
                   </form>
                 </div>

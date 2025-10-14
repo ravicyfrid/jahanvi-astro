@@ -81,9 +81,12 @@ const Gemstones = () => {
             )
             ) :
               (
-                Array.from({ length: 4 }).map((_, index) => (
-                  <HorizontalSkeleton />
-                )))
+                Array.from({ length: 4 }).map((_,i:number) => {
+                  console.log(_);
+                  
+                  return (
+                  <HorizontalSkeleton key={i}/>
+                )}))
             }
           </div>
 

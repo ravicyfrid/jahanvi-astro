@@ -29,9 +29,11 @@ const UserLogin = () => {
 		enableReinitialize: true,
 
 		onSubmit: async (values: any) => {
+			console.log('values',values);
+			const phoneNumber= `+${values.username}`
 			dispatch(setMobileNumber(values.username))
 			setLoading(true);
-			const results: any = await authService.RequestOtpForLogin({ username: values.username, username_type: 'phone_number' });
+			const results: any = await authService.RequestOtpForLogin({ username: phoneNumber, username_type: 'phone_number' });
 			console.log('results', results);
 
 			if (results?.error === false) {
