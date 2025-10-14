@@ -51,7 +51,7 @@ export default function UpdateProfile() {
 								<div className="user-info">
 									<h5 className="mb-1">User
 									</h5>
-									<p className="mb-0">+{loggedInUser?.phone_number}</p>
+									<p className="mb-0">{loggedInUser?.phone_number}</p>
 								</div>
 								<div className="ms-auto">
 									<div className="date-box">

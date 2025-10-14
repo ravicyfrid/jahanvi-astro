@@ -145,6 +145,7 @@ const Consultation = () => {
 													type="radio"
 													name="fees_id"
 													id={item.id}
+													className="form-check-input"
 													required
 													value="myself"
 													onBlur={formik.handleBlur}

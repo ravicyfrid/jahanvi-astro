@@ -17,6 +17,16 @@ class GemsService extends CommonService {
 		return await this.get('/gems/enquiries')
 	}
 
+	async getGemsInquiriesDetails(id:any) {
+		return await this.get(`/gems/enquiries/${id}`)
+	}
+
+	async gemsInquiriesMessages(id:any,params:any) {
+		return await this.post(`/gems/enquiries/${id}/comments`,params)
+	}
+
+
+	
 }
 
 export const gemsService = new GemsService();

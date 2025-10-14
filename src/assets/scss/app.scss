@@ -26,15 +26,16 @@ h1 {
   font-weight: 600;
   margin-bottom: 0;
 }
- h4 {
-   font-size: 20px;
-   font-weight: 600;
-   margin-bottom: 0;
-   color: $dark;
-   line-height: normal;
 
-  
- }
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: $dark;
+  line-height: normal;
+
+
+}
 
 h5 {
   font-size: 18px;
@@ -1500,26 +1501,124 @@ a {
 }
 
 
-  
-  
-    .details-card {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      padding: 15px;
-    }
-   
-    .mahadasa-card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px 15px;
-      margin-top: 10px;
-    }
-    .mahadasa-card h6 {
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .mahadasa-card p {
-      margin: 0;
-      font-size: 14px;
-    }
+
+
+.details-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.mahadasa-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-top: 10px;
+}
+
+.mahadasa-card h6 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.mahadasa-card p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.skeleton-horoscope {
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 37%, #e9ecef 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8px;
+}
+
+.skeleton-title {
+  height: 20px;
+}
+
+.skeleton-text {
+  height: 14px;
+}
+
+.skeleton-subtitle {
+  height: 18px;
+}
+
+.skeleton-box {
+  height: 200px;
+  border-radius: 12px;
+}
+
+.skeleton-card {
+  height: 80px;
+  border-radius: 10px;
+}
+
+/* ✨ Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+/* container hook for scoping if needed */
+.user-card-skeleton {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+
+  /* Base shimmer look */
+  .skeleton {
+    display: inline-block;
+    background: linear-gradient(90deg, #ececec 25%, #f6f6f6 50%, #ececec 75%);
+    background-size: 400% 100%;
+    animation: skeleton-shimmer 1.2s linear infinite;
+    border-radius: 6px;
+  }
+
+  .skeleton-title {
+    height: 18px;
+    width: 48%;
+    border-radius: 6px;
+  }
+
+  .skeleton-meta {
+    height: 12px;
+    border-radius: 6px;
+  }
+
+  .skeleton-btn {
+    width: 70px;
+    height: 34px;
+    border-radius: 20px;
+  }
+
+  /* Spacing helpers to mirror your layout */
+  .user-card-skeleton .user-info {
+    min-width: 0;
+  }
+
+  /* allow ellipsis-like shrink */
+  .user-card-skeleton .d-flex.gap-2 {
+    gap: 0.5rem;
+  }
+}
+
+
+
+
+/* Shimmer animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}

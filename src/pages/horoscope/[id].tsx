@@ -1,11 +1,11 @@
 import { SEOHead } from "@/components"
 import { kundliService } from "@/services"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 
 const HoroscopeDetails = () => {
   const router = useRouter();
-  const [results, setResults] = useState<any>({});
   const [kundli, setKundli] = useState<any>(null);
 
   useEffect(() => {
@@ -15,7 +15,6 @@ const HoroscopeDetails = () => {
       page: 1,
       per_page: 999999,
     }).then((res: any) => {
-      setResults(res);
       const filtered = res.items?.filter((item: any) => item.id === router.query.id);
       setKundli(filtered ? filtered[0] : null);
     });
@@ -28,9 +27,9 @@ const HoroscopeDetails = () => {
       <section className="horoscope-details">
         <div className="card-header bg-white border-bottom p-3 sticky-sidebar">
           <h5 className="card-title text-black d-flex align-items-center gap-2">
-            <a href="#">
+            <Link href="/horoscope">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="20" x="0" y="0" viewBox="0 0 24 24" >
-                <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg></a>
+                <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg></Link>
             Horoscope Details</h5>
         </div>
 
@@ -98,10 +97,11 @@ const HoroscopeDetails = () => {
                   </div>
                 </div>
               </div>
+              {/* <Skelton/> */}
             </div>
           </div>
           :
-          <p>Loading...</p>
+          <Skelton />
         }
       </section>
 
@@ -110,3 +110,32 @@ const HoroscopeDetails = () => {
   )
 }
 export default HoroscopeDetails
+
+
+const Skelton = () => {
+  return (
+    <>
+
+      <div className="col-12">
+        <div className="details-card mt-3 p-3 rounded-3 shadow-sm bg-white">
+          <>
+            <div className="skeleton-horoscope skeleton-title mb-2" style={{ width: '50%' }}>
+
+            </div>
+            <div className="skeleton-horoscope skeleton-text mb-1" style={{ width: '40%' }}></div>
+            <div className="sskeleton-horoscope skeleton-text mb-1" style={{ width: '60%' }}></div>
+            <div className="skeleton-horoscope skeleton-text mb-1" style={{ width: '55%' }}></div>
+            <div className="skeleton-horoscope skeleton-text mb-1" style={{ width: '70%' }}></div>
+
+            <div className="skeleton-horoscope skeleton-box my-3"></div>
+
+            <div className="skeleton-horoscope skeleton-subtitle mb-2" style={{ width: '30%' }}></div>
+            <div className="skeleton-horoscope skeleton-card mb-2"></div>
+            <div className="skeleton-horoscope skeleton-card"></div>
+          </>
+
+        </div>
+      </div>
+    </>
+  )
+}
