@@ -26,6 +26,15 @@ h1 {
   font-weight: 600;
   margin-bottom: 0;
 }
+ h4 {
+   font-size: 20px;
+   font-weight: 600;
+   margin-bottom: 0;
+   color: $dark;
+   line-height: normal;
+
+  
+ }
 
 h5 {
   font-size: 18px;
@@ -1471,3 +1480,46 @@ a {
     width: 80px;
   }
 }
+
+.enquirires-placehoder-card {
+  .placehoder-img-enquires {
+    min-height: 300px;
+  }
+
+  .user-info-placehoder {
+    .inquiry-placehoder {
+      width: 100px;
+    }
+
+    .id-placehoder {
+      min-height: 8px;
+      width: 60px;
+
+    }
+  }
+}
+
+
+  
+  
+    .details-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      padding: 15px;
+    }
+   
+    .mahadasa-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-top: 10px;
+    }
+    .mahadasa-card h6 {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .mahadasa-card p {
+      margin: 0;
+      font-size: 14px;
+    }
