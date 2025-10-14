@@ -1,5 +1,5 @@
 import Image from "next/image"
-import {  CategoryIcon, PlaceHolder } from "@/assets/images"
+import { CategoryIcon, PlaceHolder } from "@/assets/images"
 import { useEffect, useState } from "react"
 import { gemsService } from "@/services"
 import { Footer, SEOHead } from "@/components"
@@ -80,116 +80,12 @@ const Gemstones = () => {
               )
             )
             ) :
-              <HorizontalSkeleton />
+              (
+                Array.from({ length: 4 }).map((_, index) => (
+                  <HorizontalSkeleton />
+                )))
             }
           </div>
-          {/* <div className="row gap-4">
-            <div className="col-12">
-
-
-
-
-              <div className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={CoralImg} className="icon card-img-top rounded-2" height={100} width={100} alt="Coral (Moonga)" />
-                  </div>
-                  <div className="col-8 ps-2 d-flex align-items-center">
-                    <div className="card-body py-1 px-1">
-                      <h5 className="card-title text-primary mb-1">Coral (Moonga)</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={BlueTopaz} className="icon card-img-top rounded-2" height={100} width={100} alt="Blue Topaz" />
-                  </div>
-                  <div className="col-8 d-flex align-items-center ps-2">
-                    <div className="card-body py-1 px-1">
-                      <h5 className="card-title text-primary mb-1">Blue Topaz</h5>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card mb-3 bg-white rounded-2 mb-2 ps-0 gemes-details-card-box">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={CatsEye} className="icon card-img-top rounded-2" height={100} width={100} alt="Cats Eye" />
-                  </div>
-                  <div className="col-8 ps-2 d-flex align-items-center">
-                    <div className="card-body py-1 px-1">
-                      <h5 className="card-title text-primary">Cats Eye (Lahsuniya)
-                        Pearl (Moti)</h5>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card mb-3 rounded-2 mb-2 bg-white gemes-details-card-box">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={PearlMoti} className="icon me-2 card-img-top rounded-2" height={100} width={100} alt="Pearl Moti" />
-                  </div>
-                  <div className="col-8 ps-2 d-flex align-items-center">
-                    <div className="card-body py-1 px-1">
-                      <h5 className="card-title text-primary">
-                        Pearl (Moti)</h5>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className="card mb-3 rounded-2 mb-2 bg-white gemes-details-card-box">
-                <div className="row g-0">
-                  <div className="col-4">
-                    <Image src={PearlMoti} className="icon card-img-top rounded-2" height={100} width={100} alt="Gems" />
-                  </div>
-                  <div className="col-8 ps-2 d-flex align-items-center">
-                    <div className="card-body py-1 px-1">
-                      <h5 className="card-title text-primary">
-                        Pearl (Moti)</h5>
-                      <h6>Price</h6>
-                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div> */}
-
-          {/* <div className="row">
-
-            <div className="col-6">
-              <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
-                <Image src={OpalImg} className="icon me-1 img-fluid rounded-2 w-100" height={100} width={100} alt="Gems" />
-                <div className="card-body py-1 px-1 text-center">
-                  <h5 className="card-title text-primary mb-1">Opal</h5>
-                  <p>Price:4500</p>
-
-                </div>
-              </div>
-            </div>
-
-            <div className="col-6">
-              <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
-                <Image src={OpalImg} className="icon me-1 img-fluid rounded-2 w-100" height={100} width={100} alt="Gems" />
-                <div className="card-body py-1 px-1 text-center">
-                  <h5 className="card-title text-primary mb-2">Opal</h5>
-                  <p>Price:400</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
 
         </div>
       </section >

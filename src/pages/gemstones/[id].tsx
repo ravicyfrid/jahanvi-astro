@@ -170,7 +170,6 @@ const Gems = () => {
 
                     <div className="form-group mb-3 col-12">
                       <InputField
-                        required={true}
                         type="email"
                         name="email"
                         placeholder="Email"

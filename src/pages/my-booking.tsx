@@ -140,15 +140,14 @@ const MyBooking = () => {
 														<div className="booking-card" >
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
-																<div className="d-flex gap-2">
+																{/* <div className="d-flex gap-2">
 																	<button
 																		type="button"
-																		// onClick={() => chatid(item.chat.id, item.order_number)}
 																		className="btn success-button border-0"
 																		data-bs-toggle="offcanvas"
 																		data-bs-target="#offcanvasRight"
 																		aria-controls="offcanvasRight">Chat</button>
-																</div>
+																</div> */}
 															</div>
 															<hr />
 															<div className="d-flex align-items-center mb-3">
