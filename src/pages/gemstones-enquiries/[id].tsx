@@ -138,9 +138,9 @@ const EnquiryDetails = () => {
 
             <div className="col-12">
               <div className="card px-2">
-                <div className="card-body pb-5">
+                <div className="card-body chat-comments-box pb-5">
                   <h5>Comments</h5>
-                  <div className="chat-list">
+                  <div className="chat-list pb-2">
                     {gems?.comments?.length > 0 ? [...gems?.comments]?.reverse()?.map((item: any, i: number) => {
                       return (
                         <div className="chat-item" key={i}>
@@ -165,8 +165,8 @@ const EnquiryDetails = () => {
 
                   </div>
                 </div>
-                <div className="card-footer bg-white border-0 px-0">
-                  <div className="mb-3 form-group position-relative">
+                <div className="card-footer shadow-lg bg-white border-top">
+                  <div className="form-group position-relative">
                     <form onSubmit={formik.handleSubmit}>
                       <input
                         type="text"

@@ -48,7 +48,7 @@ export default function Footer() {
         </nav> */}
 
             <div className="container">
-          <nav className="navbar fixed-bottom shadow-sm footer-menu-list">
+          <nav className="navbar fixed-bottom shadow-lg footer-menu-list border-top">
               <div className="row text-center align-items-center w-100">
                 {/* Home */}
                 <div className="col px-1">
