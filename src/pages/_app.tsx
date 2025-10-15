@@ -7,6 +7,7 @@ import store from '@/redux/store';
 import type { AppProps } from 'next/app';
 import '../assets/scss/app.scss';
 import '../assets/scss/main.scss';
+import 'react-phone-input-2/lib/style.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	useEffect(() => {

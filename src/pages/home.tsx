@@ -13,13 +13,19 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Footer } from "@/components";
 import { useEffect, useState } from "react";
-import { homePageSerivec } from "@/services";
+import { bioService, homePageSerivec } from "@/services";
 
 const Home = () => {
   const [results, setResults] = useState<any>({})
+  const [bio, setBio] = useState<any>({})
+
   useEffect(() => {
     homePageSerivec.getHomePage().then((results: any) => {
       setResults(results)
+    })
+
+    bioService.getBio().then((res: any) => {
+      setBio(res)
     })
   }, [])
 
@@ -47,39 +53,31 @@ const Home = () => {
                   modules={[Navigation, Pagination, Autoplay]}
                   className="mySwiper"
                 >
-                  <SwiperSlide>
-                    <a href="#" className="hero-banner-images">
-                      <Image
-                        src={GurumaPhoto}
-                        alt="Hero Banner"
-                        className="img-fluid"
-                        width={500}
-                        height={450}
-                        priority
-                      />
-                    </a>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <a href="#" className="hero-banner-images">
-                      <Image
-                        src={GurumaPhoto}
-                        alt="Hero Banner"
-                        className="img-fluid"
-                        width={500}
-                        height={450}
-                        priority
-                      />
-                    </a>
-                  </SwiperSlide>
+                  {bio?.images?.map((item: any, i: number) => {
+                    return (
+                      <SwiperSlide key={i}>
+                        <a href="#" className="hero-banner-images">
+                          <Image
+                            src={item.path || GurumaPhoto}
+                            alt="Hero Banner"
+                            className="img-fluid"
+                            width={500}
+                            height={450}
+                            priority
+                          />
+                        </a>
+                      </SwiperSlide>
+                    )
+                  })}
 
-                  {/* agar multiple images add karni ho to aur <SwiperSlide> yaha add kar sakte ho */}
                 </Swiper>
               </div>
               <div className="col-6 d-flex align-items-center">
                 <div className="hero-banner-content pe-2">
 
                   <p>
-                    you! Jahanvi offers in-depth personal consultations, combining ancient wisdom with modern insight to provide clear guidance on all aspects of life. Whether
+                    {bio.description?.split(" ").slice(0, 12).join(" ")}
+                    {bio.description?.split(" ").length > 12 ? "..." : ""}
                   </p>
                 </div>
               </div>
@@ -155,10 +153,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="home-page-section bg-white">
+      <section className="home-page-section bg-white pb-2">
         <div className="top-img">
           {/* <img src="tree.jpg" alt="Tree Image" className="img-fluid w-100"> */}
-          <Image src={vriksha} alt="vriksha mb-4" width={120} height={120} className="img-fluid w-100" />
+          <Image src={vriksha} alt="vriksha mb-4" width={400} height={350} className="img-fluid w-100" />
         </div>
 
         <div className="container mt-4 mb-5">
@@ -168,11 +166,11 @@ const Home = () => {
                 <div className="card mb-3">
                   <div className="row g-0">
                     <div className="col-4">
-                      <Image src={Astro} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
+                      <Image src={Astro} className="icon me-1 img-fluid rounded-2 w-100" height={120} width={120} alt="Gems" />
                     </div>
                     <div className="col-8 d-flex aligh-items-center">
-                      <div className="card-body py-1">
-                        <h5 className="card-title">Gems</h5>
+                      <div className="card-body py-1 my-auto">
+                        <h5 className="card-title mb-1">Gems</h5>
                         <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
                       </div>
                     </div>
@@ -186,11 +184,11 @@ const Home = () => {
                 <div className="card mb-3">
                   <div className="row g-0">
                     <div className="col-4">
-                      <Image src={Astro2} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
+                      <Image src={Astro2} className="icon me-1 img-fluid rounded-2 w-100" height={120} width={120} alt="Appointment" />
                     </div>
                     <div className="col-8 d-flex aligh-items-center">
-                      <div className="card-body py-1">
-                        <h5 className="card-title">Appointment</h5>
+                      <div className="card-body py-1 my-auto">
+                        <h5 className="card-title mb-1">Appointment</h5>
                         <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
                       </div>
                     </div>
@@ -205,11 +203,11 @@ const Home = () => {
                 <div className="card mb-3">
                   <div className="row g-0">
                     <div className="col-4">
-                      <Image src={Astro3} className="icon me-1 img-fluid rounded-2" height={100} width={100} alt="Gems" />
+                      <Image src={Astro3} className="icon me-1 img-fluid rounded-2 w-100" height={120} width={120} alt="Kundli" />
                     </div>
                     <div className="col-8 d-flex aligh-items-center">
-                      <div className="card-body py-1">
-                        <h5 className="card-title">Kundli</h5>
+                      <div className="card-body py-1 my-auto">
+                        <h5 className="card-title mb-1">Kundli</h5>
                         <p className="card-text">Gems or Gemstones play an important role in Vedic Astrology.</p>
                       </div>
                     </div>

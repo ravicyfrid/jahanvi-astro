@@ -1,20 +1,24 @@
 import Image from "next/image"
 import { CategoryIcon, PlaceHolder } from "@/assets/images"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { gemsService } from "@/services"
-import { Footer, SEOHead } from "@/components"
+import { Footer, Pagination, SEOHead } from "@/components"
 import { Breadcrumb } from "@/assets/svg"
 import Link from "next/link"
 
 const Gemstones = () => {
   const [results, setResults] = useState<any>({ items: [], pagination: {} })
   const [shoItemsVertically, setShowItemsVertically] = useState(false)
+  const [filters, setFilters] = React.useState<any>({
+    page: 1,
+    per_page: 6,
+  })
 
   useEffect(() => {
-    gemsService.getGems().then((results: any) => {
+    gemsService.getGems(filters).then((results: any) => {
       setResults({ items: results.items, pagination: results.pagination })
     })
-  }, [])
+  }, [filters])
 
   return (
     <>
@@ -23,6 +27,9 @@ const Gemstones = () => {
         <div className="card-header bg-white border-bottom p-3 sticky-sidebar d-flex justify-content-between">
 
           <h5 className="card-title text-black d-flex align-items-center gap-2">
+            <Link href="/gemstone-category">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="20" x="0" y="0" viewBox="0 0 24 24" >
+                <g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg></Link>
             Gemstone
           </h5>
 
@@ -81,17 +88,28 @@ const Gemstones = () => {
             )
             ) :
               (
-                Array.from({ length: 4 }).map((_,i:number) => {
+                Array.from({ length: 4 }).map((_, i: number) => {
                   console.log(_);
-                  
+
                   return (
-                  <HorizontalSkeleton key={i}/>
-                )}))
+                    <HorizontalSkeleton key={i} />
+                  )
+                }))
             }
           </div>
 
         </div>
+        {results?.pagination?.total_pages > 1 &&
+          <Pagination
+            pageCount={results?.pagination?.total_pages}
+            current_page={results?.pagination?.current_page}
+            onPageChange={(e: any) => {
+              setFilters({ ...filters, page: e.selected + 1 })
+            }}
+          />
+        }
       </section >
+
       <Footer />
 
     </>

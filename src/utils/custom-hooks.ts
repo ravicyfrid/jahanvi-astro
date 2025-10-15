@@ -25,3 +25,27 @@ export default function formatDateParts(dateStr: any) {
   }
   return replace
 }
+
+export const generateQueryParams2 = (args: any) => {
+  const params: string[] = []
+
+  for (const key in args) {
+    const value = args[key]
+
+    // Skip empty values
+    if (value === '' || value === null || value === undefined) continue
+
+    // Handle nested filters object
+    if (key === 'filters' && typeof value === 'object') {
+      for (const nestedKey in value) {
+        if (value[nestedKey] !== '') {
+          params.push(`filters[${nestedKey}]=${encodeURIComponent(value[nestedKey])}`)
+        }
+      }
+    } else {
+      params.push(`${key}=${encodeURIComponent(value)}`)
+    }
+  }
+
+  return params.join('&')
+}

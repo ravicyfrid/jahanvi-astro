@@ -35,8 +35,7 @@ const Gems = () => {
     },
     validationSchema: Yup.object({
       name: Yup.string().label('Name').required(),
-      phone_number: Yup.string().label('Phone Number').required(),
-
+      phone_number: Yup.string().label('Phone Number').required().min(10, 'Phone number must be at least 10 digits'),
     }),
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
@@ -162,6 +161,10 @@ const Gems = () => {
                         }
                         inputStyle={{ width: "100%" }}
                         countryCodeEditable={false}
+                        enableAreaCodes={true}
+                        inputProps={{
+                          minLength: 10
+                        }}
                         inputClass={`form-control ${formik.errors.phone_number && formik.touched.phone_number ? 'is-invalid' : ''}`}
                       />
                       {formik.errors.phone_number && formik.touched.phone_number && (
