@@ -15,7 +15,7 @@
 //     span{
 //       @media screen and (max-width: 767px) {
 //        display: block;
-       
+
 //       }
 //     }
 //   }
@@ -31,3 +31,74 @@
 //     }
 //   }
 // }
+
+.footer-menu-list {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  max-width: 450px;
+  background-color: #fff;
+
+  .add-btn {
+    position: relative;
+    top: -15px;
+    z-index: 2;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+
+  a {
+    text-align: center;
+    color: #939393;
+    position: relative;
+
+    span {
+      font-size: 12px;
+    }
+
+
+
+
+  }
+
+  .active {
+    color: #328FE0;
+
+    svg {
+      fill: #328FE0;
+    }
+
+    path {
+      fill: #328FE0;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 4px;
+      background: #328FE0;
+      top: -8px;
+      border-radius: 0px 0px 10px 10px;
+      left: 0;
+      right: 0;
+      margin: auto;
+
+
+    }
+  }
+
+ 
+}

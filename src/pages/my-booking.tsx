@@ -107,7 +107,7 @@ const MyBooking = () => {
 																	</div>
 																</div>
 															</div>
-															<p className="booking-msg">
+															<p className="booking-msg mb-0">
 																Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
 															</p>
 														</div>
@@ -172,7 +172,7 @@ const MyBooking = () => {
 																	</div>
 																</div>
 															</div>
-															<p className="booking-msg">
+															<p className="booking-msg mb-0">
 																Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
 															</p>
 														</div>
@@ -215,7 +215,7 @@ const MyBooking = () => {
 																	</div>
 																</div>
 															</div>
-															<p className="booking-msg">
+															<p className="booking-msg mb-0">
 																Thank you for your booking! We’ll be in touch within 24 hours to confirm the details and chat with any questions.
 															</p>
 														</div>
