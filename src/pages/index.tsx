@@ -24,13 +24,16 @@ const UserLogin = () => {
 			username_type: "", // 'phone_number'
 		},
 		validationSchema: Yup.object({
-			username: Yup.string().label('Phone number').required()
+			username: Yup.string()
+				.label('Phone Number')
+				.required()
+				.min(10, 'Phone number must be at least 10 digits')
 		}),
 		enableReinitialize: true,
 
 		onSubmit: async (values: any) => {
-			console.log('values',values);
-			const phoneNumber= `+${values.username}`
+			console.log('values', values);
+			const phoneNumber = `+${values.username}`
 			dispatch(setMobileNumber(values.username))
 			setLoading(true);
 			const results: any = await authService.RequestOtpForLogin({ username: phoneNumber, username_type: 'phone_number' });
@@ -76,14 +79,19 @@ const UserLogin = () => {
 													onChange={(value) => formik.setFieldValue('username', value)}
 													inputStyle={{ width: "100%" }}
 													countryCodeEditable={false}
+													enableAreaCodes={true}
+													inputProps={{
+														minLength: 10
+													}}
+													inputClass={`form-control ${formik.errors.username && formik.touched.username ? 'is-invalid' : ''}`}
 												/>
 												<div className='d-flex justify-content-between mt-1'>
-													{formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+													{formik.touched.username && formik.errors.username ? (
 														<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
-															{formik.errors.phoneNumber}
+															{formik.errors.username}
 														</p>
 													) : <p className="text-danger mb-0" style={{ fontSize: "12px" }}>
-														</p>}
+													</p>}
 													<p className='mb-0' style={{ textAlign: 'right', fontSize: '12px' }}>
 														0 / 10
 													</p>

@@ -13,12 +13,10 @@ import { useSelector } from "react-redux";
 import { setLoggedInUser } from "@/redux/slices/session.slice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { authService } from "@/services";
+import { authService, mediaService } from "@/services";
 
 export default function UpdateProfile() {
 
-	// const [suggestions, setSuggestions] = useState<any[]>([]);
-	// const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const dispatch = useDispatch<AppDispatch>();
 	const [loading, setLoading] = React.useState(false);
 	console.log(loading);
@@ -63,9 +61,31 @@ export default function UpdateProfile() {
 			}
 		},
 	});
-
-
-	console.log('formik.errors.name', formik.errors.gender);
+	const uploadUserImage = async (userId: string) => {
+		try {
+			const input = document.createElement('input');
+			input.type = 'file';
+			input.accept = 'image/*';
+			input.onchange = async () => {
+				if (input.files && input.files[0]) {
+					const file = input.files[0];
+					const formData = new FormData();
+					formData.append('key', 'profile_image');
+					formData.append('entity_id', userId);
+					formData.append('files', file);
+					setLoading(true)
+					const res = await mediaService.uploadUserProfilePhoto(formData)
+					setLoading(false)
+					if (res.error === false) {
+						dispatch(setLoggedInUser());
+					}
+				}
+			};
+			input.click();
+		} catch (err) {
+			console.error(err);
+		}
+	}
 
 	return (
 		<>
@@ -82,8 +102,8 @@ export default function UpdateProfile() {
 					<div className="card text-center">
 						<div className="row">
 							<div className="update-user-icon">
-								<Image src={UserProfile} alt="User Profile" width={70} height={70} className="mb-4 relative" />
-								<button type="button" className="border-0 pensil-icon bg-primary" >
+								<Image src={loggedInUser?.images?.path || UserProfile} alt="User Profile" width={70} height={70} className="mb-4 relative" />
+								<button type="button" className="border-0 pensil-icon bg-primary" onClick={() => uploadUserImage(loggedInUser.id)} >
 									<Image src={PensilIcon} alt="User Profile" width={15} height={15} />
 								</button>
 							</div>

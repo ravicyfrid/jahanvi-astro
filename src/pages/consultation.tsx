@@ -6,6 +6,7 @@ import SEOHead from "@/components/seo";
 import { ordersService } from "@/services";
 import { useFormik } from "formik";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
@@ -17,7 +18,7 @@ const Consultation = () => {
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
-
+	const router = useRouter()
 
 	useEffect(() => {
 		ordersService.getConsultationFees().then((res: any) => {
@@ -89,7 +90,7 @@ const Consultation = () => {
 		validationSchema: Yup.object({
 			fees_id: Yup.string().label("Consultation Fees").required(),
 			full_name: Yup.string().label("Full Name").required(),
-			phone_number: Yup.string().label("Phone Number").required(),
+			phone_number: Yup.string().label('Phone Number').required().min(10, 'Phone number must be at least 10 digits'),
 			gender: Yup.string().label("Gender").required(),
 			birth_place: Yup.string().label("Birth Place").required(),
 			dob: Yup.string().label("Date Of Birth").required(),
@@ -103,6 +104,7 @@ const Consultation = () => {
 				if (!response.error && response.data?.id) {
 					resetForm()
 					formik.setFieldValue("phone_number", "+91")
+					router.push('/my-booking')
 					// const cashfree = await ordersService.Cashfree(response.data.id);
 
 					// if (!cashfree.error && cashfree.payment_link) {
@@ -166,18 +168,7 @@ const Consultation = () => {
 								})}
 								{formik.errors.fees_id && formik.touched.fees_id && <span className="invalid-feedback text-danger d-block mt-1 text-start">{formik.errors.fees_id}</span>}
 
-								{/* <div className="form-check form-check-inline">
-									<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-									<label className="form-check-label" htmlFor="inlineRadio2">Student
-										₹700</label>
-								</div>
-								<div className="form-check form-check-inline">
-									<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-									<label className="form-check-label" htmlFor="inlineRadio3">
-										Tapasvi D/O Guru Maa
-										₹2100
-									</label>
-								</div> */}
+
 							</div>
 
 							<div className="col-12">
@@ -209,6 +200,7 @@ const Consultation = () => {
 
 							<div className='form-group mb-3'>
 								{/* <label className="form-label">Mobile Number</label> */}
+
 								<PhoneInput
 									country={"in"}
 									value={formik.values.phone_number}
@@ -216,15 +208,19 @@ const Consultation = () => {
 									onChange={(phone) =>
 										formik.setFieldValue("phone_number", phone)
 									}
-									countryCodeEditable={false}
 									inputStyle={{ width: "100%" }}
+									countryCodeEditable={false}
+									enableAreaCodes={true}
+									inputProps={{
+										minLength: 10
+									}}
+									inputClass={`form-control ${formik.errors.phone_number && formik.touched.phone_number ? 'is-invalid' : ''}`}
 								/>
-								{formik.touched.phone_number && formik.errors.phone_number ? (
-									<p className="text-danger mb-0" style={{ fontSize: "12px" }}>
+								{formik.errors.phone_number && formik.touched.phone_number && (
+									<div className="text-danger small">
 										{formik.errors.phone_number}
-									</p>
-								) : <p className="text-danger mb-0" style={{ fontSize: "12px" }}>
-								</p>}
+									</div>
+								)}
 							</div>
 
 							<div className="form-group mb-3 col-12">
@@ -236,7 +232,8 @@ const Consultation = () => {
 									onBlur={formik.handleBlur}
 									required
 									className={`form-select ${formik.touched.gender && formik.errors.gender ? "is-invalid" : ""
-										}`}>
+										}`}
+										>
 									<option value="">Gender</option>
 									<option value="male">Male</option>
 									<option value="female">Female</option>

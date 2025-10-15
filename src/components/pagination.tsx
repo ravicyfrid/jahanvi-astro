@@ -9,14 +9,13 @@ const Pagination: React.FC<any> = ({ pageCount, onPageChange, current_page }) =>
 
   return (
     <ReactPaginate
-      previousLabel={<LeftArrow className="me-1" />}   // Bootstrap margin utility
+      previousLabel={<LeftArrow className="me-1" />}  
       nextLabel={<RightArrow className="ms-1" />}
       breakLabel="..."
       pageCount={pageCount}
       pageRangeDisplayed={3}
       onPageChange={handlePageChange}
       forcePage={current_page - 1}
-      // ✅ Bootstrap pagination classes
       containerClassName="pagination justify-content-center mt-4"
       pageClassName="page-item"
       pageLinkClassName="page-link"

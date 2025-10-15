@@ -1,8 +1,8 @@
 import Image from "next/image"
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { gemsService } from "@/services"
-import { Footer, SEOHead } from "@/components"
+import { Footer, Pagination, SEOHead } from "@/components"
 import { Breadcrumb } from "@/assets/svg"
 import Link from "next/link"
 import { CategoryIcon } from "@/assets/images"
@@ -10,12 +10,16 @@ import { CategoryIcon } from "@/assets/images"
 const GemsCategories = () => {
   const [results, setResults] = useState<any>({ items: [], pagination: {} })
   const [shoItemsVertically, setShowItemsVertically] = useState(false)
+  const [filters, setFilters] = React.useState<any>({
+    page: 1,
+    per_page: 8,
+  })
 
   useEffect(() => {
-    gemsService.getGemsCategories().then((results: any) => {
+    gemsService.getGemsCategories(filters).then((results: any) => {
       setResults({ items: results.items, pagination: results.pagination })
     })
-  }, [])
+  }, [filters])
 
   return (
     <>
@@ -78,7 +82,7 @@ const GemsCategories = () => {
                           </div>
                           <div className="col-8 ps-2 d-flex align-items-center">
                             <div className="card-body py-1 px-1">
-                              <h5 className="card-title text-primary">{item.title}</h5>
+                              <h5 className="card-title text-primary mb-0">{item.title}</h5>
                             </div>
                           </div>
                         </div>
@@ -96,6 +100,15 @@ const GemsCategories = () => {
             </div>
           </div>
         </div>
+        {results?.pagination?.total_pages > 1 &&
+          <Pagination
+            pageCount={results?.pagination?.total_pages}
+            current_page={results?.pagination?.current_page}
+            onPageChange={(e: any) => {
+              setFilters({ ...filters, page: e.selected + 1 })
+            }}
+          />
+        }
       </section >
       <Footer />
     </>

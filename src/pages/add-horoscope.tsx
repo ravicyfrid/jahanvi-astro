@@ -10,18 +10,16 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { kundliService } from "@/services";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 
 const AddHoroscope = () => {
-
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
-
+	const router = useRouter();
 	const formik = useFormik({
 		initialValues: {
 			full_name: "",
-			email: "",
 			gender: "",
 			birth_place: "",
 			dob: "",
@@ -33,7 +31,6 @@ const AddHoroscope = () => {
 		validationSchema: Yup.object({
 			full_name: Yup.string().required("Required"),
 			gender: Yup.string().required("Required"),
-			email: Yup.string().email("Invalid email").required("Required"),
 			birth_place: Yup.string().required("Required"),
 			dob: Yup.string().required("Required"),
 			tob: Yup.string().required("Required"),
@@ -42,8 +39,9 @@ const AddHoroscope = () => {
 			setLoading(true);
 			try {
 				const results = await kundliService.creatKundli(values);
-				console.log('reulst', results);
-
+				if (results.error === false) {
+					router.push('/horoscope');
+				}
 			} catch (error) {
 				console.error(error);
 				toast.error("Something went wrong, please try again.");
@@ -99,7 +97,6 @@ const AddHoroscope = () => {
 		setSuggestions([]); // clear dropdown after selection
 	};
 
-
 	return (
 		<>
 			<SEOHead title={'Add Horoscope'} />
@@ -111,10 +108,7 @@ const AddHoroscope = () => {
 								<g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg>
 						</Link>
 						Add Horoscope</h5>
-
-
 				</div>
-
 				<div className="container pt-4">
 					<div className="row">
 						<form onSubmit={formik.handleSubmit}>
@@ -133,23 +127,8 @@ const AddHoroscope = () => {
 										}`}
 								/>
 							</div>
-							<div className="col-12">
-								<InputField
-									label="Email"
-									required={true}
-									type="email"
-									name="email"
-									onChange={formik.handleChange}
-									value={formik.values.email}
-									onBlur={formik.handleBlur}
-									error={formik.errors.email && formik.touched.email && (formik.errors.email)}
-									className={` ${formik.errors.email && formik.touched.email ? "is-invalid" : ""
-										}`}
 
-								/>
-							</div>
 							<div className="form-group mb-3 col-12">
-								{/* <label className="form-label">Gender<span className="text-danger">*</span></label> */}
 								<select
 									name="gender"
 									className="form-select"
@@ -167,26 +146,8 @@ const AddHoroscope = () => {
 									</div>
 								)}
 							</div>
-
 							<div className="col-12">
 								<InputField
-									// label="Time of Birth HH:MM)"
-									required={true}
-									type="time"
-									name="tob"
-									onChange={formik.handleChange}
-									value={formik.values.tob}
-									placeholder="Time of Birth"
-									onBlur={formik.handleBlur}
-									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
-									className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
-										}`}
-								/>
-							</div>
-
-							<div className="col-12">
-								<InputField
-									// label="Date of Birth"
 									required={true}
 									type="date"
 									name="dob"
@@ -201,9 +162,23 @@ const AddHoroscope = () => {
 							</div>
 
 							<div className="col-12">
+								<InputField
+									required={true}
+									type="time"
+									name="tob"
+									onChange={formik.handleChange}
+									value={formik.values.tob}
+									placeholder="Time of Birth"
+									onBlur={formik.handleBlur}
+									error={formik.errors.tob && formik.touched.tob && (formik.errors.tob)}
+									className={` ${formik.errors.tob && formik.touched.tob ? "is-invalid" : ""
+										}`}
+								/>
+							</div>
+
+							<div className="col-12">
 								<div className="brith-place-flied position-relative">
 									<InputField
-										// label="Birth Place"
 										required={true}
 										type="text"
 										name="birth_place"
@@ -211,7 +186,7 @@ const AddHoroscope = () => {
 										value={formik.values.birth_place}
 										placeholder="Birth Place"
 										autoComplete="off"
-										
+
 									/>
 									{suggestions.length > 0 && (
 										<ul
@@ -232,8 +207,6 @@ const AddHoroscope = () => {
 									)}
 									<button type="button"
 										className="border-0 p-0 search-button"
-
-
 									><Image src={SearchIcon} alt="search icon" width={16} height={16} /> </button>
 								</div>
 							</div>

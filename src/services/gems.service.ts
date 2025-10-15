@@ -1,13 +1,14 @@
+import { generateQueryParams2 } from '@/utils/custom-hooks';
 import CommonService from './common.service';
 
 class GemsService extends CommonService {
 
-	async getGemsCategories() {
-		return await this.get('/gem-categories')
+	async getGemsCategories(params:any) {
+		return await this.get(`/gem-categories?${generateQueryParams2(params)}`)
 	}
 	
-	async getGems() {
-		return await this.get('/gems')
+	async getGems(params:any) {
+		return await this.get(`/gems?${generateQueryParams2(params)}`)
 	}
 
 	async getGemsDetails(id: any) {
@@ -21,8 +22,8 @@ class GemsService extends CommonService {
 		return await this.get(`/gems/enquiries/${id}`)
 	}
 
-	async gemsInquiriesMessages(id:any,params:any) {
-		return await this.post(`/gems/enquiries/${id}/comments`,params)
+	async inquiriesMessages(id:any,params:any , toastify = false) {
+		return await this.post(`/gems/enquiries/${id}/comments`,params, toastify)
 	}
 
 

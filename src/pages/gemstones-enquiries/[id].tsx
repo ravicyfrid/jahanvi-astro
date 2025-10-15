@@ -1,3 +1,4 @@
+import { PlaceHolder } from "@/assets/images"
 import { gemsService } from "@/services"
 import { useFormik } from "formik"
 import moment from "moment"
@@ -10,14 +11,18 @@ const EnquiryDetails = () => {
   const router = useRouter();
   const [gems, setGems] = useState<any>({});
 
-  useEffect(() => {
-    const id = router.query.id;
-    if (!id) return;
+  const getMessage = (id:any) => {
     gemsService.getGemsInquiriesDetails(id).then((result: any) => {
       setGems(result);
     }).catch(err => {
       console.error("failed to load details", err);
     });
+  }
+
+  useEffect(() => {
+    const id = router.query.id;
+    if (!id) return;
+    getMessage(id)
   }, [router.query.id]);
 
   const formik: any = useFormik({
@@ -34,8 +39,11 @@ const EnquiryDetails = () => {
 
       try {
 
-        const refreshed = await gemsService.getGemsInquiriesDetails(id);
+        const refreshed = await gemsService.inquiriesMessages(id, values);
         setGems(refreshed);
+        if (refreshed.error===false) {
+          getMessage(id)
+        }
 
         resetForm();
       } catch (err) {
@@ -83,8 +91,8 @@ const EnquiryDetails = () => {
               <div className="card mb-2">
                 <div className="mb-3">
                   <Image
-                    src={gems?.gem?.path}
-                    alt="Gemstons"
+                    src={gems?.gem?.path || PlaceHolder}
+                    alt={gems.gem?.title}
                     width={100}
                     height={100}
                     className="img-fluid rounded-2 shadow-lg bg-white mb-2 d-flex justify-content-center w-75 h-75 mx-auto p-4"
@@ -118,7 +126,7 @@ const EnquiryDetails = () => {
                     <div className="user-info">
                       <h6 className="mb-0">Status
                       </h6>
-                      <p className="mb-0"><small>New</small></p>
+                      <p className="mb-0"><small>{gems?.status}</small></p>
                     </div>
 
                   </div>
@@ -136,7 +144,7 @@ const EnquiryDetails = () => {
                     {gems?.comments?.length > 0 ? [...gems?.comments]?.reverse()?.map((item: any, i: number) => {
                       return (
                         <div className="chat-item" key={i}>
-                          <div className="avatar-circle">Y</div>
+                          <div className="avatar-circle">{item?.user?.name || 'Y'}</div>
                           <div className="chat-meta">
                             <div className="chat-top">
                               <div>

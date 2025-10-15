@@ -74,13 +74,13 @@ const OtpVerify = () => {
 			<SEOHead title={'Login'} />
 
 			<section className="">
-				<Link href={'/'}>
-					<div className="card-header bg-white border-bottom p-3">
+				<div className="card-header bg-white border-bottom p-3">
+					<Link href={'/'}>
 						<h5 className="card-title text-black d-flex align-items-center gap-2">
 							<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="20" x="0" y="0" viewBox="0 0 24 24"><g><path d="M21 11H5.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L5.414 13H21a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg>
 							Account Verification</h5>
-					</div>
-				</Link>
+					</Link>
+				</div>
 				<div className="container">
 					<div className="card">
 						<div className="row">
@@ -88,7 +88,7 @@ const OtpVerify = () => {
 								<div className='login-form-cotnent'>
 									<div className="text-center mb-3">
 										<Image src={Logo} alt="Jahanvi Astro Logo mb-4" width={120} height={120} />
-										<p className="text-muted mb-4">
+										<p className="mb-4">
 											Please enter the OTP to verify your account. We have sent a 6-digit OTP to your <strong>+{mobileNumber}</strong>
 										</p>
 									</div>
@@ -129,9 +129,11 @@ const OtpVerify = () => {
 										<Button
 											label='Submit'
 											className='primary w-100 rounded-pill mt-3'
-												disabled={loading || (
-													(!formik.isValid || !formik.dirty)
-												) ||  formik.values.otp.length !== 6}
+											disabled={true}
+
+										// disabled={loading || (
+										// 	(!formik.isValid || !formik.dirty)
+										// ) ||  formik.values.otp.length !== 6}
 										/>
 									</form>
 								</div>
