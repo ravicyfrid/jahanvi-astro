@@ -165,12 +165,11 @@ const Gems = () => {
                         inputProps={{
                           minLength: 10
                         }}
-                        inputClass={`form-control ${formik.errors.phone_number && formik.touched.phone_number ? 'is-invalid' : ''}`}
                       />
                       {formik.errors.phone_number && formik.touched.phone_number && (
-                        <div className="text-danger small">
+                        <span className="text-danger small d-block text-start">
                           {formik.errors.phone_number}
-                        </div>
+                        </span>
                       )}
                     </div>
 

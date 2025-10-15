@@ -214,12 +214,11 @@ const Consultation = () => {
 									inputProps={{
 										minLength: 10
 									}}
-									inputClass={`form-control ${formik.errors.phone_number && formik.touched.phone_number ? 'is-invalid' : ''}`}
 								/>
 								{formik.errors.phone_number && formik.touched.phone_number && (
-									<div className="text-danger small">
+									<span className="text-danger small d-block text-start">
 										{formik.errors.phone_number}
-									</div>
+									</span>
 								)}
 							</div>
 
@@ -231,7 +230,7 @@ const Consultation = () => {
 									value={formik.values.gender}
 									onBlur={formik.handleBlur}
 									required
-									className={`form-select ${formik.touched.gender && formik.errors.gender ? "is-invalid" : ""
+									className={`form-select ${formik.touched.gender && formik.errors.gender ? "invalid" : ""
 										}`}
 										>
 									<option value="">Gender</option>
@@ -240,7 +239,7 @@ const Consultation = () => {
 									<option value="other">Other</option>
 								</select>
 								{formik.errors.gender && formik.touched.gender && (
-									<div className="invalid-feedback">{formik.errors.gender}</div>
+									<span className="invalid-feedback d-block">{formik.errors.gender}</span>
 								)}
 							</div>
 
@@ -311,7 +310,7 @@ const Consultation = () => {
 							<div className="form-group mb-3 col-12">
 								{/* <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
 								<textarea
-									className="form-control"
+									className="form-control invalid"
 									placeholder="Message"
 									name="order_note"
 									onChange={formik.handleChange}
@@ -319,6 +318,7 @@ const Consultation = () => {
 									rows={3}
 								>
 								</textarea>
+								<span className="invalid-feedback text-danger d-block mt-1 text-start">fkdjfdsj</span>
 							</div>
 
 							<div>

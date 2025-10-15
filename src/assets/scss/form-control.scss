@@ -3,8 +3,9 @@
 .form-group {
   position: relative;
 
-  .is-invalid {
+  .invalid {
     background-image: none !important;
+    border-color: $danger;
   }
 
   .invalid-feedback {
@@ -162,7 +163,7 @@
 
   .invalid {
     background-image: none;
-    border-color: $primary;
+    border-color: $danger !important;
 
     .react-select__control {
       background-image: none;
