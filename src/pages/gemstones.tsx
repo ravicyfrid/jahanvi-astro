@@ -51,7 +51,7 @@ const Gemstones = () => {
                 <div className="col-6" key={i}>
                   <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
                     <Link href={`/gemstones/${item.id}`}>
-                      <Image src={item?.images[0]?.path || PlaceHolder} className="icon me-1 img-fluid rounded-2 w-100" height={100} width={100} alt={item.title} />
+                      <Image src={item?.images[0]?.path || PlaceHolder} className="icon me-1 img-fluid rounded-2 w-100" height={120} width={100} alt={item.title} />
                       <div className="card-body py-1 px-1 text-center">
                         <h5 className="card-title text-primary mb-1">{item.title}</h5>
                         <p className="mb-1">Price:{item.price}</p>

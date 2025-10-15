@@ -53,8 +53,8 @@ const Chat = () => {
 				</div>
 				<div>
 					<p className="mb-0">
-						<strong className="text-black">Guruma</strong>
-						<small className="d-block">Consultant</small>
+						<strong className="text-black">Consultant</strong>
+						<small className="d-block"> Guruma </small>
 					</p>
 				</div>
 			</div>
@@ -99,7 +99,7 @@ const Chat = () => {
 												)
 											})
 												:
-												<p className="text-center">No Record Found</p>
+												<p className="text-center">No Message Found</p>
 										}
 									</div>
 								</div>
@@ -113,7 +113,7 @@ const Chat = () => {
 
 				<form className=" w-100" onSubmit={formik.handleSubmit}>
 					<div className="chat-footer border-top">
-						<input type="text" placeholder="Type a message..." name="message" onChange={formik.handleChange} value={formik.values.message} />
+						<input type="text" placeholder="Type a message" name="message" onChange={formik.handleChange} value={formik.values.message} />
 						<button type="submit" className={`bg-primary ${chatLoading ? 'loading' : ''}`}>➤</button>
 					</div>
 				</form>

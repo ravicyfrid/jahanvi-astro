@@ -118,7 +118,7 @@ const MyBooking = () => {
 
 											{orders?.pagination?.total_items > 0 && loading &&
 												<div className="justify-content-center d-flex w-100 mt-2">
-													<p>No record found</p>
+													<p>No message found</p>
 												</div>
 											}
 											<div className="col-12">

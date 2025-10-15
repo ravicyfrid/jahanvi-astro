@@ -12,7 +12,7 @@ const GemsCategories = () => {
   const [shoItemsVertically, setShowItemsVertically] = useState(false)
   const [filters, setFilters] = React.useState<any>({
     page: 1,
-    per_page: 8,
+    per_page: 2,
   })
 
   useEffect(() => {
@@ -46,56 +46,58 @@ const GemsCategories = () => {
           <div className="row gap-4">
             <div className="col-12">
               <div className="row">
+                <div className="col-12">
 
-                {results?.items.length > 0 ? results?.items?.map((item: any, i: number) => (
-                  shoItemsVertically ? (
-                    <div className="col-6" key={i}>
-                      <div key={i} className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
-                        <Link href={'/gemstones'}>
-                          <img
-                            src={item?.images?.path}
-                            className="icon card-img-top w-100 rounded-2"
-                            height={100}
-                            width={100}
-                            alt={item.title}
-                          />
-                          <div className="card-body py-1 px-1 text-center">
-                            <h5 className="card-title text-primary mb-1">{item.title}</h5>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-
-                  ) : (
-
-                    <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
-                      <Link href={'/gemstones'}>
-                        <div className="row g-0">
-                          <div className="col-4">
+                  {results?.items.length > 0 ? results?.items?.map((item: any, i: number) => (
+                    shoItemsVertically ? (
+                      <div className="col-6" key={i}>
+                        <div key={i} className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
+                          <Link href={'/gemstones'}>
                             <img
                               src={item?.images?.path}
-                              className="icon card-img-top rounded-2"
+                              className="icon card-img-top w-100 rounded-2"
                               height={100}
                               width={100}
                               alt={item.title}
                             />
-                          </div>
-                          <div className="col-8 ps-2 d-flex align-items-center">
-                            <div className="card-body py-1 px-1">
-                              <h5 className="card-title text-primary mb-0">{item.title}</h5>
+                            <div className="card-body py-1 px-1 text-center">
+                              <h5 className="card-title text-primary mb-1">{item.title}</h5>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+
+                    ) : (
+
+                      <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
+                        <Link href={'/gemstones'}>
+                          <div className="row g-0">
+                            <div className="col-4">
+                              <img
+                                src={item?.images?.path}
+                                className="icon card-img-top rounded-2"
+                                height={100}
+                                width={100}
+                                alt={item.title}
+                              />
+                            </div>
+                            <div className="col-8 ps-2 d-flex align-items-center">
+                              <div className="card-body py-1 px-1">
+                                <h5 className="card-title text-primary mb-0">{item.title}</h5>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </div>
+                        </Link>
+                      </div>
+                    )
                   )
-                )
-                ) :
-                  (
-                    Array.from({ length: 4 }).map((_, index) => (
-                      <HorizontalSkeleton key={index} />
-                    )))
-                }
+                  ) :
+                    (
+                      Array.from({ length: 4 }).map((_, index) => (
+                        <HorizontalSkeleton key={index} />
+                      )))
+                  }
+                </div>
               </div>
             </div>
           </div>
