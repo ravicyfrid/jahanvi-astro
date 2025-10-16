@@ -101,8 +101,8 @@ export default function UpdateProfile() {
 				<div className="container pt-5 mt-5">
 					<div className="card text-center">
 						<div className="row">
-							<div className="update-user-icon">
-								<Image src={loggedInUser?.images?.path || UserProfile} alt="User Profile" width={70} height={70} className="mb-4 relative" />
+							<div className="update-user-icon mb-4">
+								<Image src={loggedInUser?.images?.path || UserProfile} alt="User Profile" width={70} height={70} className="mb-4 relative rounded-circle" />
 								<button type="button" className="border-0 pensil-icon bg-primary" onClick={() => uploadUserImage(loggedInUser.id)} >
 									<Image src={PensilIcon} alt="User Profile" width={15} height={15} />
 								</button>

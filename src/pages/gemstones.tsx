@@ -49,11 +49,11 @@ const Gemstones = () => {
             {results?.items.length > 0 ? results?.items?.map((item: any, i: number) => (
               shoItemsVertically ? (
                 <div className="col-6" key={i}>
-                  <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
+                  <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white natural-gemstons-box">
                     <Link href={`/gemstones/${item.id}`}>
                       <Image src={item?.images[0]?.path || PlaceHolder} className="icon me-1 img-fluid rounded-2 w-100" height={120} width={100} alt={item.title} />
-                      <div className="card-body py-1 px-1 text-center">
-                        <h5 className="card-title text-primary mb-1">{item.title}</h5>
+                      <div className="card-body p-2 text-center">
+                        <h6 className="card-title text-primary mb-1">{item.title}</h6>
                         <p className="mb-1">Price:{item.price}</p>
                       </div>
                     </Link>
@@ -69,7 +69,7 @@ const Gemstones = () => {
                         <Image src={item?.images[0]?.path || PlaceHolder} className="icon card-img-top rounded-2" height={100} width={100} alt={item.title} />
                       </div>
                       <div className="col-8 ps-2 d-flex align-items-center">
-                        <div className="card-body py-1 px-1">
+                        <div className="card-body py-2 px-1">
                           <h5 className="card-title text-primary mb-1">
                             {item.title}</h5>
                           <h6 className="mb-1">Price:{item.price}</h6>

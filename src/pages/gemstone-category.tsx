@@ -45,8 +45,6 @@ const GemsCategories = () => {
         <div className="container pt-4 gems-category-card-box-list">
           <div className="row gap-4">
             <div className="col-12">
-              <div className="row">
-                <div className="col-12">
 
                   {results?.items.length > 0 ? results?.items?.map((item: any, i: number) => (
                     shoItemsVertically ? (
@@ -61,7 +59,7 @@ const GemsCategories = () => {
                               alt={item.title}
                             />
                             <div className="card-body py-1 px-1 text-center">
-                              <h5 className="card-title text-primary mb-1">{item.title}</h5>
+                              <h6 className="card-title text-primary mb-1">{item.title}</h6>
                             </div>
                           </Link>
                         </div>
@@ -97,8 +95,6 @@ const GemsCategories = () => {
                         <HorizontalSkeleton key={index} />
                       )))
                   }
-                </div>
-              </div>
             </div>
           </div>
         </div>
