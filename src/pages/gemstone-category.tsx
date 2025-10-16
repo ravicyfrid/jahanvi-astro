@@ -12,7 +12,7 @@ const GemsCategories = () => {
   const [shoItemsVertically, setShowItemsVertically] = useState(false)
   const [filters, setFilters] = React.useState<any>({
     page: 1,
-    per_page: 2,
+    per_page: 8,
   })
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const GemsCategories = () => {
                 </div>
 
               ) : (
-                <div className="col-12">
+                <div className="col-12" key={i}>
                   <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
                     <Link href={'/gemstones'}>
                       <div className="row g-0">

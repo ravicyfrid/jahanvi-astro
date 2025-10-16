@@ -41,7 +41,7 @@ export default function UpdateProfile() {
 							<div className="d-flex align-items-center">
 								<div className="user-avatar pe-3">
 									<Image
-										src={UserProfile}
+										src={loggedInUser?.images?.path || UserProfile}
 										alt="Avatar"
 										width={30}
 										height={30}

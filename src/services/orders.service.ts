@@ -23,6 +23,10 @@ class OrdersService extends CommonService {
 		return await this.get(`/orders/?${generateQueryParams(params)}`)
 	}
 
+		async GetOrderDetails(id: any) {
+		return await this.get(`/orders/${id}`)
+	}
+
 
 }
 

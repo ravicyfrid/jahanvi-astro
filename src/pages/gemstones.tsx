@@ -61,7 +61,7 @@ const Gemstones = () => {
                 </div>
 
               ) : (
-                <div className="col-12">
+                <div className="col-12" key={i}>
                   <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
                     <Link href={`/gemstones/${item.id}`}>
                       <div className="row g-0">
@@ -74,9 +74,8 @@ const Gemstones = () => {
                               {item.title}</h5>
                             <h6 className="mb-1">Price:{item.price}</h6>
                             <p className="mb-0">
-                              {item?.description?.length > 79
-                                ? item.description.slice(0, 79) + "..."
-                                : item?.description}
+                              {item.description.split(" ").slice(0, 12).join(" ")}
+                              {item.description.split(" ").length > 12 && "..."}
                             </p>
 
                           </div>
