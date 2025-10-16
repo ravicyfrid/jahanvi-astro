@@ -310,7 +310,7 @@ const Consultation = () => {
 							<div className="form-group mb-3 col-12">
 								{/* <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
 								<textarea
-									className="form-control invalid"
+									className="form-control"
 									placeholder="Message"
 									name="order_note"
 									onChange={formik.handleChange}
@@ -318,7 +318,7 @@ const Consultation = () => {
 									rows={3}
 								>
 								</textarea>
-								<span className="invalid-feedback text-danger d-block mt-1 text-start">fkdjfdsj</span>
+								{/* <span className="invalid-feedback text-danger d-block mt-1 text-start">fkdjfdsj</span> */}
 							</div>
 
 							<div>

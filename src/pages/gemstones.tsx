@@ -61,28 +61,29 @@ const Gemstones = () => {
                 </div>
 
               ) : (
+                <div className="col-12">
+                  <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
+                    <Link href={`/gemstones/${item.id}`}>
+                      <div className="row g-0">
+                        <div className="col-4">
+                          <Image src={item?.images[0]?.path || PlaceHolder} className="icon card-img-top rounded-2 object-fit-cover" height={100} width={100} alt={item.title} />
+                        </div>
+                        <div className="col-8 ps-2 d-flex align-items-center">
+                          <div className="card-body py-2 px-1">
+                            <h5 className="card-title text-primary mb-1">
+                              {item.title}</h5>
+                            <h6 className="mb-1">Price:{item.price}</h6>
+                            <p className="mb-0">
+                              {item?.description?.length > 79
+                                ? item.description.slice(0, 79) + "..."
+                                : item?.description}
+                            </p>
 
-                <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
-                  <Link href={`/gemstones/${item.id}`}>
-                    <div className="row g-0">
-                      <div className="col-4">
-                        <Image src={item?.images[0]?.path || PlaceHolder} className="icon card-img-top rounded-2" height={100} width={100} alt={item.title} />
-                      </div>
-                      <div className="col-8 ps-2 d-flex align-items-center">
-                        <div className="card-body py-2 px-1">
-                          <h5 className="card-title text-primary mb-1">
-                            {item.title}</h5>
-                          <h6 className="mb-1">Price:{item.price}</h6>
-                          <p className="mb-0">
-                            {item?.description?.length > 79
-                              ? item.description.slice(0, 79) + "..."
-                              : item?.description}
-                          </p>
-
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               )
             )

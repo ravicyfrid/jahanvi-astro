@@ -36,17 +36,17 @@ const GemsonesEnquirires = () => {
 
 								<div className="col-12" key={i}>
 
-									<div className="card rounded-2 shadow-lg bg-white mb-2 position-relative">
+									<div className="card rounded-2 shadow-lg bg-white mb-2 position-relative gems-enquiries-box">
 										<Image
 											src={item?.gem?.path}
 											alt="Gemstons"
 											width={100}
 											height={100}
-											className="img-fluid w-100 rounded-2 lllll"
+											className="img-fluid w-100 rounded-2"
 										/>
 										<Link
 											href={`/gemstones-enquiries/${item.id}`}
-											className="bg-white border-0 rounded-2 px-2 py-1 mt-1 me-1 position-absolute top-0 end-0 d-inline-block text-decoration-none"
+											className="bg-white border-0 rounded-3 mt-1 me-1 position-absolute top-0 end-0 d-inline-block text-decoration-none gems-enquiries-link"
 										>
 											<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" x="0" y="0" viewBox="0 0 24 24"><g><path fill="#328fe0" d="m16.004 9.414-8.607 8.607-1.414-1.414L14.589 8H7.004V6h11v11h-2z" opacity="1" data-original="#000000"></path></g></svg>
 										</Link>
