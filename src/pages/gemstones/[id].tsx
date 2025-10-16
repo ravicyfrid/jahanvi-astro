@@ -45,7 +45,8 @@ const Gems = () => {
 
         if (results.error === false) {
           resetForm();
-          formik.setFieldValue("phone_number", "+91");
+          formik.setFieldValue("phone_number", "+91")
+          router.push('/gemstones')
         }
       } catch (error) {
         console.error(error);

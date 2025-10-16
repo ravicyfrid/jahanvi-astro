@@ -74,6 +74,20 @@ const EnquiryDetails = () => {
     return `${diffYears}y`;
   }
 
+function getAvatarName(name:string) {
+  if (!name || typeof name !== "string") return "Y";
+
+  const words = name.trim().split(/\s+/); // split by any whitespace
+  const initials = words
+    .slice(0, 2) // take first two words (e.g., first + last name)
+    .map(word => word[0].toUpperCase())
+    .join("");
+
+  return initials || "Y";
+}
+
+
+
   return (
     <>
       <section className="gemsones-enquirires">
@@ -144,7 +158,7 @@ const EnquiryDetails = () => {
                     {gems?.comments?.length > 0 ? [...gems?.comments]?.reverse()?.map((item: any, i: number) => {
                       return (
                         <div className="chat-item" key={i}>
-                          <div className="avatar-circle">{item?.user?.name || 'Y'}</div>
+                          <div className="avatar-circle">{getAvatarName(item?.user?.name)}</div>
                           <div className="chat-meta">
                             <div className="chat-top">
                               <div>

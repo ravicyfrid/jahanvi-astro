@@ -3,7 +3,7 @@ import SEOHead from "@/components/seo";
 import Image from "next/image";
 
 import PhoneInput from "react-phone-input-2";
-import { PensilIcon, UserProfile } from "@/assets/images";
+import { PensilIcon } from "@/assets/images";
 import { Button, InputField } from "@/components";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -14,6 +14,7 @@ import { setLoggedInUser } from "@/redux/slices/session.slice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authService, mediaService } from "@/services";
+import DummyUserImage from "@/assets/images/dummy-user.png";
 
 export default function UpdateProfile() {
 
@@ -102,7 +103,7 @@ export default function UpdateProfile() {
 					<div className="card text-center">
 						<div className="row">
 							<div className="update-user-icon mb-4">
-								<Image src={loggedInUser?.images?.path || UserProfile} alt="User Profile" width={70} height={70} className="mb-4 relative rounded-circle" />
+								<Image src={loggedInUser?.images?.path || DummyUserImage} alt="User Profile" width={70} height={70} className="mb-4 relative rounded-circle" />
 								<button type="button" className="border-0 pensil-icon bg-primary" onClick={() => uploadUserImage(loggedInUser.id)} >
 									<Image src={PensilIcon} alt="User Profile" width={15} height={15} />
 								</button>

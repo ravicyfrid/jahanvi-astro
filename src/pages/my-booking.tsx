@@ -46,7 +46,7 @@ const MyBooking = () => {
 
 			<section className="my-booking-section-mobile">
 				<div className="d-flex justify-content-between mb-3 card-header bg-white border-bottom p-3 sticky-sidebar">
-					<h6 className="mb-0">My Booking</h6>
+					<h6 className="mb-0">My Bookings</h6>
 					<button type="button" className="border-0 bg-white"> <Image src={Notification} className="icon me-1 img-fluid" height={20} width={20} alt="notification icon" /></button>
 				</div>
 				<div className="container">
@@ -76,6 +76,13 @@ const MyBooking = () => {
 														<div className="booking-card" >
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
+																	<div className="d-flex gap-2">
+																	<button
+																		type="button"
+																	onClick={()=>router.push('/my-booking/'+item.id)}
+																		className="btn success-button border-0"
+																	>Booking Details</button>
+																</div>
 																<div className="d-flex gap-2">
 																	<button
 																		type="button"

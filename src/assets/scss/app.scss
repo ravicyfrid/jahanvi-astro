@@ -443,6 +443,17 @@ p {
 }
 
 .gemsones-enquirires {
+  .gems-enquiries-box {
+    img {
+      height: 300px;
+      object-fit: cover;
+    }
+  }
+
+  .gems-enquiries-link {
+    padding: 7px 9px;
+  }
+
   .chat-comments-box {
     overflow: auto;
     height: 320px;
@@ -507,7 +518,7 @@ p {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
     .gemes-img-skeletons {
-      width: 133px;
+      width: 120px;
       min-height: 100px;
     }
 
