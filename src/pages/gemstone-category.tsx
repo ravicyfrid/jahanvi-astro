@@ -13,10 +13,11 @@ const GemsCategories = () => {
   const [filters, setFilters] = React.useState<any>({
     page: 1,
     per_page: 8,
+
   })
 
   useEffect(() => {
-    gemsService.getGemsCategories(filters).then((results: any) => {
+    gemsService.getGemsCategories(filters).then((results: any) => {      
       setResults({ items: results.items, pagination: results.pagination })
     })
   }, [filters])
@@ -45,11 +46,11 @@ const GemsCategories = () => {
         <div className="container pt-4 gems-category-card-box-list">
           <div className="row">
 
-            {results?.items.length > 0 ? results?.items?.map((item: any, i: number) => (
+            {results?.items?.length > 0 ? results?.items?.map((item: any, i: number) => (
               shoItemsVertically ? (
                 <div className="col-6" key={i}>
                   <div key={i} className="card mb-3 shadow-sm rounded-2 mb-2 bg-white">
-                    <Link href={'/gemstones'}>
+                    <Link href={`/gemstone-category/${item?.id}`}>
                       <img
                         src={item?.images?.path}
                         className="icon card-img-top w-100 rounded-2"
@@ -67,7 +68,7 @@ const GemsCategories = () => {
               ) : (
                 <div className="col-12" key={i}>
                   <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
-                    <Link href={'/gemstones'}>
+                    <Link href={`/gemstone-category/${item?.id}`}>
                       <div className="row g-0">
                         <div className="col-4">
                           <img
