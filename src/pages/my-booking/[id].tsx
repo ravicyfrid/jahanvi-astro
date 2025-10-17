@@ -1,5 +1,5 @@
 import { PlaceHolder } from '@/assets/images';
-import { Button } from '@/components';
+import { Button, SEOHead } from '@/components';
 import { ordersService } from '@/services';
 import formatDateParts from '@/utils/custom-hooks';
 import Link from 'next/link';
@@ -28,6 +28,8 @@ export default function BookingPage() {
   }, [id])
 
   return (
+    <>
+    <SEOHead title="Booking Details" />
     <div className="container py-3 position-relative" style={{ minHeight: '100vh', paddingBottom: '92px' }}>
       <h5 className="card-title text-black d-flex align-items-center gap-2 mb-1">
         <Link href="/my-booking">
@@ -126,5 +128,6 @@ export default function BookingPage() {
         }
       `}</style>
     </div>
+    </>
   );
 }

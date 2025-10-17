@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { io } from "socket.io-client";
 import { chatsService } from "@/services";
 import formatDateParts from "@/utils/custom-hooks";
+import { SEOHead } from "@/components";
 
 export type Message = {
 	id: string;
@@ -105,7 +106,7 @@ const Chat = () => {
 
 	return (
 		<>
-
+		<SEOHead title="Chats" />
 			<div className="card-header d-flex p-3 justify-content-between bg-light sticky-sidebar">
 				<div className="d-flex align-items-center">
 
