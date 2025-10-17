@@ -1,3 +1,4 @@
+import { PlaceHolder } from '@/assets/images';
 import { Button } from '@/components';
 import { ordersService } from '@/services';
 import formatDateParts from '@/utils/custom-hooks';
@@ -17,14 +18,14 @@ export default function BookingPage() {
   const { id } = router.query;
 
   useEffect(() => {
-    ordersService.GetOrderDetails(id as string).then(res => {
+    if (!id) return;
+    ordersService.GetOrderDetails(id).then(res => {
       console.log(res)
       setResults(res)
     }).catch(err => {
       console.error(err)
     })
   }, [id])
-
 
   return (
     <div className="container py-3 position-relative" style={{ minHeight: '100vh', paddingBottom: '92px' }}>
@@ -43,7 +44,7 @@ export default function BookingPage() {
             <div className="avatar-circle me-3 flex-shrink-0">
               {results?.images?.path ? (
                 <img
-                  src={results.images?.path}
+                  src={results.images?.path || PlaceHolder}
                   alt={results?.full_name || 'User'}
                   className="avatar-img"
                 />
@@ -127,3 +128,51 @@ export default function BookingPage() {
     </div>
   );
 }
+
+
+const Skelton = () => {
+  return (
+    <>
+      <div className="card p-3 shadow-sm rounded-3" style={{ maxWidth: "420px" }}>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="d-flex align-items-center">
+            <div className="placeholder rounded-circle me-3" style={{ width: "50px", height: "50px" }}></div>
+            <div>
+              <div className="placeholder-glow mb-1">
+                <span className="placeholder col-8"></span>
+              </div>
+              <div className="placeholder-glow">
+                <span className="placeholder col-6"></span>
+              </div>
+            </div>
+          </div>
+          <div className="text-end">
+            <div className="placeholder-glow mb-1">
+              <span className="placeholder col-6"></span>
+            </div>
+            <div className="placeholder-glow">
+              <span className="placeholder col-4"></span>
+            </div>
+          </div>
+        </div>
+
+      <hr/>
+
+      <div className="d-flex justify-content-between mb-2">
+        <div className="placeholder-glow">
+          <span className="placeholder col-5"></span>
+        </div>
+        <div className="placeholder-glow">
+          <span className="placeholder col-3"></span>
+        </div>
+      </div>
+
+      <div className="placeholder-glow mb-2">
+        <span className="placeholder col-7"></span>
+      </div>
+      <div className="placeholder-glow">
+        <span className="placeholder col-6"></span>
+      </div>
+    </div >
+</>
+  )}

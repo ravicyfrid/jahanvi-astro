@@ -8,24 +8,42 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 
 const Gemstones = () => {
-  const router = useRouter()
-
-  const [results, setResults] = useState<any>({ items: [], pagination: {} })
-  const [shoItemsVertically, setShowItemsVertically] = useState(false)
-  const [filters, setFilters] = React.useState<any>({
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState<{ items: any[]; pagination?: any }>({
+    items: [],
+    pagination: {},
+  });
+  const [showItemsVertically, setShowItemsVertically] = useState(false);
+  const [filters, setFilters] = useState({
     page: 1,
     per_page: 6,
-  })
+  });
 
   useEffect(() => {
-    gemsService.getGems(filters).then((results: any) => {
-      const gemsCategorybise = results.items.filter((gem: any) => gem.gem_category_id == router.query.id)
-      console.log('gemsCategorybise', gemsCategorybise);
+    if (!router.isReady || !router.query.id) return;
 
-      setResults({ items: gemsCategorybise })
-    })
-  }, [router.query.id])
+    const fetchGems = async () => {
+      setLoading(true)
+      try {
+        const results = await gemsService.getGems(filters);
 
+        const gems = Array.isArray(results?.items) ? results.items : [];
+
+        const filtered = gems.filter(
+          (gem: any) => String(gem.gem_category_id) === String(router.query.id)
+        );
+
+        console.log("Filtered gems:", filtered);
+        setResults({ items: filtered, pagination: results?.pagination || {} });
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching gems:", error);
+      }
+    };
+
+    fetchGems();
+  }, [router.isReady, router.query.id, filters]);
   return (
     <>
       <SEOHead title={'Gemstones'} />
@@ -39,12 +57,12 @@ const Gemstones = () => {
             Gemstone
           </h5>
 
-          {shoItemsVertically ?
-            <button type="button" className="border-0 bg-white" onClick={() => setShowItemsVertically(!shoItemsVertically)}>
+          {showItemsVertically ?
+            <button type="button" className="border-0 bg-white" onClick={() => setShowItemsVertically(!showItemsVertically)}>
               <Breadcrumb />
             </button>
             :
-            <button type="button" className="border-0 bg-white" onClick={() => setShowItemsVertically(!shoItemsVertically)}>
+            <button type="button" className="border-0 bg-white" onClick={() => setShowItemsVertically(!showItemsVertically)}>
               <Image src={CategoryIcon} className="icon me-1 img-fluid" height={20} width={20} alt="Category icon" />
             </button>
           }
@@ -52,56 +70,65 @@ const Gemstones = () => {
 
         <div className="container pt-4">
           <div className="row">
-            {results?.items.length > 0 ? results?.items?.map((item: any, i: number) => (
-              shoItemsVertically ? (
-                <div className="col-6" key={i}>
-                  <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white natural-gemstons-box">
-                    <Link href={`/gemstones/${item.id}`}>
-                      <Image src={item?.images[0]?.path || PlaceHolder} className="icon me-1 img-fluid rounded-2 w-100" height={120} width={100} alt={item.title} />
-                      <div className="card-body p-2 text-center">
-                        <h6 className="card-title text-primary mb-1">{item.title}</h6>
-                        <p className="mb-1">Price:{item.price}</p>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-
-              ) : (
-                <div className="col-12" key={i}>
-                  <div key={i} className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
-                    <Link href={`/gemstones/${item.id}`}>
-                      <div className="row g-0">
-                        <div className="col-4">
-                          <Image src={item?.images[0]?.path || PlaceHolder} className="icon card-img-top rounded-2 object-fit-cover" height={100} width={100} alt={item.title} />
+            {loading ? (
+              // Show skeletons while loading
+              Array.from({ length: 4 }).map((_, i: number) => <HorizontalSkeleton key={i} />)
+            ) : results?.items?.length > 0 ? (
+              // Show items when data is loaded and not empty
+              results.items.map((item: any, i: number) =>
+                showItemsVertically ? (
+                  <div className="col-6" key={i}>
+                    <div className="card mb-3 shadow-sm rounded-2 mb-2 bg-white natural-gemstons-box">
+                      <Link href={`/gemstones/${item.id}`}>
+                        <Image
+                          src={item?.images?.[0]?.path || PlaceHolder}
+                          className="icon me-1 img-fluid rounded-2 w-100"
+                          height={120}
+                          width={100}
+                          alt={item.title}
+                        />
+                        <div className="card-body p-2 text-center">
+                          <h6 className="card-title text-primary mb-1">{item.title}</h6>
+                          <p className="mb-1">Price: {item.price}</p>
                         </div>
-                        <div className="col-8 ps-2 d-flex align-items-center">
-                          <div className="card-body py-2 px-1">
-                            <h5 className="card-title text-primary mb-1">
-                              {item.title}</h5>
-                            <h6 className="mb-1">Price:{item.price}</h6>
-                            <p className="mb-0">
-                              {item.description.split(" ").slice(0, 12).join(" ")}
-                              {item.description.split(" ").length > 12 && "..."}
-                            </p>
-
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="col-12" key={i}>
+                    <div className="card mb-3 rounded-2 mb-2 ps-0 gemes-details-card-box">
+                      <Link href={`/gemstones/${item.id}`}>
+                        <div className="row g-0">
+                          <div className="col-4">
+                            <Image
+                              src={item?.images?.[0]?.path || PlaceHolder}
+                              className="icon card-img-top rounded-2 object-fit-cover"
+                              height={100}
+                              width={100}
+                              alt={item.title}
+                            />
+                          </div>
+                          <div className="col-8 ps-2 d-flex align-items-center">
+                            <div className="card-body py-2 px-1">
+                              <h5 className="card-title text-primary mb-1">{item.title}</h5>
+                              <h6 className="mb-1">Price: {item.price}</h6>
+                              <p className="mb-0">
+                                {item.description.split(" ").slice(0, 12).join(" ")}
+                                {item.description.split(" ").length > 12 && "..."}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                )
               )
-            )
-            ) :
-              ( results?.items.length === 0 ? <p className="text-center">No Data Found</p> :
-                Array.from({ length: 4 }).map((_, i: number) => {
-                  console.log(_);
+            ) : (
+              // Show "No Data Found" when not loading and no items
+              <p className="text-center">No Data Found</p>
+            )}
 
-                  return (
-                    <HorizontalSkeleton key={i} />
-                  )
-                }))
-            }
           </div>
 
         </div>

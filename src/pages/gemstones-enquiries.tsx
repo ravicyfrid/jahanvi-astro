@@ -61,7 +61,7 @@ const GemsonesEnquirires = () => {
 												<div className="user-info">
 													<h6 className="mb-0 text-end">Gemstones
 													</h6>
-													<p className="mb-0 text-end"><small>{item?.gem?.title}</small></p>
+													<p className="mb-0 text-end text-capitalize"><small>{item?.gem?.title}</small></p>
 												</div>
 
 											</div>
@@ -76,7 +76,7 @@ const GemsonesEnquirires = () => {
 												<div className="user-info">
 													<h6 className="mb-0 text-end">Status
 													</h6>
-													<p className="mb-0 text-end"><small>{item?.status}</small></p>
+													<p className="mb-0 text-end text-capitalize"><small>{item?.status}</small></p>
 												</div>
 
 											</div>

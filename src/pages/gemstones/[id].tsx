@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image"
 import Link from "next/link"
+import { PlaceHolder } from "@/assets/images"
 const Gems = () => {
 
   const [gem, setGem] = useState<any>({})
@@ -89,14 +90,14 @@ const Gems = () => {
                   <div className="card">
                   </div>
 
-                  {gem?.images?.map((item: any, i: number) => {
+                  {gem?.images?.length > 0 ? gem?.images?.map((item: any, i: number) => {
                     return (
                       <>
                         <SwiperSlide key={i}>
                           <div className="card">
                             <Link href='#' className="">
                               <Image
-                                src={item.path}
+                                src={item.path || PlaceHolder}
                                 alt={item.title}
                                 className="img-fluid"
                                 width={500}
@@ -108,7 +109,23 @@ const Gems = () => {
                         </SwiperSlide>
                       </>
                     )
-                  })}
+                  })
+                    :
+                    <SwiperSlide>
+                      <div className="card">
+                        <Link href='#' className="">
+                          <Image
+                            src={ PlaceHolder}
+                            alt="Placeholder"
+                            className="img-fluid"
+                            width={500}
+                            height={450}
+                            priority
+                          />
+                        </Link>
+                      </div>
+                    </SwiperSlide>
+                  }
                 </Swiper>
               </div>
             </div>
@@ -148,7 +165,7 @@ const Gems = () => {
                         onChange={formik.handleChange}
                         value={formik.values.name}
                         onBlur={formik.handleBlur}
-                        error={formik.errors.name  && formik.touched.name ? formik.errors.name : ''} 
+                        error={formik.errors.name && formik.touched.name ? formik.errors.name : ''}
                       />
 
                     </div>

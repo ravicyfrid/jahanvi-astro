@@ -116,8 +116,9 @@ const Consultation = () => {
 						}
 
 						const result = await cashfree.checkout({
+							
 							paymentSessionId: cashfreeOrder.payment_session_id,
-							redirectTarget: "_self"   // or "_blank"
+							redirectTarget: "http://localhost:3000/my-booking"   // or "_blank"
 						});
 
 						console.log("Checkout result:", result);
