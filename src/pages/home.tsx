@@ -53,7 +53,7 @@ const Home = () => {
                   modules={[Navigation, Pagination, Autoplay]}
                   className="mySwiper"
                 >
-                  {bio?.images?.map((item: any, i: number) => {
+                  { bio?.images?.length > 0 ? bio?.images?.map((item: any, i: number) => {
                     return (
                       <SwiperSlide key={i}>
                         <a href="#" className="hero-banner-images">
@@ -68,7 +68,21 @@ const Home = () => {
                         </a>
                       </SwiperSlide>
                     )
-                  })}
+                  })
+                :
+                 <SwiperSlide>
+                        <a href="#" className="hero-banner-images">
+                          <Image
+                            src={ GurumaPhoto}
+                            alt="Hero Banner"
+                            className="img-fluid"
+                            width={500}
+                            height={450}
+                            priority
+                          />
+                        </a>
+                      </SwiperSlide>
+                }
 
                 </Swiper>
               </div>
@@ -82,21 +96,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            {/* Right Side Content */}
-            {/* 
-          <div className="col-lg-7 col-md-7 col-sm-12 col-12 my-auto">
-            <div className="hero-banner-content">
-              <h1>
-                {props?.title ||
-                  "Personalized Astrology Consultations by Jahanvi!"}
-              </h1>
-              <p>
-                {props?.description ||
-                  "Experience astrology tailored just for you! Jahanvi offers in-depth personal consultations, combining ancient wisdom with modern insight to provide clear guidance on all aspects of life. Whether you're seeking clarity in relationships, career, or personal growth, Jahanvi's expert astrology readings will illuminate the path forward."}
-              </p>
-            </div>
-          </div> 
-          */}
+          
           </div>
         </div>
       </section>
@@ -121,7 +121,7 @@ const Home = () => {
                 modules={[Navigation, Pagination, Autoplay]}
                 className="mySwiper"
               >
-                {results?.quotes?.map((item: any, i: number) => {
+                { results?.quotes?.length>0 ? results?.quotes?.map((item: any, i: number) => {
                   return (
                     <SwiperSlide key={i}>
                       <h6>{item?.description}</h6>
@@ -130,7 +130,15 @@ const Home = () => {
                       </p>
                     </SwiperSlide>
                   )
-                })}
+                })
+              :
+              <SwiperSlide >
+                      <h6>Personalized Astrology Consultations by Jahanvi Astro. Experience astrology tailored just for you!..</h6>
+                      <p>
+                        
+                      </p>
+                    </SwiperSlide>
+              }
               </Swiper>
             </div>
 

@@ -1,4 +1,4 @@
-import { generateQueryParams } from '@/utils/custom-hooks';
+import {  generateQueryParams2 } from '@/utils/custom-hooks';
 import CommonService from './common.service';
 
 class OrdersService extends CommonService {
@@ -20,7 +20,7 @@ class OrdersService extends CommonService {
 	}
 
 	async GetOrders(params: any) {
-		return await this.get(`/orders/?${generateQueryParams(params)}`)
+		return await this.get(`/orders/?${generateQueryParams2(params)}`)
 	}
 
 		async GetOrderDetails(id: any) {

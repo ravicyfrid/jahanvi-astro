@@ -80,6 +80,7 @@ const UserLogin = () => {
 													inputStyle={{ width: "100%" }}
 													countryCodeEditable={false}
 													enableAreaCodes={true}
+													disabled={loading}
 													inputProps={{
 														minLength: 10
 													}}

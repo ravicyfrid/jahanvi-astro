@@ -1,3 +1,4 @@
+import { PlaceHolder } from '@/assets/images';
 import { Button } from '@/components';
 import { ordersService } from '@/services';
 import formatDateParts from '@/utils/custom-hooks';
@@ -17,14 +18,14 @@ export default function BookingPage() {
   const { id } = router.query;
 
   useEffect(() => {
-    ordersService.GetOrderDetails(id as string).then(res => {
+    if (!id) return;
+    ordersService.GetOrderDetails(id).then(res => {
       console.log(res)
       setResults(res)
     }).catch(err => {
       console.error(err)
     })
   }, [id])
-
 
   return (
     <div className="container py-3 position-relative" style={{ minHeight: '100vh', paddingBottom: '92px' }}>
@@ -43,7 +44,7 @@ export default function BookingPage() {
             <div className="avatar-circle me-3 flex-shrink-0">
               {results?.images?.path ? (
                 <img
-                  src={results.images?.path}
+                  src={results.images?.path || PlaceHolder}
                   alt={results?.full_name || 'User'}
                   className="avatar-img"
                 />

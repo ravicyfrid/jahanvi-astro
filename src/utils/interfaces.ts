@@ -260,3 +260,18 @@ export interface CTAProps {
 	imagePosition?: 'left' | 'right';
 	layout?: 'style1' | 'style2' | 'style3' | 'style4';
 }
+
+export type ServerToClient = {
+  welcome: (msg: string) => void;
+  counter: (value: number) => void;
+  chat: (payload: { id: string; text: string }) => void;
+};
+
+export type ClientToServer = {
+  ping: () => void;
+  increment: () => void;
+  chat: (text: string) => void;
+};
+
+export type InterServer =null;
+export type SocketData = { userId?: string };

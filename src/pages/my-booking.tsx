@@ -1,5 +1,5 @@
 import { Notification, PlaceHolder } from "@/assets/images";
-import { Footer } from "@/components";
+import { Footer, Pagination } from "@/components";
 import SEOHead from "@/components/seo";
 import { ordersService } from "@/services";
 import formatDateParts from "@/utils/custom-hooks";
@@ -10,35 +10,24 @@ import React, { useEffect, useState } from "react";
 const MyBooking = () => {
 	const [orders, setOrders] = React.useState<any>({ items: [], pagination: {} });
 	const [loading, setLoading] = useState(false)
-	// const [chatsId, setChatId] = React.useState<any>({});
 	const router = useRouter()
-	// const [filters, setFilters] = React.useState<any>({
-	// 	page: 1,
-	// 	per_page: 9,
-	// })
+	const [filters, setFilters] = React.useState<any>({
+		page: 1,
+		per_page: 20,
+	})
 
 	useEffect(() => {
 		setLoading(true)
-		ordersService.GetOrders({
-			page: 1,
-			per_page: 9,
-		}).then((res) => {
+		ordersService.GetOrders(filters).then((res) => {
 			setLoading(false)
-
 			setOrders({ items: res.items, pagination: res.pagination })
 		})
 
-
-	}, [])
+	}, [filters])
 
 	const upcomingOrders = orders.items.filter((o: { status: string }) => o.status === "upcoming");
 	const completedOrders = orders.items.filter((o: { status: string }) => o.status === "completed");
 	const cancelledOrders = orders.items.filter((o: { status: string }) => o.status === "cancelled");
-
-	// const chatid = (id: string, orderID: string) => {
-	// 	setChatId({ id: id, orderID: orderID })
-	// }
-
 
 	return (
 		<>
@@ -76,10 +65,10 @@ const MyBooking = () => {
 														<div className="booking-card" >
 															<div className="d-flex justify-content-between align-items-center">
 																<span className="fw-semibold">ID-{item.order_number}</span>
-																	<div className="d-flex gap-2">
+																<div className="d-flex gap-2">
 																	<button
 																		type="button"
-																	onClick={()=>router.push('/my-booking/'+item.id)}
+																		onClick={() => router.push('/my-booking/' + item.id)}
 																		className="btn success-button border-0"
 																	>Booking Details</button>
 																</div>
@@ -123,7 +112,7 @@ const MyBooking = () => {
 											})
 											}
 
-											{orders?.pagination?.total_items > 0 && loading &&
+											{orders?.pagination?.total_items == 0 && loading &&
 												<div className="justify-content-center d-flex w-100 mt-2">
 													<p>No message found</p>
 												</div>
@@ -141,7 +130,7 @@ const MyBooking = () => {
 
 									<div className="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex={0}>
 										<div className="row gap-2">
-											{completedOrders?.length > 0 && completedOrders?.map((item: any, i: number) => {
+											{completedOrders?.length > 0 ? completedOrders?.map((item: any, i: number) => {
 												return (
 													<div className="col" key={i}>
 														<div className="booking-card" >
@@ -186,13 +175,17 @@ const MyBooking = () => {
 													</div>
 												)
 											})
+												:
+												<div className="justify-content-center d-flex w-100 mt-2">
+													<p>No message found</p>
+												</div>
 											}
 										</div>
 									</div>
 
 									<div className="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-contact-tab" tabIndex={1}>
 										<div className="row gap-2">
-											{cancelledOrders?.length > 0 && cancelledOrders?.map((item: any, i: number) => {
+											{cancelledOrders?.length > 0 ? cancelledOrders?.map((item: any, i: number) => {
 												return (
 													<div className="col" key={i}>
 														<div className="booking-card" >
@@ -229,17 +222,17 @@ const MyBooking = () => {
 													</div>
 												)
 											})
-
+												:
+												<div className="justify-content-center d-flex w-100 mt-2">
+													<p>No message found</p>
+												</div>
 											}
-
-
 										</div>
-
 									</div>
 								</div>
 							</div>
 						</div>
-						{/* {orders?.pagination?.total_pages > 1 && (
+						{orders?.pagination?.total_pages > 1 && (
 							<div className="col-12">
 								<Pagination
 									pageCount={orders?.pagination?.total_pages}
@@ -250,11 +243,10 @@ const MyBooking = () => {
 								/>
 							</div>
 						)
-						} */}
+						}
 					</div>
 				</div>
 			</section>
-
 			<Footer />
 		</>
 
@@ -262,8 +254,6 @@ const MyBooking = () => {
 };
 
 export default MyBooking
-
-
 
 const MybookingSkeleton = () => {
 	return (

@@ -46,55 +46,56 @@ const HoroscopeDetails = () => {
                   <p className="mb-0"><strong>DOB:</strong>{kundli?.dob}</p>
                   <p className="mb-0"><strong>TOB:</strong> {kundli?.tob}</p>
                   <p className="mb-0"><strong>Place:</strong> {kundli?.birth_place}</p>
-
-                  <div className="horoscope-box my-2">
-                    <div
-                      className="d-flex justify-content-center p-2 bg-white rounded-2 shadow-lg"
-                      dangerouslySetInnerHTML={{ __html: kundli?.horoscope_chart_image?.svg }}
-                    />
-
-                  </div>
-
-                  <div className="mahadasa-section mt-4">
-                    <h5>Mahadasha</h5>
-
-                    <div className="mahadasa-card">
-                      <h6 className="text-center">Mahadasha 1</h6>
-                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.major?.planet}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.major?.start}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.major?.end}</p>
+                  {kundli?.horoscope_chart_image &&
+                    <div className="horoscope-box my-2">
+                      <div
+                        className="d-flex justify-content-center p-2 bg-white rounded-2 shadow-lg"
+                        dangerouslySetInnerHTML={{ __html: kundli?.horoscope_chart_image?.svg }}
+                      />
                     </div>
+                  }
+                  {kundli?.mahadasha &&
+                    <div className="mahadasa-section mt-4">
+                      <h5>Mahadasha</h5>
 
-                    <div className="mahadasa-card">
-                      <h6 className="text-center">Mahadasha 2</h6>
-                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.minor?.planet}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.minor?.start}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.minor?.end}</p>
+                      <div className="mahadasa-card">
+                        <h6 className="text-center">Mahadasha 1</h6>
+                        <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.major?.planet}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.major?.start}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.major?.end}</p>
+                      </div>
+
+                      <div className="mahadasa-card">
+                        <h6 className="text-center">Mahadasha 2</h6>
+                        <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.minor?.planet}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.minor?.start}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.minor?.end}</p>
+                      </div>
+
+
+                      <div className="mahadasa-card">
+                        <h6 className="text-center">Mahadasha 3</h6>
+                        <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_minor?.planet}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_minor?.start}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_minor?.end}</p>
+                      </div>
+
+                      <div className="mahadasa-card">
+                        <h6 className="text-center">Mahadasha 4</h6>
+                        <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_sub_minor?.planet}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_sub_minor?.start}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_sub_minor?.end}</p>
+                      </div>
+
+                      <div className="mahadasa-card">
+                        <h6 className="text-center">Mahadasha 5</h6>
+                        <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_sub_sub_minor?.planet}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_sub_sub_minor?.start}</p>
+                        <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_sub_sub_minor?.end}</p>
+                      </div>
+
                     </div>
-
-
-                    <div className="mahadasa-card">
-                      <h6 className="text-center">Mahadasha 3</h6>
-                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_minor?.planet}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_minor?.start}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_minor?.end}</p>
-                    </div>
-
-                    <div className="mahadasa-card">
-                      <h6 className="text-center">Mahadasha 4</h6>
-                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_sub_minor?.planet}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_sub_minor?.start}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_sub_minor?.end}</p>
-                    </div>
-
-                    <div className="mahadasa-card">
-                      <h6 className="text-center">Mahadasha 5</h6>
-                      <p className="d-flex justify-content-between mb-1"><strong>Planet:</strong>{kundli?.mahadasha?.sub_sub_sub_minor?.planet}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>Start:</strong> {kundli?.mahadasha?.sub_sub_sub_minor?.start}</p>
-                      <p className="d-flex justify-content-between mb-1"><strong>End:</strong> {kundli?.mahadasha?.sub_sub_sub_minor?.end}</p>
-                    </div>
-
-                  </div>
+                  }
                 </div>
               </div>
               {/* <Skelton/> */}

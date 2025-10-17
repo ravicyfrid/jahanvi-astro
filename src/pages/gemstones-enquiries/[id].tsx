@@ -86,8 +86,6 @@ function getAvatarName(name:string) {
   return initials || "Y";
 }
 
-
-
   return (
     <>
       <section className="gemsones-enquirires">
@@ -125,7 +123,7 @@ function getAvatarName(name:string) {
                     <div className="user-info">
                       <h6 className="mb-0">Gemstones
                       </h6>
-                      <p className="mb-0"><small>{gems?.gem?.title}</small></p>
+                      <p className="mb-0 text-capitalize"><small>{gems?.gem?.title}</small></p>
                     </div>
 
                   </div>
@@ -140,7 +138,7 @@ function getAvatarName(name:string) {
                     <div className="user-info">
                       <h6 className="mb-0">Status
                       </h6>
-                      <p className="mb-0"><small>{gems?.status}</small></p>
+                      <p className="mb-0 text-capitalize"><small>{gems?.status}</small></p>
                     </div>
 
                   </div>

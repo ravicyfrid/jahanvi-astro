@@ -1,16 +1,15 @@
-
-
 import { SearchIcon } from "@/assets/images";
 import { Button, Footer, InputField } from "@/components";
 import SEOHead from "@/components/seo";
 import { ordersService } from "@/services";
 import { useFormik } from "formik";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { load } from '@cashfreepayments/cashfree-js';
+
 
 const Consultation = () => {
 
@@ -18,7 +17,6 @@ const Consultation = () => {
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
-	const router = useRouter()
 
 	useEffect(() => {
 		ordersService.getConsultationFees().then((res: any) => {
@@ -97,32 +95,49 @@ const Consultation = () => {
 			tob: Yup.string().label("Time Of Birth").required(),
 		}),
 		onSubmit: async (values, { resetForm }) => {
-			setLoading(true)
+			setLoading(true);
 			try {
 				const response = await ordersService.CreateOrder(values);
-
 				if (!response.error && response.data?.id) {
-					resetForm()
-					formik.setFieldValue("phone_number", "+91")
-					router.push('/my-booking')
-					// const cashfree = await ordersService.Cashfree(response.data.id);
+					const cashfreeOrder = await ordersService.Cashfree(response.data.id);
+					console.log('cashfreeOrder', cashfreeOrder);
 
-					// if (!cashfree.error && cashfree.payment_link) {
+					if (!cashfreeOrder.error && cashfreeOrder.payment_session_id) {
+						const cashfree = await load({
+							mode: process.env.NODE_ENV === "production" ? "production" : "sandbox"
+						});
 
-					// 	if (cashfree.cf_order_id) {
-					// 		await ordersService.MarkPaid({
-					// 			order_id: response.data.id,
-					// 			cf_order_id: cashfree.cf_order_id,
-					// 		});
-					// 	}
-					// 	window.location.href = cashfree.payment_link;
-					// }
-					setLoading(false)
+						if (!cashfree) {
+							throw new Error("Cashfree SDK failed to load (maybe server side?)");
+						}
+
+						const result = await cashfree.checkout({
+							
+							paymentSessionId: cashfreeOrder.payment_session_id,
+							redirectTarget: "http://localhost:3000/my-booking"   // or "_blank"
+						});
+
+						console.log("Checkout result:", result);
+						if (result?.payment_status === "SUCCESS") {
+							await ordersService.MarkPaid({
+								order_id: response.data.id,
+								cf_order_id: cashfreeOrder.cf_order_id,
+							});
+						}
+
+						// you may also handle other statuses (FAILED, PENDING, etc.)
+					}
+
+					resetForm();
+					formik.setFieldValue("phone_number", "+91");
 				}
-			} catch (error) {
-				toast.error('Sumthing went wrong')
+			} catch (e:any) {
+				toast.error("Something went wrong: " + e.message);
+			} finally {
+				setLoading(false);
 			}
 		}
+
 
 	});
 	return (
@@ -232,7 +247,7 @@ const Consultation = () => {
 									required
 									className={`form-select ${formik.touched.gender && formik.errors.gender ? "invalid" : ""
 										}`}
-										>
+								>
 									<option value="">Gender</option>
 									<option value="male">Male</option>
 									<option value="female">Female</option>
