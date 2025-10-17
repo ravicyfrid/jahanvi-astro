@@ -273,5 +273,5 @@ export type ClientToServer = {
   chat: (text: string) => void;
 };
 
-export type InterServer = {};
+export type InterServer =null;
 export type SocketData = { userId?: string };

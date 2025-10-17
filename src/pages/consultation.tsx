@@ -1,12 +1,9 @@
-
-
 import { SearchIcon } from "@/assets/images";
 import { Button, Footer, InputField } from "@/components";
 import SEOHead from "@/components/seo";
 import { ordersService } from "@/services";
 import { useFormik } from "formik";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
@@ -20,7 +17,6 @@ const Consultation = () => {
 	const [suggestions, setSuggestions] = useState<any[]>([]);
 	const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [loading, setLoading] = useState(false);
-	const router = useRouter()
 
 	useEffect(() => {
 		ordersService.getConsultationFees().then((res: any) => {

@@ -133,9 +133,9 @@ const Home = () => {
                 })
               :
               <SwiperSlide >
-                      <h6>'Personalized Astrology Consultations by Jahanvi Astro. Experience astrology tailored just for you!..</h6>
+                      <h6>Personalized Astrology Consultations by Jahanvi Astro. Experience astrology tailored just for you!..</h6>
                       <p>
-                        ''
+                        
                       </p>
                     </SwiperSlide>
               }
