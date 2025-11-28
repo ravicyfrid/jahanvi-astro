@@ -155,7 +155,7 @@ const Gems = () => {
                 <div className="card shadow-sm rounded-2 p-3 text-center border" >
 
                   <form className="login-form" onSubmit={formik.handleSubmit}>
-                    <h6 className="mb-3">Content With Our Team</h6>
+                    <h6 className="mb-3">Contact With Our Team</h6>
                     <div className="col-12">
                       <InputField
                         required={true}
