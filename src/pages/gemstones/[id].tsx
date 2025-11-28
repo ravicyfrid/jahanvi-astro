@@ -131,7 +131,7 @@ const Gems = () => {
             </div>
           </div>
         </div>
-        <div className="container pt-4">
+        <div className="container pt-2">
           <div className="row">
             <div className="col-12">
               <div className="gemestone-content mb-4">
