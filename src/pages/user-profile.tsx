@@ -149,7 +149,7 @@ export default function UpdateProfile() {
 							</h4>
 							<p>Are You Sure you want to log out?</p>
 							<div className="d-flex justify-content-between ">
-								<button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
+								<button type="button" className="btn btn-danger text-white" data-bs-dismiss="modal">Cancel</button>
 								<button type="button" className="btn btn-primary" onClick={() => dispatch(destroyAuthSession())} >Log Out</button>
 							</div>
 						</div>

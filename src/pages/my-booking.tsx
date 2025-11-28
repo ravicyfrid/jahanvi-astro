@@ -93,13 +93,13 @@ const MyBooking = () => {
 																</div>
 																<div className="user-info">
 																	<h6>{item.full_name}</h6>
-																	<p>+{item.phone_number}</p>
+																	<p >+{item.phone_number}</p>
 																</div>
 																<div className="ms-auto">
 																	<div className="date-box">
 																		<div className="text-muted">{formatDateParts(item.created_at).fullDate}</div>
 																		<h6 className="day my-1">{formatDateParts(item.created_at).dayOnly}</h6>
-																		<p>{formatDateParts(item.created_at).timeOnly}</p>
+																		<p className="mb-0">{formatDateParts(item.created_at).timeOnly}</p>
 																	</div>
 																</div>
 															</div>
